@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dien Marvelous Bloq</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #b5963a;
+    --gold-light: #e8d5a0;
+    --gold-dark: #7a6420;
+    --cream: #faf8f4;
+    --ink: #1a1a18;
+    --ink-mid: #3d3d3a;
+    --ink-muted: #6e6d68;
+    --ink-faint: #a8a79f;
+    --border: rgba(26,26,24,0.12);
+    --border-soft: rgba(26,26,24,0.07);
+    --serif: 'Playfair Display', Georgia, serif;
+    --body: 'EB Garamond', Georgia, serif;
+    --sans: 'Jost', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 18px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  /* ── MASTHEAD ── */
+  .masthead {
+    background: var(--ink);
+    color: var(--cream);
+    text-align: center;
+    padding: 3.5rem 1.5rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .masthead::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 39px,
+      rgba(181,150,58,0.06) 39px, rgba(181,150,58,0.06) 40px
+    );
+    pointer-events: none;
+  }
+  .masthead-eyebrow {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .masthead-title {
+    font-family: var(--serif);
+    font-size: clamp(42px, 8vw, 72px);
+    font-weight: 400;
+    line-height: 1.05;
+    color: #fff;
+    letter-spacing: -1px;
+  }
+  .masthead-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+  .masthead-rule {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 1.25rem auto;
+    max-width: 300px;
+  }
+  .masthead-rule::before, .masthead-rule::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: var(--gold);
+    opacity: 0.4;
+  }
+  .masthead-diamond {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+  .masthead-tagline {
+    font-family: var(--body);
+    font-size: 16px;
+    font-style: italic;
+    color: rgba(250,248,244,0.6);
+    margin-top: 0.25rem;
+  }
+
+  /* ── NAV ── */
+  .site-nav {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    padding: 1rem 1.25rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+  }
+  .nav-btn:hover, .nav-btn.active {
+    color: var(--ink);
+    border-bottom-color: var(--gold);
+  }
+
+  /* ── LAYOUT ── */
+  .page-wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* ── FEATURED SECTION ── */
+  .featured-section {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    padding: 3rem 0;
+  }
+  .featured-main {
+    padding-right: 2.5rem;
+    border-right: 1px solid var(--border);
+  }
+  .featured-aside {
+    padding-left: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* ── CATEGORY TAG ── */
+  .cat-tag {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .cat-tag::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  /* ── ARTICLE CARDS ── */
+  .article-link { text-decoration: none; color: inherit; cursor: pointer; }
+
+  .article-headline {
+    font-family: var(--serif);
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.25;
+    transition: color 0.2s;
+  }
+  .article-headline:hover { color: var(--gold-dark); }
+  .article-headline.xl { font-size: 32px; }
+  .article-headline.lg { font-size: 22px; }
+  .article-headline.md { font-size: 20px; }
+  .article-headline.sm { font-size: 17px; }
+
+  .article-excerpt {
+    font-size: 16px;
+    color: var(--ink-muted);
+    line-height: 1.7;
+    margin-top: 0.65rem;
+  }
+  .article-meta {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    margin-top: 0.9rem;
+  }
+  .article-meta span { color: var(--gold); margin: 0 6px; }
+
+  .aside-item {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .aside-item:first-child { padding-top: 0; }
+  .aside-item:last-child { border-bottom: none; }
+
+  /* ── SECTION HEADERS ── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 2.5rem 0 1.5rem;
+  }
+  .section-header h2 {
+    font-family: var(--serif);
+    font-size: 13px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--ink-muted);
+    white-space: nowrap;
+    letter-spacing: 0.03em;
+  }
+  .section-header::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: var(--border);
+  }
+
+  /* ── ARTICLE GRID ── */
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem 2rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── CARD IMAGE ── */
+  .card-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 1rem;
+    background: var(--border);
+  }
+  .card-img-wrap {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    aspect-ratio: 16/9;
+    background: #ddd;
+  }
+  .card-img-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  .grid-card:hover .card-img-wrap img { transform: scale(1.04); }
+
+  /* featured hero image */
+  .featured-hero {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 1.25rem;
+  }
+  .featured-hero-wrap {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+    aspect-ratio: 16/8;
+    background: #ddd;
+  }
+  .featured-hero-wrap img { width:100%;height:100%;object-fit:cover;display:block; }
+
+  /* aside thumbnail */
+  .aside-thumb {
+    width: 100%;
+    aspect-ratio: 16/7;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 0.65rem;
+    background: #ddd;
+  }
+
+  /* article full hero */
+  .article-hero-wrap {
+    width: 100%;
+    aspect-ratio: 16/7;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    background: #ddd;
+  }
+  .article-hero-wrap img { width:100%;height:100%;object-fit:cover;display:block; }
+  .article-hero-caption {
+    font-family: var(--sans);
+    font-size: 11px;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+    margin-top: 0.4rem;
+    margin-bottom: 1.75rem;
+    text-align: center;
+    font-style: italic;
+  }
+
+  /* listicle card image */
+  .listicle-card-img {
+    width: 100%;
+    aspect-ratio: 16/7;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 1rem;
+    background: rgba(255,255,255,0.05);
+  }
+
+  /* ── FULL ARTICLE VIEW ── */
+  .article-full {
+    display: none;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 3rem 0 4rem;
+  }
+  .article-full.visible { display: block; }
+
+  .article-full-header { margin-bottom: 2.5rem; border-bottom: 1px solid var(--border); padding-bottom: 2rem; }
+  .article-full-title {
+    font-family: var(--serif);
+    font-size: clamp(28px, 5vw, 40px);
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 0.5rem 0 1rem;
+  }
+  .article-full-meta {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+  }
+  .article-full-meta strong { color: var(--ink-muted); font-weight: 500; }
+
+  .article-body { font-size: 19px; line-height: 1.8; color: var(--ink-mid); }
+  .article-body p { margin-bottom: 1.5em; }
+  .article-body h2 {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--ink);
+    margin: 2em 0 0.75em;
+    line-height: 1.3;
+  }
+  .article-body h3 {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--ink);
+    margin: 1.5em 0 0.5em;
+  }
+  .article-body blockquote {
+    border-left: 2px solid var(--gold);
+    padding: 0.5rem 0 0.5rem 1.5rem;
+    margin: 2em 0;
+    font-style: italic;
+    font-size: 21px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-bottom: 2.5rem;
+    transition: color 0.2s;
+  }
+  .back-btn:hover { color: var(--gold-dark); }
+  .back-btn::before { content: '←'; font-size: 14px; }
+
+  /* ── QUOTE BAR ── */
+  .quote-bar {
+    background: var(--ink);
+    color: #fff;
+    padding: 3.5rem 2rem;
+    text-align: center;
+    margin: 0 -1.5rem;
+  }
+  .quote-bar blockquote {
+    font-family: var(--serif);
+    font-size: clamp(20px, 3vw, 26px);
+    font-style: italic;
+    line-height: 1.55;
+    max-width: 600px;
+    margin: 0 auto;
+    color: rgba(250,248,244,0.9);
+  }
+  .quote-bar cite {
+    display: block;
+    margin-top: 1rem;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-style: normal;
+  }
+
+  /* ── NEWSLETTER ── */
+  .newsletter {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 3rem 2rem;
+    text-align: center;
+    margin: 3rem 0;
+  }
+  .newsletter-eyebrow {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+  .newsletter h3 {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+  }
+  .newsletter p {
+    font-size: 16px;
+    color: var(--ink-muted);
+    margin-bottom: 1.75rem;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .nl-form {
+    display: flex;
+    gap: 0;
+    justify-content: center;
+    max-width: 420px;
+    margin: 0 auto;
+    border: 1px solid var(--border);
+  }
+  .nl-form input {
+    flex: 1;
+    padding: 12px 16px;
+    font-family: var(--body);
+    font-size: 16px;
+    border: none;
+    background: var(--cream);
+    color: var(--ink);
+    outline: none;
+  }
+  .nl-form input::placeholder { color: var(--ink-faint); font-style: italic; }
+  .nl-form button {
+    padding: 12px 20px;
+    background: var(--gold);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: background 0.2s;
+  }
+  .nl-form button:hover { background: var(--gold-dark); }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    background: var(--ink);
+    color: rgba(250,248,244,0.5);
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+  }
+  .site-footer strong { color: var(--gold); font-weight: 400; }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 0.75rem;
+  }
+  .footer-links a {
+    color: rgba(250,248,244,0.3);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+
+  /* ── HOME / ARTICLE TOGGLE ── */
+  #home-view { display: block; }
+  #article-view { display: none; }
+  #article-view.visible { display: block; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .featured-section, .articles-grid, .article-full { animation: fadeIn 0.4s ease both; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .featured-section { grid-template-columns: 1fr; }
+    .featured-main { padding-right: 0; border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 2rem; margin-bottom: 0; }
+    .featured-aside { padding-left: 0; padding-top: 2rem; }
+    .articles-grid { grid-template-columns: 1fr 1fr; }
+    .quote-bar { margin: 0 -1.5rem; }
+  }
+  @media (max-width: 520px) {
+    .articles-grid { grid-template-columns: 1fr; }
+    .masthead-title { font-size: 36px; }
+  }
+
+  /* ── LISTICLE SECTION ── */
+  .listicle-band {
+    background: var(--ink);
+    margin: 0 -1.5rem;
+    padding: 3.5rem 1.5rem;
+  }
+  .listicle-band-inner { max-width: 1080px; margin: 0 auto; }
+  .listicle-band-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .listicle-band-header h2 {
+    font-family: var(--serif);
+    font-size: 13px;
+    font-style: italic;
+    font-weight: 400;
+    color: rgba(250,248,244,0.45);
+    white-space: nowrap;
+  }
+  .listicle-band-header::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: rgba(250,248,244,0.1);
+  }
+  .listicle-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  .listicle-card {
+    background: rgba(250,248,244,0.04);
+    border: 0.5px solid rgba(250,248,244,0.1);
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+    position: relative;
+  }
+  .listicle-card:hover {
+    background: rgba(250,248,244,0.08);
+    border-color: rgba(181,150,58,0.4);
+  }
+  .listicle-number {
+    font-family: var(--serif);
+    font-size: 48px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--gold);
+    opacity: 0.35;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .listicle-cat {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
+  .listicle-title {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 400;
+    color: rgba(250,248,244,0.9);
+    line-height: 1.3;
+    margin-bottom: 0.65rem;
+  }
+  .listicle-excerpt {
+    font-size: 14px;
+    color: rgba(250,248,244,0.45);
+    line-height: 1.65;
+  }
+  .listicle-meta {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: rgba(250,248,244,0.25);
+    margin-top: 1rem;
+  }
+
+  /* Listicle full-article item styles */
+  .list-item {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 0 1.5rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 0.5px solid var(--border-soft);
+  }
+  .list-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .list-num {
+    font-family: var(--serif);
+    font-size: 42px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--gold-light);
+    line-height: 1;
+    padding-top: 4px;
+    text-align: right;
+  }
+  .list-item-body h3 {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+    font-style: normal;
+  }
+  .list-item-body p {
+    font-size: 17px;
+    color: var(--ink-mid);
+    line-height: 1.75;
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 768px) {
+    .listicle-grid { grid-template-columns: 1fr 1fr; }
+    .listicle-band { margin: 0 -1.5rem; }
+  }
+  @media (max-width: 520px) {
+    .listicle-grid { grid-template-columns: 1fr; }
+    .list-item { grid-template-columns: 36px 1fr; gap: 0 1rem; }
+    .list-num { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <p class="masthead-eyebrow">Est. 2024 &nbsp;·&nbsp; Ideas Worth Reading</p>
+  <h1 class="masthead-title">Dien <em>Marvelous</em> Bloq</h1>
+  <div class="masthead-rule"><div class="masthead-diamond"></div></div>
+  <p class="masthead-tagline">Thoughtful writing on life, culture & the world</p>
+</header>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <div class="nav-inner">
+    <button class="nav-btn active" onclick="filterArticles('all', this)">All</button>
+    <button class="nav-btn" onclick="filterArticles('listicle', this)">Listicles</button>
+    <button class="nav-btn" onclick="filterArticles('technology', this)">Technology & AI</button>
+    <button class="nav-btn" onclick="filterArticles('health', this)">Health & Wellness</button>
+    <button class="nav-btn" onclick="filterArticles('finance', this)">Finance</button>
+    <button class="nav-btn" onclick="filterArticles('travel', this)">Travel</button>
+    <button class="nav-btn" onclick="filterArticles('culture', this)">Culture</button>
+    <button class="nav-btn" onclick="filterArticles('opinion', this)">Opinion</button>
+    <button class="nav-btn" onclick="filterArticles('society', this)">Society</button>
+  </div>
+</nav>
+
+<!-- HOME VIEW -->
+<div id="home-view">
+  <div class="page-wrap">
+
+    <!-- FEATURED -->
+    <section class="featured-section">
+      <div class="featured-main">
+        <div class="featured-hero-wrap">
+          <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=900&auto=format&fit=crop&q=80" alt="AI and human thinking" loading="lazy">
+        </div>
+        <div class="cat-tag">Featured · Technology & AI</div>
+        <h2 class="article-headline xl" onclick="openArticle('ai-thinking')" style="cursor:pointer">
+          What We Lose When Machines Do Our Thinking
+        </h2>
+        <p class="article-excerpt">We are outsourcing cognition at a scale history has never seen. The tools are remarkable. But something quieter is slipping away — the friction that made us sharper, the struggle that made us wise.</p>
+        <p class="article-meta">By Dien Marvelous <span>·</span> May 12, 2026 <span>·</span> 7 min read</p>
+      </div>
+      <div class="featured-aside">
+        <div class="aside-item">
+          <img class="aside-thumb" src="https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=600&auto=format&fit=crop&q=75" alt="Sleep and rest" loading="lazy">
+          <div class="cat-tag">Health & Wellness</div>
+          <h3 class="article-headline sm" onclick="openArticle('sleep-economy')" style="cursor:pointer">The Sleep Economy: Why Rest Became the New Productivity</h3>
+          <p class="article-meta">May 9, 2026 <span>·</span> 5 min</p>
+        </div>
+        <div class="aside-item">
+          <img class="aside-thumb" src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&auto=format&fit=crop&q=75" alt="Finance and money" loading="lazy">
+          <div class="cat-tag">Finance</div>
+          <h3 class="article-headline sm" onclick="openArticle('money-language')" style="cursor:pointer">The Language of Money Nobody Teaches You</h3>
+          <p class="article-meta">May 5, 2026 <span>·</span> 6 min</p>
+        </div>
+        <div class="aside-item">
+          <img class="aside-thumb" src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=600&auto=format&fit=crop&q=75" alt="Lagos city at dawn" loading="lazy">
+          <div class="cat-tag">Travel</div>
+          <h3 class="article-headline sm" onclick="openArticle('lagos-dawn')" style="cursor:pointer">Lagos at Dawn: A City Before It Wakes</h3>
+          <p class="article-meta">Apr 28, 2026 <span>·</span> 4 min</p>
+        </div>
+        <div class="aside-item">
+          <img class="aside-thumb" src="https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=600&auto=format&fit=crop&q=75" alt="Thinking and reflection" loading="lazy">
+          <div class="cat-tag">Opinion</div>
+          <h3 class="article-headline sm" onclick="openArticle('change-mind')" style="cursor:pointer">On the Courage It Takes to Change Your Mind</h3>
+          <p class="article-meta">Apr 22, 2026 <span>·</span> 5 min</p>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- end page-wrap -->
+
+  <!-- LISTICLES BAND -->
+  <div class="page-wrap">
+    <div class="listicle-band">
+      <div class="listicle-band-inner">
+        <div class="listicle-band-header"><h2>Listicles — Quick reads, lasting takeaways</h2></div>
+        <div class="listicle-grid" id="listicle-grid">
+
+          <div class="listicle-card" onclick="openArticle('list-ai-tools')">
+            <img class="listicle-card-img" src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=700&auto=format&fit=crop&q=75" alt="AI tools and technology" loading="lazy">
+            <span class="listicle-number">8</span>
+            <div class="listicle-cat">Technology & AI</div>
+            <h3 class="listicle-title">8 AI Tools That Are Quietly Changing How We Work</h3>
+            <p class="listicle-excerpt">Beyond the hype — the tools actually earning their place in daily workflows.</p>
+            <p class="listicle-meta">May 11, 2026 · 5 min</p>
+          </div>
+
+          <div class="listicle-card" onclick="openArticle('list-wellness-habits')">
+            <img class="listicle-card-img" src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=700&auto=format&fit=crop&q=75" alt="Healthy lifestyle habits" loading="lazy">
+            <span class="listicle-number">7</span>
+            <div class="listicle-cat">Health & Wellness</div>
+            <h3 class="listicle-title">7 Small Habits That Science Says Will Extend Your Life</h3>
+            <p class="listicle-excerpt">None of them require a gym membership or a $300 supplement stack.</p>
+            <p class="listicle-meta">May 7, 2026 · 4 min</p>
+          </div>
+
+          <div class="listicle-card" onclick="openArticle('list-money-rules')">
+            <img class="listicle-card-img" src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=700&auto=format&fit=crop&q=75" alt="Wealth and money rules" loading="lazy">
+            <span class="listicle-number">10</span>
+            <div class="listicle-cat">Finance</div>
+            <h3 class="listicle-title">10 Money Rules the Wealthy Follow That Nobody Talks About</h3>
+            <p class="listicle-excerpt">The principles are not secrets. They are just rarely assembled in one place.</p>
+            <p class="listicle-meta">May 2, 2026 · 6 min</p>
+          </div>
+
+          <div class="listicle-card" onclick="openArticle('list-african-destinations')">
+            <img class="listicle-card-img" src="https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=700&auto=format&fit=crop&q=75" alt="African landscape travel" loading="lazy">
+            <span class="listicle-number">9</span>
+            <div class="listicle-cat">Travel</div>
+            <h3 class="listicle-title">9 African Destinations That Should Be on Every Serious Traveller's List</h3>
+            <p class="listicle-excerpt">The continent is vast, the choices are overwhelming — here is where to start.</p>
+            <p class="listicle-meta">Apr 25, 2026 · 5 min</p>
+          </div>
+
+          <div class="listicle-card" onclick="openArticle('list-books-decade')">
+            <img class="listicle-card-img" src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=700&auto=format&fit=crop&q=75" alt="Books and ideas" loading="lazy">
+            <span class="listicle-number">12</span>
+            <div class="listicle-cat">Culture</div>
+            <h3 class="listicle-title">12 Books That Defined the Last Decade of Ideas</h3>
+            <p class="listicle-excerpt">A reading list for anyone who wants to understand the world they are actually living in.</p>
+            <p class="listicle-meta">Apr 15, 2026 · 5 min</p>
+          </div>
+
+          <div class="listicle-card" onclick="openArticle('list-productivity-myths')">
+            <img class="listicle-card-img" src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=700&auto=format&fit=crop&q=75" alt="Productivity and work" loading="lazy">
+            <span class="listicle-number">6</span>
+            <div class="listicle-cat">Society</div>
+            <h3 class="listicle-title">6 Productivity Myths It's Time to Stop Believing</h3>
+            <p class="listicle-excerpt">The advice is everywhere. Most of it is wrong. Here is what the research actually says.</p>
+            <p class="listicle-meta">Apr 5, 2026 · 4 min</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-wrap">
+    <!-- RECENT ARTICLES -->
+    <div class="section-header"><h2>Recent Articles</h2></div>
+
+    <div class="articles-grid" id="articles-grid">
+
+      <div class="grid-card" data-category="technology">
+        <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&auto=format&fit=crop&q=75" alt="AI thinking" loading="lazy"></div>
+        <div class="cat-tag">Technology & AI</div>
+        <h3 class="article-headline md" onclick="openArticle('ai-thinking')" style="cursor:pointer">What We Lose When Machines Do Our Thinking</h3>
+        <p class="article-excerpt" style="font-size:15px">Convenience is the trade we make. But some costs only become visible in hindsight.</p>
+        <p class="article-meta">May 12, 2026 <span>·</span> 7 min</p>
+      </div>
+
+      <div class="grid-card" data-category="technology">
+        <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&auto=format&fit=crop&q=75" alt="AI creativity" loading="lazy"></div>
+        <div class="cat-tag">Technology & AI</div>
+        <h3 class="article-headline md" onclick="openArticle('ai-creativity')" style="cursor:pointer">Can AI Truly Create, or Only Recombine?</h3>
+        <p class="article-excerpt" style="font-size:15px">The debate over machine creativity is really a debate about what creativity means at all.</p>
+        <p class="article-meta">May 3, 2026 <span>·</span> 6 min</p>
+      </div>
+
+      <div class="grid-card" data-category="health">
+        <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=600&auto=format&fit=crop&q=75" alt="Sleep and rest" loading="lazy"></div>
+        <div class="cat-tag">Health & Wellness</div>
+        <h3 class="article-headline md" onclick="openArticle('sleep-economy')" style="cursor:pointer">The Sleep Economy: Why Rest Became the New Productivity</h3>
+        <p class="article-excerpt" style="font-size:15px">Silicon Valley once bragged about four-hour nights. Now it sells eight-hour supplements.</p>
+        <p class="article-meta">May 9, 2026 <span>·</span> 5 min</p>
+      </div>
+
+      <div class="grid-card" data-category="health">
+        <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=600&auto=format&fit=crop&q=75" alt="Walking for health" loading="lazy"></div>
+        <div class="cat-tag">Health & Wellness</div>
+        <h3 class="article-headline md" onclick="openArticle('walking-cure')" style="cursor:pointer">The Walking Cure: What a Daily Stroll Does to Your Brain</h3>
+        <p class="article-excerpt" style="font-size:15px">Science keeps confirming what philosophers always suspected: thinking and walking belong together.</p>
+        <p class="article-meta">Apr 18, 2026 <span>·</span> 4 min</p>
+      </div>
+
+      <div class="grid-card" data-category="finance">
+        <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&auto=format&fit=crop&q=75" alt="Finance and money" loading="lazy"></div>
+        <div class="cat-tag">Finance</div>
+        <h3 class="article-headline md" onclick="openArticle('money-language')" style="cursor:pointer">The Language of Money Nobody Teaches You</h3>
+        <p class="article-excerpt" style="font-size:15px">Understanding compound interest, liquidity, and risk tolerance is not optional — it is survival.</p>
+        <p class="article-meta">May 5, 2026 <span>·</span> 6 min</p>
+      </div>
+
+      <div class="grid-card" data-category="finance">
+        <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&auto=format&fit=crop&q=75" alt="African investors" loading="lazy"></div>
+        <div class="cat-tag">Finance</div>
+        <h3 class="article-headline md" onclick="openArticle('africa-money')" style="cursor:pointer">Why Africa's Young Investors Are Rewriting the Rules</h3>
+        <p class="article-excerpt" style="font-size:15px">A generation skipping traditional banking and building wealth on entirely different terms.</p>
+        <p class="article-meta">Apr 30, 2026 <span>·</span> 5 min</p>
+      </div>
+
+      <div class="grid-card" data-category="travel">
+        <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=600&auto=format&fit=crop&q=75" alt="Lagos Nigeria" loading="lazy"></div>
+        <div class="cat-tag">Travel</div>
+        <h3 class="article-headline md" onclick="openArticle('lagos-dawn')" style="cursor:pointer">Lagos at Dawn: A City Before It Wakes</h3>
+        <p class="article-excerpt" style="font-size:15px">There is a particular silence between 4 and 6 am that belongs entirely to the city itself.</p>
+        <p class="article-meta">Apr 28, 2026 <span>·</span> 4 min</p>
+      </div>
+
+      <div class="grid-card" data-category="travel">
+        <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&auto=format&fit=crop&q=75" alt="Slow travel road" loading="lazy"></div>
+        <div class="cat-tag">Travel</div>
+        <h3 class="article-headline md" onclick="openArticle('slow-travel')" style="cursor:pointer">The Case for Going Nowhere Fast</h3>
+        <p class="article-excerpt" style="font-size:15px">Slow travel is not a budget choice. It is a philosophical one — and it changes what you see.</p>
+        <p class="article-meta">Apr 14, 2026 <span>·</span> 5 min</p>
+      </div>
+
+      <div class="grid-card" data-category="culture">
+        <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=600&auto=format&fit=crop&q=75" alt="Books on shelf" loading="lazy"></div>
+        <div class="cat-tag">Culture</div>
+        <h3 class="article-headline md" onclick="openArticle('books-stay')" style="cursor:pointer">The Books That Stay With You Without Permission</h3>
+        <p class="article-excerpt" style="font-size:15px">Some stories do not end when you close the cover. They simply move into a different room.</p>
+        <p class="article-meta">Apr 10, 2026 <span>·</span> 5 min</p>
+      </div>
+
+      <div class="grid-card" data-category="opinion">
+        <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=600&auto=format&fit=crop&q=75" alt="Reflection and thought" loading="lazy"></div>
+        <div class="cat-tag">Opinion</div>
+        <h3 class="article-headline md" onclick="openArticle('change-mind')" style="cursor:pointer">On the Courage It Takes to Change Your Mind</h3>
+        <p class="article-excerpt" style="font-size:15px">We treat consistency as a virtue and revision as weakness. Both assumptions are wrong.</p>
+        <p class="article-meta">Apr 22, 2026 <span>·</span> 5 min</p>
+      </div>
+
+      <div class="grid-card" data-category="society">
+        <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=600&auto=format&fit=crop&q=75" alt="Handwritten letter" loading="lazy"></div>
+        <div class="cat-tag">Society</div>
+        <h3 class="article-headline md" onclick="openArticle('long-letter')" style="cursor:pointer">The Return of the Long Letter</h3>
+        <p class="article-excerpt" style="font-size:15px">In the age of instant messages, a handwritten letter has become almost subversive.</p>
+        <p class="article-meta">Mar 30, 2026 <span>·</span> 4 min</p>
+      </div>
+
+      <div class="grid-card" data-category="culture">
+        <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=600&auto=format&fit=crop&q=75" alt="Old city architecture" loading="lazy"></div>
+        <div class="cat-tag">Culture</div>
+        <h3 class="article-headline md" onclick="openArticle('old-cities')" style="cursor:pointer">Why Old Cities Still Teach Us How to Live</h3>
+        <p class="article-excerpt" style="font-size:15px">Ancient urban design embedded wisdom we are only now rediscovering through urban studies.</p>
+        <p class="article-meta">Mar 22, 2026 <span>·</span> 5 min</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- QUOTE BAR -->
+  <div class="page-wrap">
+    <div class="quote-bar">
+      <blockquote>"Writing is how I make sense of a world that rarely explains itself."</blockquote>
+      <cite>— Dien Marvelous</cite>
+    </div>
+  </div>
+
+  <!-- NEWSLETTER -->
+  <div class="page-wrap">
+    <div class="newsletter">
+      <p class="newsletter-eyebrow">The Bloq Letter</p>
+      <h3>Words worth your inbox</h3>
+      <p>New essays delivered twice a month. No noise, no clutter — only writing that earns your time.</p>
+      <div class="nl-form">
+        <input type="email" placeholder="your@email.com" />
+        <button onclick="this.textContent='✓ Subscribed'">Subscribe</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ARTICLE VIEW -->
+<div id="article-view">
+  <div class="page-wrap">
+    <div style="padding-top: 2.5rem;">
+      <button class="back-btn" onclick="closeArticle()">Back to all articles</button>
+    </div>
+    <div id="article-content"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <p>© 2026 <strong>Dien Marvelous Bloq</strong> &nbsp;·&nbsp; All rights reserved</p>
+  <div class="footer-links">
+    <a href="#">About</a>
+    <a href="#">Archive</a>
+    <a href="#">Newsletter</a>
+    <a href="#">Contact</a>
+  </div>
+</footer>
+
+<script>
+/* ── ARTICLES DATA ── */
+const articles = {
+
+  'ai-thinking': {
+    category: 'Technology & AI',
+    title: 'What We Lose When Machines Do Our Thinking',
+    date: 'May 12, 2026',
+    readTime: '7 min read',
+    body: `
+      <p>There is a particular kind of satisfaction in solving a problem slowly. Not the triumphant click of an answer, but the long, ungainly process of working toward it: the false starts, the reconsidered assumptions, the sudden lateral leap that changes everything. This is what thinking actually feels like. And it is precisely this experience that we are, quietly and eagerly, giving away.</p>
+
+      <p>Artificial intelligence has arrived not as a replacement for human intelligence but as a supplement — or so we tell ourselves. In practice, the line is less clear. When a navigation app tells you which turn to take, you stop consulting your internal map. When a writing assistant finishes your sentences, you stop searching for your own words. The capability atrophies not because the tool is bad but because the tool is too good.</p>
+
+      <h2>The Friction We Need</h2>
+
+      <p>Cognitive scientists have long understood that difficulty is not the enemy of learning — it is its engine. "Desirable difficulties," a term coined by Robert Bjork, describes the counterintuitive truth that struggling to recall something makes it stick better than being told the answer. We learn by being slightly lost. We grow sharp through resistance.</p>
+
+      <p>The tools that make life easier are not neutral. Every time we delegate a cognitive task, we reduce our exposure to exactly the kind of productive friction that builds mental resilience. This is not technophobia. It is neuroscience.</p>
+
+      <blockquote>"The danger is not that machines will think like humans. The danger is that humans will stop thinking like humans."</blockquote>
+
+      <h2>A New Kind of Illiteracy</h2>
+
+      <p>We are approaching what some researchers are calling "cognitive outsourcing dependency" — a state in which people can no longer perform certain mental tasks without technological assistance. It mirrors the anxiety around calculators in schools a generation ago, but operates at a far more fundamental level. We are not outsourcing arithmetic. We are outsourcing judgment, synthesis, and original thought.</p>
+
+      <p>The irony is that we are doing this while feeling more capable than ever. AI tools produce fluent writing, logical arguments, and detailed analysis. We look at the output and feel competent. But the output is not ours — and over time, the muscle that would have produced something similar grows weaker.</p>
+
+      <h2>What to Do With This Knowledge</h2>
+
+      <p>None of this argues for rejecting AI tools. That would be both futile and foolish. These systems will continue to improve and to embed themselves in every layer of professional and personal life. The question is not whether to use them, but how to use them without surrendering what makes you distinctly human.</p>
+
+      <p>The answer may lie in deliberate inefficiency. Choose, sometimes, to work without the assistant. Write the first draft before asking for help with the second. Solve the problem before checking the solution. Navigate without the app, just once, to remind yourself that you still can.</p>
+
+      <p>Thinking is not just a means to an end. It is the practice through which we become who we are. And like all practices, it requires regular exercise. What we delegate too readily, we eventually forget how to do. And what we forget how to do, we eventually forget we ever could.</p>
+    `
+  },
+
+  'ai-creativity': {
+    category: 'Technology & AI',
+    title: 'Can AI Truly Create, or Only Recombine?',
+    date: 'May 3, 2026',
+    readTime: '6 min read',
+    body: `
+      <p>The question sounds philosophical until you realize it has urgent practical stakes. As AI-generated art fills galleries, music streaming platforms, and film studios, we are forced to confront something we previously took for granted: our understanding of what creativity actually is.</p>
+
+      <p>The skeptic's position is intuitive. Every AI image, poem, or symphony is statistically derived from human-made work. There is no blank canvas — only a vast, weighted average of everything humanity has already expressed. The machine cannot surprise itself. It has no desires, no fears, no mortality pressing against its output.</p>
+
+      <h2>The Recombination Argument</h2>
+
+      <p>But consider the counterargument. Human creativity, on close inspection, is also largely recombinatorial. Every artist cites influences. Every writer has absorbed thousands of other writers. The jazz musician improvises within inherited scales. The architect designs within cultural conventions, gravitational constraints, and the accumulated weight of every building ever made. What makes human creativity special is not that it comes from nowhere — it doesn't — but the nature of the recombination itself.</p>
+
+      <p>The novelist does not simply average prior novels. She selects, distorts, rejects, rebels, mourns, and obsesses. Her combinations are not random but shaped by something personal — a particular experience of being alive. That is the ingredient no model currently possesses.</p>
+
+      <blockquote>"Creativity is not the absence of influence. It is the transformation of influence into something personal."</blockquote>
+
+      <h2>Where the Debate Actually Leads</h2>
+
+      <p>Perhaps the more interesting question is not whether AI can truly create, but what the proliferation of AI-generated work does to human creativity. If the market is flooded with competent, free, and instantaneous content, what happens to the human artist willing to spend years on a single novel?</p>
+
+      <p>The optimistic answer is that scarcity shifts. What becomes rare and therefore precious is not technique — which machines have now democratized — but genuine voice, lived experience, and the messy, irreducible fact of a human life being honestly expressed. Art made with suffering, with time, with stakes. That, no algorithm can replicate.</p>
+
+      <p>The outcome depends partly on what we, as an audience, choose to value. And that choice — unlike the art itself — is still entirely ours to make.</p>
+    `
+  },
+
+  'sleep-economy': {
+    category: 'Health & Wellness',
+    title: 'The Sleep Economy: Why Rest Became the New Productivity',
+    date: 'May 9, 2026',
+    readTime: '5 min read',
+    body: `
+      <p>Not long ago, the most admired people in certain professional circles were those who needed the least sleep. Four hours was a boast. Six was acceptable. Eight was for the lazy or the old. Sleep deprivation was worn like a badge, proof of commitment, of hunger, of serious intent.</p>
+
+      <p>Something has shifted dramatically in the decade since. The same wellness culture that once celebrated sleeplessness now sells magnesium supplements, weighted blankets, sleep trackers, and $30-a-bottle melatonin gummies. Sleep optimization has become a billion-dollar industry. What changed?</p>
+
+      <h2>The Science Caught Up</h2>
+
+      <p>The research, frankly, was always there. Studies consistently found that chronic sleep deprivation impairs cognitive function, emotional regulation, immune response, and long-term cardiovascular health. What changed was not the science but who was paying attention to it. When productivity culture realized that sleep-deprived workers make worse decisions, lose more time to illness, and burn out faster, the calculation changed.</p>
+
+      <p>Sleep became, in the language of optimization culture, a performance variable. Rest was reframed not as the absence of productivity but as its precondition. CEOs began talking about their sleep schedules the way they once talked about their workout regimens. Eight hours became aspirational.</p>
+
+      <blockquote>"We discovered that the brain does not just rest during sleep. It consolidates memory, clears metabolic waste, and rebuilds the circuitry that governs judgment."</blockquote>
+
+      <h2>The Commodification Problem</h2>
+
+      <p>There is something worth examining in the way rest has been repackaged for sale. The sleep economy does not simply help people sleep — it creates anxiety around sleep quality that drives further consumption. The act of monitoring your sleep with a wearable device can, paradoxically, make sleep worse. A condition called orthosomnia — anxiety caused by obsessing over sleep data — is now recognized by sleep clinicians.</p>
+
+      <p>The deepest insight is also the simplest: the body already knows how to sleep. What it needs is not a supplement or a gadget but less of what disrupts it — less light at night, less caffeine, less screen time, less cortisol from a life too full of urgency. The wellness industry can point you toward the problem. The solution, as always, requires living differently.</p>
+    `
+  },
+
+  'walking-cure': {
+    category: 'Health & Wellness',
+    title: 'The Walking Cure: What a Daily Stroll Does to Your Brain',
+    date: 'April 18, 2026',
+    readTime: '4 min read',
+    body: `
+      <p>Aristotle lectured while walking. Nietzsche said that only thoughts arrived on foot deserved trust. Darwin built a "thinking path" — a gravel loop he walked every day to solve problems. Charles Dickens walked up to thirty kilometres nightly through London when he could not sleep. The connection between walking and thinking is not a metaphor. It is physiology.</p>
+
+      <p>Neuroscience has spent the last two decades documenting what philosophers intuited by instinct. Walking increases blood flow to the prefrontal cortex — the seat of creativity, planning, and decision-making. It triggers the release of BDNF (brain-derived neurotrophic factor), a protein that supports the growth and maintenance of neurons. It reduces cortisol. It activates the default mode network, the brain system associated with imagination and introspection.</p>
+
+      <h2>The Stanford Creativity Study</h2>
+
+      <p>A landmark study from Stanford University found that walking increased creative output by an average of 81 percent compared to sitting. Crucially, the effect was not limited to outdoor walking — treadmill walking in a room facing a blank wall produced similar results. The movement itself, not the scenery, was the catalyst.</p>
+
+      <p>This matters because it contradicts the dominant workspace model of our time: the chair, the screen, the stillness. Knowledge work is sedentary work, and sedentary work, it turns out, is cognitively self-limiting. We sit to think, and sitting makes us worse at it.</p>
+
+      <blockquote>"The mind is not a computer sitting quietly on a desk. It is an organ evolved for movement, and it works best when the body moves."</blockquote>
+
+      <h2>Making It a Practice</h2>
+
+      <p>You do not need a thinking path or thirty kilometres. Research suggests that even a ten-minute walk is enough to shift your cognitive state. The prescription is modest: walk before a difficult conversation, after receiving bad news, when a problem will not resolve itself at your desk. Walk without your phone occasionally — which is to say, without an escape route from your own thoughts.</p>
+
+      <p>The oldest medicine is still, in many ways, the best. Not because ancient wisdom is always right, but because the human body has not changed nearly as fast as the world around it. We are animals built for motion. When we move, we think better. It is as uncomplicated as that.</p>
+    `
+  },
+
+  'money-language': {
+    category: 'Finance',
+    title: 'The Language of Money Nobody Teaches You',
+    date: 'May 5, 2026',
+    readTime: '6 min read',
+    body: `
+      <p>We teach children to read, write, and solve for x. We teach them about ancient civilizations and the periodic table. We do not, in any systematic way, teach them how money actually works. The consequences of this omission follow people through their entire adult lives — in debt decisions made without understanding interest, in savings never started because the mechanisms were never explained, in wealth transferred upward to those who did know the language.</p>
+
+      <p>The language of money is not complicated. But like any language, you cannot navigate the territory without learning it first. Here are the terms that matter most — and what they actually mean in a life.</p>
+
+      <h2>Compound Interest: The Force That Works For or Against You</h2>
+
+      <p>Albert Einstein reportedly called compound interest the eighth wonder of the world, though the attribution is almost certainly apocryphal. Regardless of who said it, the mathematics is real. Compound interest means earning interest on your interest — or, in the case of debt, paying interest on your interest. Over time, this creates exponential growth in either direction.</p>
+
+      <p>A ₦500,000 investment earning 10% annually becomes not ₦1,000,000 after ten years but ₦1,296,871. The extra ₦296,871 is pure compounding. Conversely, a ₦500,000 debt at 24% annual interest, left unpaid, becomes ₦4,435,461 after ten years. The force is neutral. Its direction depends on which side of it you stand.</p>
+
+      <h2>Liquidity: The Value of Being Able to Move</h2>
+
+      <p>Liquidity describes how quickly an asset can be converted to cash without significant loss of value. Cash itself is perfectly liquid. A house is illiquid — it may be worth a great deal, but you cannot spend it without a lengthy, costly process of sale. This distinction matters enormously in a crisis.</p>
+
+      <p>The common financial advice to maintain three to six months of expenses in liquid savings exists precisely because life does not wait for assets to be sold. Medical emergencies, job losses, and urgent opportunities do not offer grace periods.</p>
+
+      <blockquote>"Financial literacy is not about becoming wealthy. It is about not being taken advantage of by a world that already speaks the language."</blockquote>
+
+      <h2>Risk Tolerance: Knowing Yourself as an Investor</h2>
+
+      <p>Every investment involves a trade-off between potential return and potential loss. Understanding your own relationship to that trade-off — your risk tolerance — is not a soft, psychological exercise. It is a financial necessity. An investor who cannot emotionally survive a 40% portfolio decline should not be holding investments that can decline 40%. The most elegant investment strategy is useless if you abandon it at the worst possible moment.</p>
+
+      <p>Financial literacy does not promise wealth. It promises agency. The ability to make informed decisions with your own money — to understand what is being offered to you, what it costs, and what it is actually worth — is one of the most practical forms of freedom available to an ordinary person. It begins, like all fluency, with learning the words.</p>
+    `
+  },
+
+  'africa-money': {
+    category: 'Finance',
+    title: 'Why Africa\'s Young Investors Are Rewriting the Rules',
+    date: 'April 30, 2026',
+    readTime: '5 min read',
+    body: `
+      <p>In Lagos, Nairobi, Accra, and Kigali, something is happening that the established financial world has been slow to notice. A generation of Africans born between 1990 and 2005 — many of them the first in their families to attend university, the first to have a smartphone before a bank account — are building wealth on terms that look nothing like those of their parents.</p>
+
+      <p>They are skipping the traditional bank branch entirely. They are investing through mobile apps. They are diversifying into US equities via fintech platforms, buying cryptocurrency with careful eyes on inflation hedges, funding each other's ventures through digital cooperatives, and pooling resources in WhatsApp groups that function like informal investment clubs.</p>
+
+      <h2>The Infrastructure Gap Became an Advantage</h2>
+
+      <p>Paradoxically, the underdevelopment of traditional financial infrastructure in parts of Africa created room for innovation. In countries where banks were inaccessible, expensive, or untrustworthy, mobile money filled the gap. M-Pesa in Kenya moved billions of shillings through mobile phones years before similar systems existed in Europe. The necessity of building around broken systems produced builders who were not constrained by deference to those systems.</p>
+
+      <p>The same dynamic is playing out in investing. Without decades of experience in traditional markets to anchor their assumptions, young African investors are genuinely open to new models. They understand intuitively that the old rules — save in a bank account, buy property, retire at sixty-five — were written for a different economy in a different era.</p>
+
+      <blockquote>"We are not waiting for the system to include us. We are building something different."</blockquote>
+
+      <h2>The Risks Are Real</h2>
+
+      <p>None of this is without danger. Cryptocurrency markets are volatile in ways that can devastate undiversified portfolios. Regulatory frameworks for fintech investment platforms in many African countries remain thin, leaving users with limited recourse if a platform fails. The same optimism that makes young investors bold can make them credulous — fraudulent investment schemes continue to cost Africans billions annually.</p>
+
+      <p>The story of Africa's young investors is still being written. Its ending depends partly on the regulatory and institutional infrastructure that governments build, and partly on the financial literacy this generation develops alongside its enthusiasm. What is already certain is that this generation is not waiting for someone else to solve the problem. They are, as they have always had to be, solving it themselves.</p>
+    `
+  },
+
+  'lagos-dawn': {
+    category: 'Travel',
+    title: 'Lagos at Dawn: A City Before It Wakes',
+    date: 'April 28, 2026',
+    readTime: '4 min read',
+    body: `
+      <p>There is a particular silence between 4 and 6 in the morning that belongs entirely to Lagos. Not the silence of absence — the city is never fully empty — but the silence of held breath. The generators are quiet. The hawkers have not yet appeared. The yellow danfos are only just beginning to gather at their staging points, their drivers drinking tea and speaking in low voices, as if they too feel the fragility of the hour.</p>
+
+      <p>I have made a habit of being awake for this. Not because I am a morning person by nature — I am not — but because Lagos in full daylight is an argument at full volume, and there are things you can only see when the argument pauses.</p>
+
+      <h2>The Water</h2>
+
+      <p>Lagos is an island city, or rather a city of islands, its edges constantly negotiating with the lagoon. At dawn, the water is the colour of pewter, and the fishing boats that left at midnight are beginning to return. The fishermen work in practised silence, hauling nets with a rhythm that predates the city by centuries. They are the oldest thing in Lagos — or rather, what they do is. The city has grown up around their practice without much acknowledging it.</p>
+
+      <p>If you stand on the waterfront at Makoko before the morning mist lifts, you see something that does not photograph properly: the stilt houses rising from the lagoon, smoke from cooking fires drifting horizontally, a child paddling a canoe with an authority that suggests he has been doing this since before he could walk. Lagos, for this one hour, is not a megacity of twenty million people. It is something much older and stranger.</p>
+
+      <blockquote>"Every great city has a version of itself that only exists before it fully wakes. In Lagos, that version is more vivid than most."</blockquote>
+
+      <h2>The Transition</h2>
+
+      <p>By 6:30, the hour is breaking. The muezzin calls from the mosque near Lagos Island, and from across the water, somewhere in the mainland, a church bell follows in reply — a daily ecumenical conversation that has been happening so long it no longer surprises anyone. The traffic begins, first as a trickle and then, with alarming speed, as the full roar of a city that runs at a particular pitch of controlled chaos.</p>
+
+      <p>You could resent the noise. Or you could understand it as what it is: the sound of twenty million people in motion, pursuing something. Lagos does not do anything quietly, and on balance, this is a virtue. But for that one hour before it begins — that hour belongs to the water and the boats and the old persistence of things that will outlast every skyscraper in the skyline.</p>
+    `
+  },
+
+  'slow-travel': {
+    category: 'Travel',
+    title: 'The Case for Going Nowhere Fast',
+    date: 'April 14, 2026',
+    readTime: '5 min read',
+    body: `
+      <p>The trip that changed how I travel was, by conventional metrics, a failure. I had intended to visit five countries in two weeks. I made it to one. A chest infection in Lisbon, a recommendation from a pharmacist, and a small apartment in the Alfama neighbourhood conspired to keep me in Portugal for all fourteen days. I was furious for the first three. By the end, I had stopped wanting to leave.</p>
+
+      <p>Slow travel is not, fundamentally, about travel at all. It is about what you are trying to get from leaving home. If the goal is to say you have been somewhere — to add a pin to a map, to post a photograph at a landmark — then speed is rational. There is no need to linger. But if the goal is to understand something, to actually feel the weight of a different life even briefly, then slowing down is not a luxury. It is the method.</p>
+
+      <h2>The Paradox of Tourist Efficiency</h2>
+
+      <p>The modern travel industry is extraordinarily good at compressing experience into schedules. Fourteen countries in ten days. Seven major attractions before lunch. Every hour accounted for. The photographs are excellent. The memory, curiously, is thin.</p>
+
+      <p>Psychologists who study autobiographical memory note that novel experiences are encoded more richly than routine ones — but that after a certain density of novelty, the episodes blur together. The brain, overwhelmed, stops distinguishing them. A week of intense sightseeing may produce fewer distinct memories than a week in one place where you bought bread from the same bakery every morning and learned the baker's name.</p>
+
+      <blockquote>"To travel fast is to skim the surface of the world. To travel slowly is to become, briefly, part of it."</blockquote>
+
+      <h2>What Staying Reveals</h2>
+
+      <p>In Lisbon's Alfama, I learned things that no guidebook contains, because no guidebook can. I learned which café opens early for the workers before the tourists arrive, and how the coffee tastes different there, stronger and more serious. I learned that the fado music I had been told about as a tourist spectacle was, in certain small venues on certain nights, still something raw and close to grief. I learned the specific, unremarkable pleasure of becoming temporarily a regular somewhere — known, expected, part of the furniture.</p>
+
+      <p>None of this required anything special. It required only time and the willingness to be less ambitious about how far my feet could carry me. Slow travel is, in the end, a wager: that depth is worth more than breadth, that one place known well will stay with you longer than five places photographed and departed. It is a bet I have not stopped winning since Lisbon.</p>
+    `
+  },
+
+  'books-stay': {
+    category: 'Culture',
+    title: 'The Books That Stay With You Without Permission',
+    date: 'April 10, 2026',
+    readTime: '5 min read',
+    body: `
+      <p>Some books are finished and then they finish. You close the cover, you place them on the shelf, and they stay there, inert, waiting for the next reader. Other books refuse this arrangement entirely. You close them and they follow you — into the shower, into conversations, into the particular angle of light on a Tuesday afternoon three years later that suddenly, unexpectedly, becomes the exact light described on page 47.</p>
+
+      <p>The books that stay with you without your permission are not always the ones critics most admire. They are not always the ones you would name in polite company. They are often embarrassingly old, or obscure, or out of fashion. They find you rather than the reverse — arriving at precisely the life-stage for which they were always, somehow, intended.</p>
+
+      <h2>The Chemistry of Resonance</h2>
+
+      <p>Why certain books attach themselves to certain readers at certain times is one of the more interesting unanswered questions in literary experience. Part of it is timing — a book about grief means something entirely different before and after loss. Part of it is what you are already carrying. The book does not introduce the feeling; it names something that was already there, unnamed and uncomfortable, and the relief of recognition is what makes it lodge.</p>
+
+      <p>The British writer and bookseller Shaun Bythell describes this as books "reading you back" — the uncanny experience of finding yourself in a story, not as wish-fulfilment but as precise description. The plot and setting may be entirely unlike your life. The emotional truth may be closer than anything you have articulated yourself.</p>
+
+      <blockquote>"The books that matter are not the ones you choose. They are the ones that choose you, at the exact moment you needed the choosing."</blockquote>
+
+      <h2>What They Do After</h2>
+
+      <p>The most interesting thing about the books that stay is what they continue to do long after reading. They act as filters — you see the world slightly differently through them. They become reference points for emotions you otherwise lack language for. You find yourself describing an experience to a friend by saying "it was like that moment in..." and your friend either knows exactly what you mean or they don't, and their answer tells you something about both of you.</p>
+
+      <p>Literature's highest function may be precisely this: the provision of company. Not comfort, necessarily. Not answers. But the knowledge that someone, at some point, felt this specific thing enough to write it down. The book that stays with you is the book that makes you less alone in the particular, private country of your own experience.</p>
+    `
+  },
+
+  'change-mind': {
+    category: 'Opinion',
+    title: 'On the Courage It Takes to Change Your Mind',
+    date: 'April 22, 2026',
+    readTime: '5 min read',
+    body: `
+      <p>We have built entire social architectures around the virtue of consistency. Politicians who change positions are called flip-floppers. Professionals who revise their views are sometimes suspected of weakness. Certainty is rewarded; revision is penalized. The person who says "I was wrong, and here is why I now think differently" occupies one of the most socially precarious positions available.</p>
+
+      <p>This is exactly backwards. The willingness to update your beliefs in response to new evidence or better arguments is not a character flaw. It is the definition of intellectual honesty, and it is, in the contemporary landscape, a genuinely courageous act.</p>
+
+      <h2>What Changing Your Mind Actually Requires</h2>
+
+      <p>Changing your mind is not simply an intellectual exercise. It is an identity event. Most of us do not hold our opinions lightly — we identify with them, use them to define ourselves, build communities around them. To revise a belief is to revise, at least slightly, who you are. This is why belief change is effortful in ways that go beyond information processing. It requires a willingness to experience temporary disorientation in exchange for longer-term accuracy.</p>
+
+      <p>The psychologist Daniel Kahneman, in his work on cognitive bias, distinguishes between the fast, automatic thinking that generates initial impressions and the slow, deliberate thinking that allows for revision. We are biased toward the fast — confirmation bias leads us to seek evidence that supports what we already believe. Changing your mind means catching yourself in this pattern and doing the slower, harder work anyway.</p>
+
+      <blockquote>"The truly intelligent person is not the one who is right most often. It is the one who is wrong least long."</blockquote>
+
+      <h2>The Cost of Not Changing</h2>
+
+      <p>The alternative to intellectual flexibility is a particular kind of rigidity that mistakes consistency for integrity. History is full of people who held positions long past the evidence for them, not because they had evaluated the alternatives and found them wanting, but because changing would have required admitting that they were once wrong. The personal cost of admission felt higher than the cost of continued error. It rarely is.</p>
+
+      <p>To change your mind, in the end, is to prefer truth to comfort. It is to say: this matters more than looking stable. I would rather be accurate than consistent. In a world that rewards performance over substance, this choice — small and private as it often is — is one of the more radical things a person can do.</p>
+    `
+  },
+
+  'long-letter': {
+    category: 'Society',
+    title: 'The Return of the Long Letter',
+    date: 'March 30, 2026',
+    readTime: '4 min read',
+    body: `
+      <p>A friend of mine, a doctor in her early thirties, started writing letters in 2024. Not emails. Letters — handwritten on good paper, folded into envelopes, addressed with care, sent to seven people who were important to her. She received, over the following months, six replies. Three of those correspondences are still ongoing. She calls it the best decision she has made in years.</p>
+
+      <p>There is a revival happening that the metrics of the digital world cannot easily capture. Fountain pen sales have quietly grown for a decade. Stationery shops that should have closed have not. A small but meaningful number of people are choosing, deliberately and at some inconvenience to themselves, to communicate in a medium that requires them to slow down, think before writing, and accept that they cannot edit what they have already sealed into an envelope.</p>
+
+      <h2>What the Letter Does That the Message Cannot</h2>
+
+      <p>A text message exists in a permanent state of availability — you can read it anywhere, reply immediately, delete it, revisit it. It asks nothing of you as a physical object. A letter is different. It arrives, and its arrival is an event. Someone held this paper. Someone thought about what to say, and then said it by hand, in a form that cannot be copied and pasted or forwarded without effort. It carries, in a way that pixels cannot, the fact of its own making.</p>
+
+      <p>The content also tends to be different. Digital communication optimizes for speed, and speed selects for the immediate, the reactive, the brief. A letter, by contrast, is a commitment. You do not sit down to write a letter about something trivial. The medium invites gravity, or at least seriousness. People write about their lives — actually write about them — in ways they rarely do in messages.</p>
+
+      <blockquote>"A letter is proof that someone sat still long enough to think about you. In our current moment, this is not a small thing."</blockquote>
+
+      <h2>What It Signals</h2>
+
+      <p>There may be something else at work, too. In choosing the slower, more effortful form of communication, the letter-writer sends a signal that the recipient cannot misread: you are worth this. Not because the content could not have been emailed — it could — but because the choice to write by hand says something that the content itself cannot fully say. It is, in the most literal sense, a gift of time.</p>
+
+      <p>The letter is not coming back as a dominant form of communication. It doesn't need to. What it is doing is finding its proper place: as a practice for the relationships that matter enough to deserve it, and as a counterweight to the beautiful, exhausting, frictionless velocity of everything else.</p>
+    `
+  },
+
+  'old-cities': {
+    category: 'Culture',
+    title: 'Why Old Cities Still Teach Us How to Live',
+    date: 'March 22, 2026',
+    readTime: '5 min read',
+    body: `
+      <p>The modern city is optimised for movement. Wide roads for cars, efficient grids, everything designed to get you from one destination to another with minimum friction and maximum speed. It is enormously effective at what it attempts. And it produces, with remarkable reliability, environments where people feel lonely even in dense proximity to each other.</p>
+
+      <p>Ancient cities were optimised for something different. The winding medinas of Fez and Marrakech, the compressed neighbourhoods of Siena, the intimate alleyways of old Kyoto — these were not designed for automobiles or for efficiency in the industrial sense. They were designed, consciously or not, for human encounter. They create the conditions in which strangers become familiar, in which community is not an aspiration but an inevitability of geography.</p>
+
+      <h2>The Urbanist Rediscovery</h2>
+
+      <p>Contemporary urban planners are spending considerable intellectual effort rediscovering what pre-industrial city builders knew by instinct. Jane Jacobs, whose 1961 book "The Death and Life of Great American Cities" remains the field's most important text, argued that mixed-use, fine-grained, pedestrian-scaled urban environments produce social cohesion and human flourishing in ways that large-scale modernist planning fundamentally cannot.</p>
+
+      <p>The evidence from decades of research supports her. Walkable neighbourhoods with short blocks, mixed uses, and human-scale buildings produce higher levels of social trust, lower rates of depression and anxiety, and greater civic engagement than car-dependent suburban environments designed for isolation and efficiency.</p>
+
+      <blockquote>"The old city was not beautiful by accident. It was the accumulated result of generations of people learning, through trial and error, what kinds of spaces make human beings thrive."</blockquote>
+
+      <h2>What We Can Still Learn</h2>
+
+      <p>You do not need to live in Siena to take the lesson. The principle — that human beings flourish in places designed for encounter rather than transit — applies everywhere. The neighbourhood cafe where the same people appear every morning. The market street where commerce and conversation happen simultaneously. The public square where children play under the loose supervision of people who are not their parents but who feel, in some diffuse way, responsible.</p>
+
+      <p>These are not nostalgic fantasies. They are patterns that produce measurable improvements in human wellbeing, and they are learnable. The old cities do not offer blueprints — their specific forms belong to their specific contexts. But they offer principles, hard-won over centuries, about what it means to build a place where people actually want to live. In that, they remain our most useful teachers.</p>
+    `
+  },
+
+  /* ── LISTICLES ── */
+
+  'list-ai-tools': {
+    category: 'Technology & AI · Listicle',
+    title: '8 AI Tools That Are Quietly Changing How We Work',
+    date: 'May 11, 2026',
+    readTime: '5 min read',
+    isListicle: true,
+    intro: `The noise around artificial intelligence is enormous. Beneath it, a smaller and more practical conversation is happening among professionals who have actually integrated these tools into their daily work. This is not a ranking of the most powerful models. It is a list of tools that are earning their place — not through spectacle, but through genuine, repeatable utility.`,
+    items: [
+      { title: 'Claude (Anthropic)', body: 'For long-form reasoning, nuanced writing, and research synthesis, Claude has emerged as the tool of choice for writers, researchers, and strategists who need more than a quick answer. Its ability to hold extended context and reason across it makes it especially valuable for complex, multi-part work.' },
+      { title: 'Perplexity AI', body: 'A search engine rebuilt for the AI era. Where traditional search returns links, Perplexity returns synthesised answers with citations. It is not perfect, but for research tasks that used to require scanning ten tabs simultaneously, it has meaningfully reduced the friction.' },
+      { title: 'Cursor', body: 'A code editor built around AI assistance. Unlike bolt-on AI plugins, Cursor was designed from the ground up for AI-assisted development. Developers who have switched describe a qualitative shift in how quickly they can move from idea to working code.' },
+      { title: 'Otter.ai', body: 'Transcription and meeting notes, done invisibly. Otter joins your calls, transcribes them in real time, generates summaries, and lets you search across your entire meeting history. The hours recovered from manual note-taking add up faster than most people expect.' },
+      { title: 'Runway ML', body: 'Video editing and generation for people who are not video editors. Runway has made capabilities that previously required specialist skills — background removal, motion tracking, AI-generated footage — accessible to anyone with a browser and a creative brief.' },
+      { title: 'Notion AI', body: 'For teams already living in Notion, the AI layer adds genuine value: drafting, summarising, translating, and generating structured documents from rough notes. Its power comes from being embedded in the workspace rather than sitting outside it.' },
+      { title: 'ElevenLabs', body: 'Voice synthesis that has crossed the threshold from interesting to useful. Podcasters, content creators, and accessibility-focused developers are using ElevenLabs to produce natural-sounding voiceovers at a fraction of the traditional cost and timeline.' },
+      { title: 'Gamma', body: 'Presentations, rebuilt. Gamma generates well-structured, visually coherent slide decks from a prompt or outline. For people who spend hours fighting with slide software to produce something merely adequate, it removes the most painful part of the process.' }
+    ]
+  },
+
+  'list-wellness-habits': {
+    category: 'Health & Wellness · Listicle',
+    title: '7 Small Habits That Science Says Will Extend Your Life',
+    date: 'May 7, 2026',
+    readTime: '4 min read',
+    isListicle: true,
+    intro: `Longevity research has, in recent years, moved from the fringes of geroscience into the mainstream. What it consistently finds is both reassuring and slightly inconvenient: the things that add years to life are neither expensive nor exotic. They are small, repeatable behaviours that compound over decades. Here are seven of the most robustly supported.`,
+    items: [
+      { title: 'Walk at least 7,000 steps a day', body: 'A landmark study published in JAMA Network Open found that walking 7,000 or more steps daily was associated with a 50–70% lower risk of mortality compared to fewer steps. The finding holds across age groups and does not require the steps to be consecutive — accumulated movement across the day counts.' },
+      { title: 'Sleep seven to nine hours consistently', body: 'Chronic sleep deprivation is associated with elevated risk of cardiovascular disease, type 2 diabetes, obesity, and cognitive decline. Consistency matters as much as duration: irregular sleep schedules — sleeping late on weekends and early on weekdays — disrupt circadian rhythms independently of total hours.' },
+      { title: 'Eat mostly plants, most of the time', body: 'The dietary pattern most consistently linked to longevity is not any specific diet but a general orientation: high in vegetables, legumes, whole grains, and fruit; low in ultra-processed foods and red meat. Blue Zone populations across Okinawa, Sardinia, and Nicoya differ widely in specific foods but share this general architecture.' },
+      { title: 'Maintain strong social connections', body: 'Loneliness is now classified by major health organisations as a risk factor equivalent to smoking 15 cigarettes a day. Social connection — not quantity of contacts but depth of relationship — is one of the most powerful predictors of both longevity and quality of life in later years.' },
+      { title: 'Do resistance training at least twice a week', body: 'Muscle mass declines naturally with age, but this decline is substantially modifiable through strength training. Maintaining muscle mass into later decades is associated with lower rates of fall-related injury, better metabolic health, and improved cognitive function.' },
+      { title: 'Manage stress with a daily practice', body: 'Chronic psychological stress accelerates cellular ageing through a measurable mechanism: the shortening of telomeres. Practices that demonstrably reduce cortisol — including meditation, deep breathing, time in nature, and regular exercise — appear to slow this process.' },
+      { title: 'Don\'t smoke, and drink alcohol minimally', body: 'The research here is unambiguous. Smoking remains the single most modifiable cause of premature death globally. Alcohol, long assumed to carry cardiovascular benefits in moderation, is increasingly recognised as harmful at any level — the earlier moderation advice was partly confounded by former heavy drinkers abstaining for health reasons.' }
+    ]
+  },
+
+  'list-money-rules': {
+    category: 'Finance · Listicle',
+    title: '10 Money Rules the Wealthy Follow That Nobody Talks About',
+    date: 'May 2, 2026',
+    readTime: '6 min read',
+    isListicle: true,
+    intro: `Financial advice is everywhere, and most of it is generic. The principles below are less often articulated, but they appear with remarkable consistency among people who have built lasting wealth across different industries, geographies, and starting points. They are not tips. They are orientations — ways of thinking about money that, over time, produce different outcomes.`,
+    items: [
+      { title: 'They pay themselves first, automatically', body: 'Before any spending decision is made, a fixed percentage of income moves to savings or investment automatically. This is not discipline — it is architecture. By removing the decision entirely, they eliminate the most common point of failure in personal finance.' },
+      { title: 'They know the difference between assets and expenses', body: 'A car, a luxury watch, and a second home may all feel like investments. They are not. An asset generates income or appreciates reliably. An expense costs money to maintain. The wealthy are ruthless about this distinction, even when the expense is pleasurable.' },
+      { title: 'They let compound interest work across decades, not years', body: 'Wealth built through investment compounds exponentially — but the exponential curve is backloaded. The first decade looks discouraging. The third decade looks miraculous. Most people abandon the process before reaching the part where it accelerates.' },
+      { title: 'They spend lavishly on a few things and frugally on everything else', body: 'Research on high-net-worth individuals consistently finds that they are not uniform spenders. They identify two or three categories that matter deeply to them and spend freely there, while being surprisingly frugal in areas they do not care about. This is intentional allocation, not accidental.' },
+      { title: 'They treat their network as infrastructure', body: 'The quality of relationships around a person — professionally, intellectually, and personally — is a better predictor of financial trajectory than almost any technical skill. This is not cynical; it is the recognition that most significant opportunities arrive through people, not applications.' },
+      { title: 'They are comfortable with calculated risk', body: 'Wealth rarely accumulates through entirely safe choices. The wealthy are not reckless — they are skilled at evaluating asymmetric bets: situations where the downside is bounded but the upside is not. They also diversify not to eliminate risk but to ensure no single bet can end them.' },
+      { title: 'They read their contracts', body: 'This sounds mundane. It is enormously consequential. The wealth transfer that happens through poorly understood financial agreements — mortgages, insurance policies, employment contracts, investment terms — is staggering. Understanding what you are signing is a form of self-protection that compound over a lifetime.' },
+      { title: 'They have multiple income streams', body: 'A single income source, however large, is a fragile financial structure. The wealthy systematically build additional streams: investments, side projects, royalties, rental income, consulting. The goal is not to be busy — it is to ensure that no single point of failure can dramatically alter their financial position.' },
+      { title: 'They hire for their weaknesses early', body: 'Accountants, lawyers, and financial advisors cost money. They cost far less than the errors their absence allows. Wealthy individuals tend to engage professional advisors much earlier than others believe is necessary — before the complexity justifies it, not after.' },
+      { title: 'They redefine what "enough" means on their own terms', body: 'Perhaps the least obvious entry on this list. The accumulation of wealth without a definition of sufficiency produces a particular kind of anxiety — the feeling of never quite arriving. The people who seem most genuinely comfortable with their financial lives are those who have made a deliberate decision about what enough looks like, and built toward it intentionally.' }
+    ]
+  },
+
+  'list-african-destinations': {
+    category: 'Travel · Listicle',
+    title: '9 African Destinations That Should Be on Every Serious Traveller\'s List',
+    date: 'April 25, 2026',
+    readTime: '5 min read',
+    isListicle: true,
+    intro: `Africa is the most geographically diverse continent on earth — 54 countries, every climate zone, ecosystems ranging from the Sahara to the Congo Basin to the Drakensberg highlands. What follows is not a greatest-hits list of safari destinations. It is a selection of places that reward the traveller who pays attention, chosen for the specificity and depth of experience they offer.`,
+    items: [
+      { title: 'Marrakech, Morocco', body: 'The medina of Marrakech is a masterclass in sensory complexity — a medieval city that has absorbed centuries of trade routes, dynasties, and cultures without losing its essential character. The Djemaa el-Fna square at dusk, with its storytellers and musicians and the smell of grilling meat, is one of the great urban experiences on the planet.' },
+      { title: 'Kigali, Rwanda', body: 'The cleanest, most orderly capital city in Africa — and one of the safest. Kigali is also a city that has rebuilt itself from catastrophe with a determination that is visible in its infrastructure, its institutions, and the striking self-possession of its people. It is not a difficult place to visit. It is a challenging place to understand.' },
+      { title: 'The Omo Valley, Ethiopia', body: 'One of the last places on earth where radically different ways of life exist in close proximity — pastoralist communities whose practices, languages, and aesthetics remain largely intact. This is not a place for casual tourism; it requires preparation, a good guide, and a serious commitment to respectful engagement.' },
+      { title: 'Zanzibar, Tanzania', body: 'Stone Town is a UNESCO World Heritage site for reasons that become immediately obvious upon walking its alleys — the layered architectural evidence of Arab, Persian, Indian, and Swahili influences creates something that exists nowhere else. The surrounding ocean is, separately, among the most spectacular in the world.' },
+      { title: 'Dakar, Senegal', body: 'The cultural capital of West Africa in a very real sense: its art scene, music scene, restaurant scene, and intellectual life punch far above the city\'s size. The IFAN museum houses one of the finest collections of traditional African art on the continent, and the Gorée Island ferry crossing remains one of the most historically significant short journeys anywhere.' },
+      { title: 'The Okavango Delta, Botswana', body: 'A river that flows inland and vanishes into the Kalahari Desert, creating a vast inland delta that supports extraordinary biodiversity. Unlike the heavily trafficked game reserves of East Africa, the Okavango rewards patience — the wildlife reveals itself gradually, and the experience is closer to immersion than performance.' },
+      { title: 'Cape Town, South Africa', body: 'Possibly the most visually spectacular city in the world, set between Table Mountain and two oceans. Its complexity — the beauty and the inequality, the extraordinary food and wine culture alongside the legacy of apartheid — makes it a place that asks more of you than most cities do.' },
+      { title: 'Lamu, Kenya', body: 'A small island off the Kenyan coast where no cars are permitted and daily life still moves at a pre-industrial pace. The old town is one of the best-preserved Swahili settlements in East Africa. Lamu rewards the traveller willing to go slowly and resist the impulse to optimise their time.' },
+      { title: 'Lagos, Nigeria', body: 'Not for the faint of heart, and worth every moment. Lagos is the most energetic city in Africa — a megacity of extraordinary contradictions, terrible infrastructure, brilliant art, astonishing food, and a creative class that is among the most vital in the world. You will not be bored. You will often be overwhelmed. You will not forget it.' }
+    ]
+  },
+
+  'list-books-decade': {
+    category: 'Culture · Listicle',
+    title: '12 Books That Defined the Last Decade of Ideas',
+    date: 'April 15, 2026',
+    readTime: '5 min read',
+    isListicle: true,
+    intro: `Ideas do not arrive fully formed. They accumulate, contradict each other, get stress-tested by events, and eventually settle into the background assumptions of an era. The books below shaped — or captured — some of the most significant shifts in how educated, engaged people understand the world they are living in. They span politics, science, economics, and philosophy, but they share a quality of genuine intellectual ambition.`,
+    items: [
+      { title: 'Thinking, Fast and Slow — Daniel Kahneman (2011, lasting impact through the decade)', body: 'The definitive account of how the human mind actually works — imperfectly, heuristically, systematically biased. Kahneman\'s framework of System 1 and System 2 thinking became the common language of behavioural economics, public policy, and anyone trying to understand why smart people make bad decisions.' },
+      { title: 'Capital in the Twenty-First Century — Thomas Piketty (2013)', body: 'A French economist produced the unlikely bestseller of the decade, arguing from historical data that wealth inequality is not an aberration but the default condition of capitalism when growth slows. The debate it ignited — about whether Piketty was right — was itself one of the decade\'s most productive intellectual arguments.' },
+      { title: 'Between the World and Me — Ta-Nehisi Coates (2015)', body: 'Written as a letter from a father to his teenage son, this slim book redefined how Americans could speak about race, body, history, and fear. It won the National Book Award and introduced a generation of readers to an analytical framework for understanding structural racism that had previously existed largely in academic literature.' },
+      { title: 'Sapiens — Yuval Noah Harari (2015)', body: 'A grand, sweeping, occasionally controversial history of humankind that asked a simple question — how did Homo sapiens come to dominate the earth? — and answered it with unusual range and readability. Whatever its scholarly limitations, Sapiens restored the appetite for big-picture historical thinking.' },
+      { title: 'The Uninhabitable Earth — David Wallace-Wells (2019)', body: 'The most clarifying account of the climate crisis written for a general reader. Wallace-Wells did not soften the findings; he presented the worst-case scenarios in full, and the result was a book that changed how many readers thought about the stakes of the next several decades.' },
+      { title: 'Becoming — Michelle Obama (2018)', body: 'The best-selling memoir in American history. Beyond its political context, it is a beautifully written account of self-construction — how a person builds an identity across class, race, ambition, and circumstance. It spoke to tens of millions of readers who recognised something of their own experience in its pages.' },
+      { title: 'Educated — Tara Westover (2018)', body: 'A memoir about growing up in a survivalist family in rural Idaho with no formal education, and the particular kind of courage required to pursue knowledge when knowledge itself threatens the world that made you. It became the book that people pressed into each other\'s hands with the urgency of something important.' },
+      { title: 'The Coddling of the American Mind — Jonathan Haidt & Greg Lukianoff (2018)', body: 'A diagnosis of what the authors called "safetyism" in higher education and its downstream effects on a generation\'s psychological resilience. Whether or not one accepted their conclusions, the book set the terms for a debate about fragility, freedom of thought, and the purpose of universities that continued well into the following decade.' },
+      { title: 'Winners Take All — Anand Giridharadas (2018)', body: 'A sharp critique of the elite philanthropic class — the argument that the very people who benefit most from systemic inequality have captured the language and institutions of change in ways that entrench their own position. Uncomfortable reading for anyone in or adjacent to the world it describes.' },
+      { title: 'Good Economics for Hard Times — Abhijit Banerjee & Esther Duflo (2019)', body: 'Written by Nobel laureates, this book translated the findings of rigorous development economics into clear, accessible prose — and repeatedly demonstrated how intuitive economic assumptions are contradicted by careful evidence. A model for how to write about complex ideas without condescension.' },
+      { title: 'Caste — Isabel Wilkerson (2020)', body: 'An argument that the United States is best understood not through the lens of race but through the lens of caste — an inherited, invisible hierarchy that structures every social interaction. Wilkerson\'s comparison of the American, Indian, and Nazi caste systems was simultaneously scholarly and devastating.' },
+      { title: 'The Dawn of Everything — David Graeber & David Wengrow (2021)', body: 'Perhaps the most intellectually ambitious book of the decade: a re-reading of the entire archaeological and anthropological record of human prehistory, arguing that early human societies were far more diverse, experimental, and free than the standard story of inevitable social progress allows. It arrived shortly after Graeber\'s death and stands as a monument to his restless, beautiful thinking.' }
+    ]
+  },
+
+  'list-productivity-myths': {
+    category: 'Society · Listicle',
+    title: '6 Productivity Myths It\'s Time to Stop Believing',
+    date: 'April 5, 2026',
+    readTime: '4 min read',
+    isListicle: true,
+    intro: `Productivity culture is one of the stranger features of contemporary life — a body of advice that grows more elaborate with each passing year while the people following it report feeling busier and less effective than ever. Much of the advice is not simply unhelpful; it is actively counterproductive, rooted in misreadings of research, anecdotes from exceptional individuals, or the economic interests of the people selling it.`,
+    items: [
+      { title: 'Myth: Waking up at 5am makes you more successful', body: 'The "miracle morning" genre of advice rests on a correlation that runs backwards. Highly disciplined, motivated people are more likely to choose early rising — but early rising does not produce the discipline. Research on chronobiology shows that roughly 40% of the population are genetically predisposed to be evening types, for whom forced early rising impairs rather than enhances cognitive performance.' },
+      { title: 'Myth: Multitasking makes you more efficient', body: 'There is now decades of consistent cognitive science on this: the human brain does not multitask. It task-switches, incurring a "switching cost" each time attention moves between tasks. People who believe they are good multitaskers are typically worse at it than those who know they are not — they are less able to filter irrelevant information and take longer to return to a primary task after interruption.' },
+      { title: 'Myth: You need to work more hours to get more done', body: 'The relationship between hours worked and output is not linear. Research on knowledge workers consistently finds that productive output plateaus around six focused hours per day. Beyond this point, error rates rise and genuine creative work declines. The people who appear to work sixteen-hour days are often performing busyness rather than producing in proportion to their hours.' },
+      { title: 'Myth: A full inbox means you\'re falling behind', body: 'Email anxiety is one of the most effective and least examined productivity traps in modern work life. The pressure to maintain inbox zero, respond immediately, and be perpetually available creates a mode of continuous partial attention that is deeply hostile to the focused work that actually produces results. Research by Gloria Mark at UC Irvine found it takes an average of 23 minutes to fully regain focus after an email interruption.' },
+      { title: 'Myth: Hustle culture separates the successful from the rest', body: 'The glorification of overwork produces high rates of burnout, which is itself a significant cause of sustained underperformance. The most thorough longitudinal studies of high achievers find that sustainable output — maintained across years and decades — is more associated with adequate rest, clear priorities, and healthy relationships than with the willingness to sacrifice everything else.' },
+      { title: 'Myth: The right system will finally fix your productivity', body: 'The self-help and productivity industry is highly motivated to produce new systems, frameworks, and methods at regular intervals. This suits the industry well; it suits the consumer less. Research on habit formation suggests that the most effective productivity behaviour is not finding the optimal system but building a small number of reliable routines and executing them consistently. Simplicity maintained beats complexity abandoned.' }
+    ]
+  }
+
+};
+
+/* ── ARTICLE HERO IMAGES ── */
+const articleImages = {
+  'ai-thinking':            { src: 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&auto=format&fit=crop&q=80', caption: 'The age of machine cognition — and what we risk surrendering.' },
+  'ai-creativity':          { src: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1200&auto=format&fit=crop&q=80', caption: 'Can a machine truly originate, or only elegantly recombine?' },
+  'sleep-economy':          { src: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=1200&auto=format&fit=crop&q=80', caption: 'Rest has become the new status symbol — and a booming industry.' },
+  'walking-cure':           { src: 'https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=1200&auto=format&fit=crop&q=80', caption: 'Aristotle, Nietzsche, Darwin — the greatest thinkers all walked.' },
+  'money-language':         { src: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&auto=format&fit=crop&q=80', caption: 'Financial literacy is not about wealth — it is about agency.' },
+  'africa-money':           { src: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&auto=format&fit=crop&q=80', caption: 'A generation building wealth on entirely different terms.' },
+  'lagos-dawn':             { src: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=1200&auto=format&fit=crop&q=80', caption: 'Lagos between 4 and 6 am — the city before the argument begins.' },
+  'slow-travel':            { src: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1200&auto=format&fit=crop&q=80', caption: 'To travel slowly is to become, briefly, part of a place.' },
+  'books-stay':             { src: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=1200&auto=format&fit=crop&q=80', caption: 'Some books refuse to stay on the shelf.' },
+  'change-mind':            { src: 'https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=1200&auto=format&fit=crop&q=80', caption: 'Intellectual honesty requires something closer to courage.' },
+  'long-letter':            { src: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&auto=format&fit=crop&q=80', caption: 'A handwritten letter is, in the most literal sense, a gift of time.' },
+  'old-cities':             { src: 'https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=1200&auto=format&fit=crop&q=80', caption: 'The old city was not beautiful by accident.' },
+  'list-ai-tools':          { src: 'https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=1200&auto=format&fit=crop&q=80', caption: 'The tools that are earning their place — not through spectacle, but utility.' },
+  'list-wellness-habits':   { src: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1200&auto=format&fit=crop&q=80', caption: 'Longevity research keeps returning to the same simple answers.' },
+  'list-money-rules':       { src: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=1200&auto=format&fit=crop&q=80', caption: 'The principles of lasting wealth are neither secret nor complicated.' },
+  'list-african-destinations': { src: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=1200&auto=format&fit=crop&q=80', caption: 'Africa rewards the traveller who pays attention.' },
+  'list-books-decade':      { src: 'https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=1200&auto=format&fit=crop&q=80', caption: 'Twelve books that shaped how we understand the world we live in.' },
+  'list-productivity-myths':{ src: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1200&auto=format&fit=crop&q=80', caption: 'The most popular productivity advice is often the most counterproductive.' },
+};
+
+/* ── STATE ── */
+let currentFilter = 'all';
+
+/* ── FILTER ── */
+function filterArticles(cat, btn) {
+  currentFilter = cat;
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  const cards = document.querySelectorAll('.grid-card');
+  cards.forEach(card => {
+    const cardCat = card.dataset.category;
+    if (cat === 'all' || cardCat === cat) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+
+  const featured        = document.querySelector('.featured-section');
+  const recentHeader    = document.querySelector('.section-header');
+  const articlesGrid    = document.getElementById('articles-grid');
+  const listicleBandWrap = document.querySelector('.listicle-band').closest('.page-wrap');
+
+  if (cat === 'listicle') {
+    featured.style.display        = 'none';
+    recentHeader.style.display    = 'none';
+    articlesGrid.style.display    = 'none';
+    listicleBandWrap.style.display = 'block';
+  } else {
+    recentHeader.style.display    = '';
+    articlesGrid.style.display    = '';
+    listicleBandWrap.style.display = 'block';
+    featured.style.display = (cat === 'all' || cat === 'technology') ? '' : 'none';
+  }
+}
+
+/* ── OPEN ARTICLE ── */
+function openArticle(slug) {
+  const art = articles[slug];
+  if (!art) return;
+
+  const imgData = articleImages[slug];
+  const heroHTML = imgData
+    ? `<div class="article-hero-wrap"><img src="${imgData.src}" alt="${art.title}" loading="lazy"></div>
+       <p class="article-hero-caption">${imgData.caption}</p>`
+    : '';
+
+  let bodyHTML = '';
+  if (art.isListicle) {
+    const itemsHTML = art.items.map((item, i) => `
+      <div class="list-item">
+        <div class="list-num">${i + 1}</div>
+        <div class="list-item-body">
+          <h3>${item.title}</h3>
+          <p>${item.body}</p>
+        </div>
+      </div>
+    `).join('');
+    bodyHTML = `<p style="font-size:19px;line-height:1.8;color:var(--ink-mid);margin-bottom:2.5rem">${art.intro}</p>${itemsHTML}`;
+  } else {
+    bodyHTML = art.body;
+  }
+
+  const content = document.getElementById('article-content');
+  content.innerHTML = `
+    <div class="article-full visible">
+      <div class="article-full-header">
+        <div class="cat-tag">${art.category}</div>
+        <h1 class="article-full-title">${art.title}</h1>
+        <p class="article-full-meta">
+          By <strong>Dien Marvelous</strong> &nbsp;·&nbsp; ${art.date} &nbsp;·&nbsp; ${art.readTime}
+        </p>
+      </div>
+      ${heroHTML}
+      <div class="article-body">${bodyHTML}</div>
+    </div>
+  `;
+
+  document.getElementById('home-view').style.display = 'none';
+  const av = document.getElementById('article-view');
+  av.style.display = 'block';
+  av.classList.add('visible');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ── CLOSE ARTICLE ── */
+function closeArticle() {
+  document.getElementById('home-view').style.display = 'block';
+  const av = document.getElementById('article-view');
+  av.style.display = 'none';
+  av.classList.remove('visible');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
