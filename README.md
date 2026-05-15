@@ -1,6 +1,6 @@
 # Dien Marvelous Blog
 
-An elegant and professional blog website focused on insightful, informative, and engaging content across multiple categories including Technology & AI, Health & Wellness, Finance, Travel, Culture, Opinion, and Society.
+An elegant and professional blog website focused on insightful, informative, and engaging content across multiple categories including Technology & AI, Health & Wellness, Finance, Travel, Culture, Opinion, Society, etc.
 
 ---
 
