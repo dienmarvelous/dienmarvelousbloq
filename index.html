@@ -1,0 +1,2360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dien Marvelous Bloq</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #b5963a;
+    --gold-light: #e8d5a0;
+    --gold-dark: #7a6420;
+    --cream: #faf8f4;
+    --ink: #1a1a18;
+    --ink-mid: #3d3d3a;
+    --ink-muted: #6e6d68;
+    --ink-faint: #a8a79f;
+    --border: rgba(26,26,24,0.12);
+    --border-soft: rgba(26,26,24,0.07);
+    --serif: 'Playfair Display', Georgia, serif;
+    --body: 'EB Garamond', Georgia, serif;
+    --sans: 'Jost', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 18px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  /* ── MASTHEAD ── */
+  .masthead {
+    background: var(--ink);
+    color: var(--cream);
+    text-align: center;
+    padding: 3.5rem 1.5rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .masthead::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 39px,
+      rgba(181,150,58,0.06) 39px, rgba(181,150,58,0.06) 40px
+    );
+    pointer-events: none;
+  }
+  .masthead-eyebrow {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .masthead-title {
+    font-family: var(--serif);
+    font-size: clamp(42px, 8vw, 72px);
+    font-weight: 400;
+    line-height: 1.05;
+    color: #fff;
+    letter-spacing: -1px;
+  }
+  .masthead-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+  .masthead-rule {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 1.25rem auto;
+    max-width: 300px;
+  }
+  .masthead-rule::before, .masthead-rule::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: var(--gold);
+    opacity: 0.4;
+  }
+  .masthead-diamond {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+  .masthead-tagline {
+    font-family: var(--body);
+    font-size: 16px;
+    font-style: italic;
+    color: rgba(250,248,244,0.6);
+    margin-top: 0.25rem;
+  }
+
+  /* ── NAV ── */
+  .site-nav {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    padding: 1rem 1.25rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+  }
+  .nav-btn:hover, .nav-btn.active {
+    color: var(--ink);
+    border-bottom-color: var(--gold);
+  }
+
+  /* ── LAYOUT ── */
+  .page-wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* ── FEATURED SECTION ── */
+  .featured-section {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    padding: 3rem 0;
+  }
+  .featured-main {
+    padding-right: 2.5rem;
+    border-right: 1px solid var(--border);
+  }
+  .featured-aside {
+    padding-left: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* ── CATEGORY TAG ── */
+  .cat-tag {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .cat-tag::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  /* ── ARTICLE CARDS ── */
+  .article-link { text-decoration: none; color: inherit; cursor: pointer; }
+
+  .article-headline {
+    font-family: var(--serif);
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.25;
+    transition: color 0.2s;
+  }
+  .article-headline:hover { color: var(--gold-dark); }
+  .article-headline.xl { font-size: 32px; }
+  .article-headline.lg { font-size: 22px; }
+  .article-headline.md { font-size: 20px; }
+  .article-headline.sm { font-size: 17px; }
+
+  .article-excerpt {
+    font-size: 16px;
+    color: var(--ink-muted);
+    line-height: 1.7;
+    margin-top: 0.65rem;
+  }
+  .article-meta {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    margin-top: 0.9rem;
+  }
+  .article-meta span { color: var(--gold); margin: 0 6px; }
+
+  .aside-item {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .aside-item:first-child { padding-top: 0; }
+  .aside-item:last-child { border-bottom: none; }
+
+  /* ── SECTION HEADERS ── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 2.5rem 0 1.5rem;
+  }
+  .section-header h2 {
+    font-family: var(--serif);
+    font-size: 13px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--ink-muted);
+    white-space: nowrap;
+    letter-spacing: 0.03em;
+  }
+  .section-header::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: var(--border);
+  }
+
+  /* ── ARTICLE GRID ── */
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem 2rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── CARD IMAGE ── */
+  .card-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 1rem;
+    background: var(--border);
+  }
+  .card-img-wrap {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    aspect-ratio: 16/9;
+    background: #ddd;
+  }
+  .card-img-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  .grid-card:hover .card-img-wrap img { transform: scale(1.04); }
+
+  /* featured hero image */
+  .featured-hero {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 1.25rem;
+  }
+  .featured-hero-wrap {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+    aspect-ratio: 16/8;
+    background: #ddd;
+  }
+  .featured-hero-wrap img { width:100%;height:100%;object-fit:cover;display:block; }
+
+  /* aside thumbnail */
+  .aside-thumb {
+    width: 100%;
+    aspect-ratio: 16/7;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 0.65rem;
+    background: #ddd;
+  }
+
+  /* article full hero */
+  .article-hero-wrap {
+    width: 100%;
+    aspect-ratio: 16/7;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    background: #ddd;
+  }
+  .article-hero-wrap img { width:100%;height:100%;object-fit:cover;display:block; }
+  .article-hero-caption {
+    font-family: var(--sans);
+    font-size: 11px;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+    margin-top: 0.4rem;
+    margin-bottom: 1.75rem;
+    text-align: center;
+    font-style: italic;
+  }
+
+  /* listicle card image */
+  .listicle-card-img {
+    width: 100%;
+    aspect-ratio: 16/7;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 1rem;
+    background: rgba(255,255,255,0.05);
+  }
+
+  /* ── FULL ARTICLE VIEW ── */
+  .article-full {
+    display: none;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 3rem 0 4rem;
+  }
+  .article-full.visible { display: block; }
+
+  .article-full-header { margin-bottom: 2.5rem; border-bottom: 1px solid var(--border); padding-bottom: 2rem; }
+  .article-full-title {
+    font-family: var(--serif);
+    font-size: clamp(28px, 5vw, 40px);
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 0.5rem 0 1rem;
+  }
+  .article-full-meta {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+  }
+  .article-full-meta strong { color: var(--ink-muted); font-weight: 500; }
+
+  .article-body { font-size: 19px; line-height: 1.8; color: var(--ink-mid); }
+  .article-body p { margin-bottom: 1.5em; }
+  .article-body h2 {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--ink);
+    margin: 2em 0 0.75em;
+    line-height: 1.3;
+  }
+  .article-body h3 {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--ink);
+    margin: 1.5em 0 0.5em;
+  }
+  .article-body blockquote {
+    border-left: 2px solid var(--gold);
+    padding: 0.5rem 0 0.5rem 1.5rem;
+    margin: 2em 0;
+    font-style: italic;
+    font-size: 21px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-bottom: 2.5rem;
+    transition: color 0.2s;
+  }
+  .back-btn:hover { color: var(--gold-dark); }
+  .back-btn::before { content: '←'; font-size: 14px; }
+
+  /* ── QUOTE BAR ── */
+  .quote-bar {
+    background: var(--ink);
+    color: #fff;
+    padding: 3.5rem 2rem;
+    text-align: center;
+    margin: 0 -1.5rem;
+  }
+  .quote-bar blockquote {
+    font-family: var(--serif);
+    font-size: clamp(20px, 3vw, 26px);
+    font-style: italic;
+    line-height: 1.55;
+    max-width: 600px;
+    margin: 0 auto;
+    color: rgba(250,248,244,0.9);
+  }
+  .quote-bar cite {
+    display: block;
+    margin-top: 1rem;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-style: normal;
+  }
+
+  /* ── NEWSLETTER ── */
+  .newsletter {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 3rem 2rem;
+    text-align: center;
+    margin: 3rem 0;
+  }
+  .newsletter-eyebrow {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+  .newsletter h3 {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+  }
+  .newsletter p {
+    font-size: 16px;
+    color: var(--ink-muted);
+    margin-bottom: 1.75rem;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .nl-form {
+    display: flex;
+    gap: 0;
+    justify-content: center;
+    max-width: 420px;
+    margin: 0 auto;
+    border: 1px solid var(--border);
+  }
+  .nl-form input {
+    flex: 1;
+    padding: 12px 16px;
+    font-family: var(--body);
+    font-size: 16px;
+    border: none;
+    background: var(--cream);
+    color: var(--ink);
+    outline: none;
+  }
+  .nl-form input::placeholder { color: var(--ink-faint); font-style: italic; }
+  .nl-form button {
+    padding: 12px 20px;
+    background: var(--gold);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: background 0.2s;
+  }
+  .nl-form button:hover { background: var(--gold-dark); }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    background: var(--ink);
+    color: rgba(250,248,244,0.5);
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+  }
+  .site-footer strong { color: var(--gold); font-weight: 400; }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 0.75rem;
+  }
+  .footer-links a {
+    color: rgba(250,248,244,0.3);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+
+  /* ── HOME / ARTICLE TOGGLE ── */
+  #home-view { display: block; }
+  #article-view { display: none; }
+  #article-view.visible { display: block; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .featured-section, .articles-grid, .article-full { animation: fadeIn 0.4s ease both; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .featured-section { grid-template-columns: 1fr; }
+    .featured-main { padding-right: 0; border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 2rem; margin-bottom: 0; }
+    .featured-aside { padding-left: 0; padding-top: 2rem; }
+    .articles-grid { grid-template-columns: 1fr 1fr; }
+    .quote-bar { margin: 0 -1.5rem; }
+  }
+  @media (max-width: 520px) {
+    .articles-grid { grid-template-columns: 1fr; }
+    .masthead-title { font-size: 36px; }
+  }
+
+  /* ── LISTICLE SECTION ── */
+  .listicle-band {
+    background: var(--ink);
+    margin: 0 -1.5rem;
+    padding: 3.5rem 1.5rem;
+  }
+  .listicle-band-inner { max-width: 1080px; margin: 0 auto; }
+  .listicle-band-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .listicle-band-header h2 {
+    font-family: var(--serif);
+    font-size: 13px;
+    font-style: italic;
+    font-weight: 400;
+    color: rgba(250,248,244,0.45);
+    white-space: nowrap;
+  }
+  .listicle-band-header::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: rgba(250,248,244,0.1);
+  }
+  .listicle-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  .listicle-card {
+    background: rgba(250,248,244,0.04);
+    border: 0.5px solid rgba(250,248,244,0.1);
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+    position: relative;
+  }
+  .listicle-card:hover {
+    background: rgba(250,248,244,0.08);
+    border-color: rgba(181,150,58,0.4);
+  }
+  .listicle-number {
+    font-family: var(--serif);
+    font-size: 48px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--gold);
+    opacity: 0.35;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .listicle-cat {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
+  .listicle-title {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 400;
+    color: rgba(250,248,244,0.9);
+    line-height: 1.3;
+    margin-bottom: 0.65rem;
+  }
+  .listicle-excerpt {
+    font-size: 14px;
+    color: rgba(250,248,244,0.45);
+    line-height: 1.65;
+  }
+  .listicle-meta {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: rgba(250,248,244,0.25);
+    margin-top: 1rem;
+  }
+
+  /* Listicle full-article item styles */
+  .list-item {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 0 1.5rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 0.5px solid var(--border-soft);
+  }
+  .list-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .list-num {
+    font-family: var(--serif);
+    font-size: 42px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--gold-light);
+    line-height: 1;
+    padding-top: 4px;
+    text-align: right;
+  }
+  .list-item-body h3 {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+    font-style: normal;
+  }
+  .list-item-body p {
+    font-size: 17px;
+    color: var(--ink-mid);
+    line-height: 1.75;
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 768px) {
+    .listicle-grid { grid-template-columns: 1fr 1fr; }
+    .listicle-band { margin: 0 -1.5rem; }
+  }
+  @media (max-width: 520px) {
+    .listicle-grid { grid-template-columns: 1fr; }
+    .list-item { grid-template-columns: 36px 1fr; gap: 0 1rem; }
+    .list-num { font-size: 32px; }
+  }
+
+  /* ── LONG-FORM PAGE ── */
+  #longform-view { display: none; }
+  #longform-view.visible { display: block; }
+
+  .lf-hero {
+    background: var(--ink);
+    padding: 3.5rem 1.5rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .lf-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(181,150,58,0.05) 79px, rgba(181,150,58,0.05) 80px);
+    pointer-events: none;
+  }
+  .lf-hero-eyebrow { font-family: var(--sans); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; }
+  .lf-hero-title { font-family: var(--serif); font-size: clamp(30px,5vw,52px); font-weight: 400; color: #fff; line-height: 1.1; margin-bottom: 0.5rem; }
+  .lf-hero-title em { font-style: italic; color: var(--gold-light); }
+  .lf-hero-sub { font-family: var(--body); font-size: 15px; font-style: italic; color: rgba(250,248,244,0.5); }
+
+  /* Section accordion nav */
+  .lf-section-nav {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .lf-section-nav::-webkit-scrollbar { display: none; }
+  .lf-section-nav-inner { max-width: 1080px; margin: 0 auto; display: flex; padding: 0 1rem; }
+  .lf-sec-btn {
+    font-family: var(--sans); font-size: 10.5px; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase;
+    color: var(--ink-muted); padding: 0.85rem 1rem; border: none; background: transparent; cursor: pointer;
+    border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.2s, border-color 0.2s;
+  }
+  .lf-sec-btn:hover, .lf-sec-btn.active { color: var(--ink); border-bottom-color: var(--gold); }
+
+  /* Section panels */
+  .lf-section-panel { display: none; padding: 0 0 4rem; }
+  .lf-section-panel.visible { display: block; }
+
+  /* Section title bar */
+  .lf-section-title-bar {
+    background: var(--cream);
+    border-bottom: 1px solid var(--border);
+    padding: 1.75rem 0 0;
+  }
+  .lf-section-title-bar-inner { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
+  .lf-section-heading {
+    font-family: var(--serif); font-size: clamp(22px,3vw,32px); font-weight: 400; color: var(--ink);
+    margin-bottom: 1.25rem;
+  }
+  .lf-section-heading em { font-style: italic; color: var(--gold-dark); }
+
+  /* Sub-section tabs */
+  .lf-sub-tabs { display: flex; gap: 0; border-top: 1px solid var(--border-soft); }
+  .lf-sub-tab {
+    font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-faint); padding: 0.7rem 1rem; border: none; background: transparent; cursor: pointer;
+    border-top: 2px solid transparent; margin-top: -1px; white-space: nowrap; transition: color 0.2s, border-color 0.2s;
+  }
+  .lf-sub-tab:hover, .lf-sub-tab.active { color: var(--gold-dark); border-top-color: var(--gold); }
+
+  /* Sub-section panels */
+  .lf-sub-panel { display: none; }
+  .lf-sub-panel.visible { display: block; }
+
+  /* Article rows — MSN list style */
+  .lf-article-list { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
+  .lf-row {
+    display: grid; grid-template-columns: 260px 1fr; gap: 0 2rem;
+    padding: 1.75rem 0; border-bottom: 0.5px solid var(--border-soft);
+    cursor: pointer; transition: background 0.15s;
+  }
+  .lf-row:hover { background: rgba(181,150,58,0.03); margin: 0 -1.5rem; padding-left: 1.5rem; padding-right: 1.5rem; }
+  .lf-row:last-child { border-bottom: none; }
+  .lf-row-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; background: #ddd; }
+  .lf-row-body { display: flex; flex-direction: column; justify-content: center; }
+  .lf-row-sub { font-family: var(--sans); font-size: 9.5px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 0.4rem; }
+  .lf-row-title { font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--ink); line-height: 1.3; margin-bottom: 0.45rem; transition: color 0.2s; }
+  .lf-row:hover .lf-row-title { color: var(--gold-dark); }
+  .lf-row-excerpt { font-size: 14.5px; color: var(--ink-muted); line-height: 1.65; margin-bottom: 0.65rem; }
+  .lf-row-meta { font-family: var(--sans); font-size: 11px; letter-spacing: 0.05em; color: var(--ink-faint); }
+  .lf-row-meta span { color: var(--gold); margin: 0 4px; }
+
+  @media (max-width: 640px) {
+    .lf-row { grid-template-columns: 1fr; gap: 0.6rem; }
+    .lf-row:hover { margin: 0; padding: 1.75rem 0; }
+  }
+
+  /* ── SHORT-FORM VIEW ── */
+  #shortform-view { display: none; }
+  #shortform-view.visible { display: block; }
+
+  .sf-hero {
+    background: var(--ink);
+    padding: 3.5rem 1.5rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .sf-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(135deg, transparent, transparent 39px, rgba(181,150,58,0.05) 39px, rgba(181,150,58,0.05) 40px);
+    pointer-events: none;
+  }
+  .sf-hero-eyebrow { font-family: var(--sans); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; }
+  .sf-hero-title { font-family: var(--serif); font-size: clamp(30px,5vw,52px); font-weight: 400; color: #fff; line-height: 1.1; margin-bottom: 0.5rem; }
+  .sf-hero-title em { font-style: italic; color: var(--gold-light); }
+  .sf-hero-sub { font-family: var(--body); font-size: 15px; font-style: italic; color: rgba(250,248,244,0.5); }
+
+  /* Niche filter tabs */
+  .sf-niche-nav {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .sf-niche-nav::-webkit-scrollbar { display: none; }
+  .sf-niche-nav-inner { max-width: 1080px; margin: 0 auto; display: flex; padding: 0 1rem; }
+  .sf-niche-btn {
+    font-family: var(--sans); font-size: 10.5px; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase;
+    color: var(--ink-muted); padding: 0.85rem 1.1rem; border: none; background: transparent; cursor: pointer;
+    border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.2s, border-color 0.2s;
+  }
+  .sf-niche-btn:hover, .sf-niche-btn.active { color: var(--ink); border-bottom-color: var(--gold); }
+
+  /* Short-form grid */
+  .sf-grid-wrap { max-width: 1080px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+  .sf-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  .sf-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: box-shadow 0.2s, transform 0.2s;
+    overflow: hidden;
+  }
+  .sf-card:hover { box-shadow: 0 6px 24px rgba(26,26,24,0.09); transform: translateY(-2px); }
+  .sf-card-img-wrap { width: 100%; aspect-ratio: 16/8; overflow: hidden; background: #ddd; }
+  .sf-card-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+  .sf-card:hover .sf-card-img-wrap img { transform: scale(1.04); }
+  .sf-card-body { padding: 1.4rem 1.5rem 1.6rem; }
+  .sf-card-niche {
+    font-family: var(--sans); font-size: 9.5px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold-dark); display: flex; align-items: center; gap: 7px; margin-bottom: 0.55rem;
+  }
+  .sf-card-niche::before { content: ''; display: inline-block; width: 16px; height: 1px; background: var(--gold); }
+  .sf-card-title {
+    font-family: var(--serif); font-size: 21px; font-weight: 400; color: var(--ink); line-height: 1.3;
+    margin-bottom: 0.55rem; transition: color 0.2s;
+  }
+  .sf-card:hover .sf-card-title { color: var(--gold-dark); }
+  .sf-card-excerpt { font-size: 15px; color: var(--ink-muted); line-height: 1.7; margin-bottom: 0.85rem; }
+  .sf-card-meta { font-family: var(--sans); font-size: 11px; letter-spacing: 0.05em; color: var(--ink-faint); }
+  .sf-card-meta span { color: var(--gold); margin: 0 5px; }
+
+  /* Short-form article body — slightly more compact */
+  .sf-article-body { font-size: 18px; line-height: 1.78; color: var(--ink-mid); }
+  .sf-article-body p { margin-bottom: 1.3em; }
+  .sf-article-body h2 {
+    font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--ink);
+    margin: 1.75em 0 0.65em; line-height: 1.3;
+  }
+  .sf-article-body blockquote {
+    border-left: 2px solid var(--gold); padding: 0.4rem 0 0.4rem 1.4rem;
+    margin: 1.75em 0; font-style: italic; font-size: 20px; color: var(--ink); line-height: 1.5;
+  }
+
+  @media (max-width: 640px) {
+    .sf-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <p class="masthead-eyebrow">Est. 2024 &nbsp;·&nbsp; Ideas Worth Reading</p>
+  <h1 class="masthead-title">Dien <em>Marvelous</em> Bloq</h1>
+  <div class="masthead-rule"><div class="masthead-diamond"></div></div>
+  <p class="masthead-tagline">Thoughtful writing on life, culture & the world</p>
+</header>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <div class="nav-inner">
+    <button class="nav-btn active" onclick="showPage('home', this)">All</button>
+    <button class="nav-btn" onclick="filterListicles(this)">Listicles</button>
+    <button class="nav-btn" onclick="showPage('shortform', this)">Short-form</button>
+    <button class="nav-btn" onclick="showPage('longform', this)">Long-form Articles</button>
+  </div>
+</nav>
+
+<!-- HOME VIEW -->
+<div id="home-view">
+
+  <!-- LISTICLES BAND -->
+  <div class="page-wrap">
+    <div class="listicle-band">
+      <div class="listicle-band-inner">
+        <div class="listicle-band-header"><h2>Listicles — Quick reads, lasting takeaways</h2></div>
+        <div class="listicle-grid" id="listicle-grid">
+
+          <div class="listicle-card" onclick="openArticle('list-ai-tools')">
+            <img class="listicle-card-img" src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=700&auto=format&fit=crop&q=75" alt="AI tools and technology" loading="lazy">
+            <span class="listicle-number">8</span>
+            <div class="listicle-cat">Technology & AI</div>
+            <h3 class="listicle-title">8 AI Tools That Are Quietly Changing How We Work</h3>
+            <p class="listicle-excerpt">Beyond the hype — the tools actually earning their place in daily workflows.</p>
+            <p class="listicle-meta">May 11, 2026 · 5 min</p>
+          </div>
+
+          <div class="listicle-card" onclick="openArticle('list-wellness-habits')">
+            <img class="listicle-card-img" src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=700&auto=format&fit=crop&q=75" alt="Healthy lifestyle habits" loading="lazy">
+            <span class="listicle-number">7</span>
+            <div class="listicle-cat">Health & Wellness</div>
+            <h3 class="listicle-title">7 Small Habits That Science Says Will Extend Your Life</h3>
+            <p class="listicle-excerpt">None of them require a gym membership or a $300 supplement stack.</p>
+            <p class="listicle-meta">May 7, 2026 · 4 min</p>
+          </div>
+
+          <div class="listicle-card" onclick="openArticle('list-money-rules')">
+            <img class="listicle-card-img" src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=700&auto=format&fit=crop&q=75" alt="Wealth and money rules" loading="lazy">
+            <span class="listicle-number">10</span>
+            <div class="listicle-cat">Finance</div>
+            <h3 class="listicle-title">10 Money Rules the Wealthy Follow That Nobody Talks About</h3>
+            <p class="listicle-excerpt">The principles are not secrets. They are just rarely assembled in one place.</p>
+            <p class="listicle-meta">May 2, 2026 · 6 min</p>
+          </div>
+
+          <div class="listicle-card" onclick="openArticle('list-african-destinations')">
+            <img class="listicle-card-img" src="https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=700&auto=format&fit=crop&q=75" alt="African landscape travel" loading="lazy">
+            <span class="listicle-number">9</span>
+            <div class="listicle-cat">Travel</div>
+            <h3 class="listicle-title">9 African Destinations That Should Be on Every Serious Traveller's List</h3>
+            <p class="listicle-excerpt">The continent is vast, the choices are overwhelming — here is where to start.</p>
+            <p class="listicle-meta">Apr 25, 2026 · 5 min</p>
+          </div>
+
+          <div class="listicle-card" onclick="openArticle('list-books-decade')">
+            <img class="listicle-card-img" src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=700&auto=format&fit=crop&q=75" alt="Books and ideas" loading="lazy">
+            <span class="listicle-number">12</span>
+            <div class="listicle-cat">Culture</div>
+            <h3 class="listicle-title">12 Books That Defined the Last Decade of Ideas</h3>
+            <p class="listicle-excerpt">A reading list for anyone who wants to understand the world they are actually living in.</p>
+            <p class="listicle-meta">Apr 15, 2026 · 5 min</p>
+          </div>
+
+          <div class="listicle-card" onclick="openArticle('list-productivity-myths')">
+            <img class="listicle-card-img" src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=700&auto=format&fit=crop&q=75" alt="Productivity and work" loading="lazy">
+            <span class="listicle-number">6</span>
+            <div class="listicle-cat">Society</div>
+            <h3 class="listicle-title">6 Productivity Myths It's Time to Stop Believing</h3>
+            <p class="listicle-excerpt">The advice is everywhere. Most of it is wrong. Here is what the research actually says.</p>
+            <p class="listicle-meta">Apr 5, 2026 · 4 min</p>
+          </div>
+
+          <div class="listicle-card" onclick="openArticle('list-safety')">
+            <img class="listicle-card-img" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=700&auto=format&fit=crop&q=75" alt="Safety and protection" loading="lazy">
+            <span class="listicle-number">8</span>
+            <div class="listicle-cat">Safety</div>
+            <h3 class="listicle-title">8 Safety Principles That Could Save Your Life One Day</h3>
+            <p class="listicle-excerpt">From home to highway, the habits that make the difference between close calls and catastrophes.</p>
+            <p class="listicle-meta">May 10, 2026 · 5 min</p>
+          </div>
+
+          <div class="listicle-card" onclick="openArticle('list-environment')">
+            <img class="listicle-card-img" src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=700&auto=format&fit=crop&q=75" alt="Environment and nature" loading="lazy">
+            <span class="listicle-number">10</span>
+            <div class="listicle-cat">Environment</div>
+            <h3 class="listicle-title">10 Environmental Facts That Should Change How You Live</h3>
+            <p class="listicle-excerpt">Not to alarm — to inform. The data on our planet's state, and what individuals can actually do about it.</p>
+            <p class="listicle-meta">May 6, 2026 · 5 min</p>
+          </div>
+
+          <div class="listicle-card" onclick="openArticle('list-security')">
+            <img class="listicle-card-img" src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=700&auto=format&fit=crop&q=75" alt="Digital security" loading="lazy">
+            <span class="listicle-number">9</span>
+            <div class="listicle-cat">Security</div>
+            <h3 class="listicle-title">9 Digital Security Habits Everyone Should Have by Now</h3>
+            <p class="listicle-excerpt">The threats are real, the defences are simpler than you think, and most people are still not protected.</p>
+            <p class="listicle-meta">Apr 29, 2026 · 5 min</p>
+          </div>
+
+          <div class="listicle-card" onclick="openArticle('list-waste')">
+            <img class="listicle-card-img" src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=700&auto=format&fit=crop&q=75" alt="Waste management and recycling" loading="lazy">
+            <span class="listicle-number">7</span>
+            <div class="listicle-cat">Waste Management</div>
+            <h3 class="listicle-title">7 Waste Reduction Habits That Actually Make a Difference</h3>
+            <p class="listicle-excerpt">Cutting through recycling myths and feel-good gestures to what the evidence says truly reduces waste at scale.</p>
+            <p class="listicle-meta">Apr 20, 2026 · 4 min</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-wrap">
+    <!-- RECENT ARTICLES -->
+    <div class="section-header"><h2>Recent Articles</h2></div>
+
+    <div class="articles-grid" id="articles-grid">
+
+      <div class="grid-card" data-category="society">
+        <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=600&auto=format&fit=crop&q=75" alt="Handwritten letter" loading="lazy"></div>
+        <div class="cat-tag">Society</div>
+        <h3 class="article-headline md" onclick="openArticle('long-letter')" style="cursor:pointer">The Return of the Long Letter</h3>
+        <p class="article-excerpt" style="font-size:15px">In the age of instant messages, a handwritten letter has become almost subversive.</p>
+        <p class="article-meta">Mar 30, 2026 <span>·</span> 4 min</p>
+      </div>
+
+      <div class="grid-card" data-category="society">
+        <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=600&auto=format&fit=crop&q=75" alt="Old city architecture" loading="lazy"></div>
+        <div class="cat-tag">Society</div>
+        <h3 class="article-headline md" onclick="openArticle('old-cities')" style="cursor:pointer">Why Old Cities Still Teach Us How to Live</h3>
+        <p class="article-excerpt" style="font-size:15px">Ancient urban design embedded wisdom we are only now rediscovering through urban studies.</p>
+        <p class="article-meta">Mar 22, 2026 <span>·</span> 5 min</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- QUOTE BAR -->
+  <div class="page-wrap">
+    <div class="quote-bar">
+      <blockquote>"Writing is how I make sense of a world that rarely explains itself."</blockquote>
+      <cite>— Dien Marvelous</cite>
+    </div>
+  </div>
+
+  <!-- NEWSLETTER -->
+  <div class="page-wrap">
+    <div class="newsletter">
+      <p class="newsletter-eyebrow">The Bloq Letter</p>
+      <h3>Words worth your inbox</h3>
+      <p>New essays delivered twice a month. No noise, no clutter — only writing that earns your time.</p>
+      <div class="nl-form">
+        <input type="email" placeholder="your@email.com" />
+        <button onclick="this.textContent='✓ Subscribed'">Subscribe</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<!-- LONG-FORM ARTICLES VIEW -->
+<div id="longform-view">
+
+  <div class="lf-hero">
+    <p class="lf-hero-eyebrow">In-depth · Long-form</p>
+    <h1 class="lf-hero-title">Long-form <em>Articles</em></h1>
+    <p class="lf-hero-sub">Reporting and analysis that take their time — because some stories deserve it.</p>
+  </div>
+
+  <!-- SECTION NAV -->
+  <div class="lf-section-nav">
+    <div class="lf-section-nav-inner">
+      <button class="lf-sec-btn active" onclick="showLFSection('politics',this)">Hard News & Politics</button>
+      <button class="lf-sec-btn" onclick="showLFSection('finance',this)">Finance & Business</button>
+      <button class="lf-sec-btn" onclick="showLFSection('entertainment',this)">Entertainment & Culture</button>
+      <button class="lf-sec-btn" onclick="showLFSection('lifestyle',this)">Lifestyle & Consumer</button>
+      <button class="lf-sec-btn" onclick="showLFSection('tech',this)">Technology & Science</button>
+      <button class="lf-sec-btn" onclick="showLFSection('sports',this)">Sports</button>
+      <button class="lf-sec-btn" onclick="showLFSection('safety',this)">Safety</button>
+      <button class="lf-sec-btn" onclick="showLFSection('environment',this)">Environment</button>
+      <button class="lf-sec-btn" onclick="showLFSection('waste',this)">Waste Management</button>
+    </div>
+  </div>
+
+  <!-- 1. HARD NEWS & POLITICS -->
+  <div class="lf-section-panel visible" id="lf-politics">
+    <div class="lf-section-title-bar">
+      <div class="lf-section-title-bar-inner">
+        <h2 class="lf-section-heading">Hard News <em>&</em> Politics</h2>
+        <div class="lf-sub-tabs">
+          <button class="lf-sub-tab active" onclick="showLFSub('politics','national',this)">National & World News</button>
+          <button class="lf-sub-tab" onclick="showLFSub('politics','elections',this)">Elections & Policy</button>
+        </div>
+      </div>
+    </div>
+    <div class="lf-sub-panel visible" id="lf-politics-national">
+      <div class="lf-article-list">
+        <div class="lf-row" onclick="openArticle('lf-global-order')">
+          <img class="lf-row-img" src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=600&auto=format&fit=crop&q=75" alt="World politics" loading="lazy">
+          <div class="lf-row-body">
+            <div class="lf-row-sub">National & World News</div>
+            <h3 class="lf-row-title">The New World Order Nobody Voted For</h3>
+            <p class="lf-row-excerpt">Geopolitical alliances that held for seven decades are fracturing at speed. From the South China Sea to the Sahel, a new architecture of power is emerging — and most governments are not ready for it.</p>
+            <p class="lf-row-meta">By Dien Marvelous <span>·</span> May 13, 2026 <span>·</span> 8 min read</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="lf-sub-panel" id="lf-politics-elections">
+      <div class="lf-article-list">
+        <div class="lf-row" onclick="openArticle('lf-policy-drift')">
+          <img class="lf-row-img" src="https://images.unsplash.com/photo-1555848962-6e79363ec58f?w=600&auto=format&fit=crop&q=75" alt="Elections and policy" loading="lazy">
+          <div class="lf-row-body">
+            <div class="lf-row-sub">Elections & Policy</div>
+            <h3 class="lf-row-title">Why Voters Keep Choosing Disruption Over Stability</h3>
+            <p class="lf-row-excerpt">Across democracies on four continents, electorates are rejecting incumbents at historic rates. The reasons are structural, not cyclical — and conventional political wisdom has no answer for them.</p>
+            <p class="lf-row-meta">By Dien Marvelous <span>·</span> May 8, 2026 <span>·</span> 7 min read</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. FINANCE & BUSINESS -->
+  <div class="lf-section-panel" id="lf-finance">
+    <div class="lf-section-title-bar">
+      <div class="lf-section-title-bar-inner">
+        <h2 class="lf-section-heading">Finance <em>&</em> Business</h2>
+        <div class="lf-sub-tabs">
+          <button class="lf-sub-tab active" onclick="showLFSub('finance','personal',this)">Personal Finance</button>
+          <button class="lf-sub-tab" onclick="showLFSub('finance','markets',this)">Market Updates</button>
+          <button class="lf-sub-tab" onclick="showLFSub('finance','realestate',this)">Real Estate & Economy</button>
+        </div>
+      </div>
+    </div>
+    <div class="lf-sub-panel visible" id="lf-finance-personal">
+      <div class="lf-article-list">
+        <div class="lf-row" onclick="openArticle('lf-inflation-survival')">
+          <img class="lf-row-img" src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=600&auto=format&fit=crop&q=75" alt="Personal finance" loading="lazy">
+          <div class="lf-row-body">
+            <div class="lf-row-sub">Personal Finance</div>
+            <h3 class="lf-row-title">How to Build a Financial Life in a Permanently Inflationary World</h3>
+            <p class="lf-row-excerpt">The era of low, stable inflation is over. Financial planners who understood this early have been rewiring their advice for clients. Here is what they are recommending — and why the old rules no longer apply.</p>
+            <p class="lf-row-meta">By Dien Marvelous <span>·</span> May 10, 2026 <span>·</span> 7 min read</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="lf-sub-panel" id="lf-finance-markets">
+      <div class="lf-article-list">
+        <div class="lf-row" onclick="openArticle('lf-markets-ai')">
+          <img class="lf-row-img" src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&auto=format&fit=crop&q=75" alt="Stock market" loading="lazy">
+          <div class="lf-row-body">
+            <div class="lf-row-sub">Market Updates</div>
+            <h3 class="lf-row-title">The AI Trade Is Splitting the Market in Two</h3>
+            <p class="lf-row-excerpt">A handful of companies tied to artificial intelligence infrastructure are carrying indices while the rest of the market stagnates. Analysts disagree on whether this is rational concentration or a bubble in formation.</p>
+            <p class="lf-row-meta">By Dien Marvelous <span>·</span> May 6, 2026 <span>·</span> 6 min read</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="lf-sub-panel" id="lf-finance-realestate">
+      <div class="lf-article-list">
+        <div class="lf-row" onclick="openArticle('lf-housing-crisis')">
+          <img class="lf-row-img" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&auto=format&fit=crop&q=75" alt="Real estate housing" loading="lazy">
+          <div class="lf-row-body">
+            <div class="lf-row-sub">Real Estate & Economy</div>
+            <h3 class="lf-row-title">Who Actually Owns the Housing Market Now?</h3>
+            <p class="lf-row-excerpt">Institutional investors, short-term rental platforms, and foreign capital have reshaped residential property in ways that first-time buyers are still trying to understand. The data tells a complicated story.</p>
+            <p class="lf-row-meta">By Dien Marvelous <span>·</span> Apr 30, 2026 <span>·</span> 8 min read</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. ENTERTAINMENT & CULTURE -->
+  <div class="lf-section-panel" id="lf-entertainment">
+    <div class="lf-section-title-bar">
+      <div class="lf-section-title-bar-inner">
+        <h2 class="lf-section-heading">Entertainment <em>&</em> Culture</h2>
+        <div class="lf-sub-tabs">
+          <button class="lf-sub-tab active" onclick="showLFSub('entertainment','celebrity',this)">Celebrity & Pop Culture</button>
+          <button class="lf-sub-tab" onclick="showLFSub('entertainment','reviews',this)">Movie & Music Reviews</button>
+        </div>
+      </div>
+    </div>
+    <div class="lf-sub-panel visible" id="lf-entertainment-celebrity">
+      <div class="lf-article-list">
+        <div class="lf-row" onclick="openArticle('lf-celebrity-economy')">
+          <img class="lf-row-img" src="https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?w=600&auto=format&fit=crop&q=75" alt="Celebrity culture" loading="lazy">
+          <div class="lf-row-body">
+            <div class="lf-row-sub">Celebrity & Pop Culture</div>
+            <h3 class="lf-row-title">The Celebrity Industrial Complex Is Eating Itself</h3>
+            <p class="lf-row-excerpt">Fame has never been more manufactured, more monitored, or more disposable. Behind the curated feeds and brand deals, the economics of celebrity culture are shifting in ways that will reshape entertainment entirely.</p>
+            <p class="lf-row-meta">By Dien Marvelous <span>·</span> May 4, 2026 <span>·</span> 6 min read</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="lf-sub-panel" id="lf-entertainment-reviews">
+      <div class="lf-article-list">
+        <div class="lf-row" onclick="openArticle('lf-streaming-fatigue')">
+          <img class="lf-row-img" src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=600&auto=format&fit=crop&q=75" alt="Movie and music" loading="lazy">
+          <div class="lf-row-body">
+            <div class="lf-row-sub">Movie & Music Reviews</div>
+            <h3 class="lf-row-title">Streaming Fatigue Is Real — and the Studios Are Finally Listening</h3>
+            <p class="lf-row-excerpt">After years of volume-over-quality content strategies, the streaming giants are recalibrating. Fewer shows, bigger bets, and a quiet return to the idea that prestige matters more than endless choice.</p>
+            <p class="lf-row-meta">By Dien Marvelous <span>·</span> Apr 27, 2026 <span>·</span> 6 min read</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. LIFESTYLE & CONSUMER -->
+  <div class="lf-section-panel" id="lf-lifestyle">
+    <div class="lf-section-title-bar">
+      <div class="lf-section-title-bar-inner">
+        <h2 class="lf-section-heading">Lifestyle <em>&</em> Consumer</h2>
+        <div class="lf-sub-tabs">
+          <button class="lf-sub-tab active" onclick="showLFSub('lifestyle','health',this)">Health & Wellness</button>
+          <button class="lf-sub-tab" onclick="showLFSub('lifestyle','travel',this)">Travel & Food</button>
+          <button class="lf-sub-tab" onclick="showLFSub('lifestyle','auto',this)">Automotive</button>
+        </div>
+      </div>
+    </div>
+    <div class="lf-sub-panel visible" id="lf-lifestyle-health">
+      <div class="lf-article-list">
+        <div class="lf-row" onclick="openArticle('lf-gut-health')">
+          <img class="lf-row-img" src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&auto=format&fit=crop&q=75" alt="Health and nutrition" loading="lazy">
+          <div class="lf-row-body">
+            <div class="lf-row-sub">Health & Wellness</div>
+            <h3 class="lf-row-title">The Gut-Brain Axis: What the Latest Research Is Telling Us About Food and Mental Health</h3>
+            <p class="lf-row-excerpt">A growing body of evidence links the microbiome to anxiety, depression, and cognitive performance. The science is still young but the implications for how we eat — and how we treat mental illness — are profound.</p>
+            <p class="lf-row-meta">By Dien Marvelous <span>·</span> May 1, 2026 <span>·</span> 7 min read</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="lf-sub-panel" id="lf-lifestyle-travel">
+      <div class="lf-article-list">
+        <div class="lf-row" onclick="openArticle('lf-travel-rebound')">
+          <img class="lf-row-img" src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&auto=format&fit=crop&q=75" alt="Travel and food" loading="lazy">
+          <div class="lf-row-body">
+            <div class="lf-row-sub">Travel & Food</div>
+            <h3 class="lf-row-title">Overtourism Is Back — and Worse Than Before</h3>
+            <p class="lf-row-excerpt">Barcelona, Santorini, Kyoto, and Dubrovnik are once again overwhelmed. Residents are pushing back, governments are imposing caps, and travellers are being forced to confront what their wanderlust actually costs.</p>
+            <p class="lf-row-meta">By Dien Marvelous <span>·</span> Apr 24, 2026 <span>·</span> 7 min read</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="lf-sub-panel" id="lf-lifestyle-auto">
+      <div class="lf-article-list">
+        <div class="lf-row" onclick="openArticle('lf-ev-reality')">
+          <img class="lf-row-img" src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=600&auto=format&fit=crop&q=75" alt="Electric vehicles" loading="lazy">
+          <div class="lf-row-body">
+            <div class="lf-row-sub">Automotive</div>
+            <h3 class="lf-row-title">The EV Revolution Is Stalling — Here Is What Went Wrong</h3>
+            <p class="lf-row-excerpt">Range anxiety, charging infrastructure gaps, and unexpected depreciation have slowed EV adoption far below projections. The industry is recalibrating, and the next phase looks very different from what was promised.</p>
+            <p class="lf-row-meta">By Dien Marvelous <span>·</span> Apr 20, 2026 <span>·</span> 8 min read</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. TECHNOLOGY & SCIENCE -->
+  <div class="lf-section-panel" id="lf-tech">
+    <div class="lf-section-title-bar">
+      <div class="lf-section-title-bar-inner">
+        <h2 class="lf-section-heading">Technology <em>&</em> Science</h2>
+        <div class="lf-sub-tabs">
+          <button class="lf-sub-tab active" onclick="showLFSub('tech','consumer',this)">Consumer Tech</button>
+          <button class="lf-sub-tab" onclick="showLFSub('tech','industry',this)">Tech Industry</button>
+        </div>
+      </div>
+    </div>
+    <div class="lf-sub-panel visible" id="lf-tech-consumer">
+      <div class="lf-article-list">
+        <div class="lf-row" onclick="openArticle('lf-smartphone-plateau')">
+          <img class="lf-row-img" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=75" alt="Smartphones gadgets" loading="lazy">
+          <div class="lf-row-body">
+            <div class="lf-row-sub">Consumer Tech</div>
+            <h3 class="lf-row-title">The Smartphone Has Peaked — Now What?</h3>
+            <p class="lf-row-excerpt">After fifteen years of transformative hardware cycles, the upgrade curve has flattened. Consumers are holding devices longer, manufacturers are running out of genuinely new ideas, and the industry is searching urgently for the next platform.</p>
+            <p class="lf-row-meta">By Dien Marvelous <span>·</span> May 7, 2026 <span>·</span> 6 min read</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="lf-sub-panel" id="lf-tech-industry">
+      <div class="lf-article-list">
+        <div class="lf-row" onclick="openArticle('lf-big-tech-reckoning')">
+          <img class="lf-row-img" src="https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?w=600&auto=format&fit=crop&q=75" alt="Big tech companies" loading="lazy">
+          <div class="lf-row-body">
+            <div class="lf-row-sub">Tech Industry</div>
+            <h3 class="lf-row-title">The Antitrust Era Has Finally Arrived for Big Tech</h3>
+            <p class="lf-row-excerpt">Courts in three continents have ruled against major technology platforms in the same twelve-month period. The regulatory tide that observers predicted for a decade has turned, and the industry's response reveals just how unprepared it was.</p>
+            <p class="lf-row-meta">By Dien Marvelous <span>·</span> Apr 18, 2026 <span>·</span> 8 min read</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. SPORTS -->
+  <div class="lf-section-panel" id="lf-sports">
+    <div class="lf-section-title-bar">
+      <div class="lf-section-title-bar-inner">
+        <h2 class="lf-section-heading"><em>Sports</em></h2>
+        <div class="lf-sub-tabs">
+          <button class="lf-sub-tab active" onclick="showLFSub('sports','leagues',this)">Major Leagues & Tournaments</button>
+        </div>
+      </div>
+    </div>
+    <div class="lf-sub-panel visible" id="lf-sports-leagues">
+      <div class="lf-article-list">
+        <div class="lf-row" onclick="openArticle('lf-sports-money')">
+          <img class="lf-row-img" src="https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?w=600&auto=format&fit=crop&q=75" alt="Sports stadium" loading="lazy">
+          <div class="lf-row-body">
+            <div class="lf-row-sub">Major Leagues & Tournaments</div>
+            <h3 class="lf-row-title">The Money That Is Rewriting the Rules of Sport</h3>
+            <p class="lf-row-excerpt">Sovereign wealth funds, private equity, and broadcast rights auctions have transformed professional sport in every major league simultaneously. What does a game mean when the economics behind it bear no resemblance to the community that built it?</p>
+            <p class="lf-row-meta">By Dien Marvelous <span>·</span> May 9, 2026 <span>·</span> 7 min read</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. SAFETY -->
+  <div class="lf-section-panel" id="lf-safety">
+    <div class="lf-section-title-bar">
+      <div class="lf-section-title-bar-inner">
+        <h2 class="lf-section-heading"><em>Safety</em></h2>
+        <div class="lf-sub-tabs">
+          <button class="lf-sub-tab active" onclick="showLFSub('safety','main',this)">Public & Personal Safety</button>
+        </div>
+      </div>
+    </div>
+    <div class="lf-sub-panel visible" id="lf-safety-main">
+      <div class="lf-article-list">
+        <div class="lf-row" onclick="openArticle('lf-road-safety')">
+          <img class="lf-row-img" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&auto=format&fit=crop&q=75" alt="Road safety" loading="lazy">
+          <div class="lf-row-body">
+            <div class="lf-row-sub">Public & Personal Safety</div>
+            <h3 class="lf-row-title">Road Deaths Are Rising Again — and Distraction Is Only Part of the Story</h3>
+            <p class="lf-row-excerpt">After decades of steady decline, road fatality rates are climbing in multiple countries. Investigators are pointing to a convergence of factors — faster cars, more distracted infrastructure design, and post-pandemic behavioural shifts — that simple enforcement cannot fix.</p>
+            <p class="lf-row-meta">By Dien Marvelous <span>·</span> Apr 22, 2026 <span>·</span> 7 min read</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. ENVIRONMENT -->
+  <div class="lf-section-panel" id="lf-environment">
+    <div class="lf-section-title-bar">
+      <div class="lf-section-title-bar-inner">
+        <h2 class="lf-section-heading"><em>Environment</em></h2>
+        <div class="lf-sub-tabs">
+          <button class="lf-sub-tab active" onclick="showLFSub('environment','main',this)">Climate & Ecology</button>
+        </div>
+      </div>
+    </div>
+    <div class="lf-sub-panel visible" id="lf-environment-main">
+      <div class="lf-article-list">
+        <div class="lf-row" onclick="openArticle('lf-climate-adaptation')">
+          <img class="lf-row-img" src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&auto=format&fit=crop&q=75" alt="Climate and environment" loading="lazy">
+          <div class="lf-row-body">
+            <div class="lf-row-sub">Climate & Ecology</div>
+            <h3 class="lf-row-title">Adaptation, Not Just Mitigation: How Cities Are Learning to Live With Climate Change</h3>
+            <p class="lf-row-excerpt">The climate debate has long focused on reducing emissions. But for many cities already experiencing the effects — flooding, extreme heat, water scarcity — adaptation has become the more urgent and more practical priority.</p>
+            <p class="lf-row-meta">By Dien Marvelous <span>·</span> Apr 15, 2026 <span>·</span> 9 min read</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. WASTE MANAGEMENT -->
+  <div class="lf-section-panel" id="lf-waste">
+    <div class="lf-section-title-bar">
+      <div class="lf-section-title-bar-inner">
+        <h2 class="lf-section-heading">Waste <em>Management</em></h2>
+        <div class="lf-sub-tabs">
+          <button class="lf-sub-tab active" onclick="showLFSub('waste','main',this)">Systems & Solutions</button>
+        </div>
+      </div>
+    </div>
+    <div class="lf-sub-panel visible" id="lf-waste-main">
+      <div class="lf-article-list">
+        <div class="lf-row" onclick="openArticle('lf-plastic-treaty')">
+          <img class="lf-row-img" src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=600&auto=format&fit=crop&q=75" alt="Waste and recycling" loading="lazy">
+          <div class="lf-row-body">
+            <div class="lf-row-sub">Systems & Solutions</div>
+            <h3 class="lf-row-title">The Global Plastics Treaty: Why It Matters and Why It Is So Difficult</h3>
+            <p class="lf-row-excerpt">Nations have been negotiating a binding international agreement on plastic pollution for three years. The talks have revealed a fundamental disagreement between producing nations and those bearing the environmental cost — and the outcome will shape waste policy for the next generation.</p>
+            <p class="lf-row-meta">By Dien Marvelous <span>·</span> Apr 10, 2026 <span>·</span> 8 min read</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end longform-view -->
+
+<!-- SHORT-FORM VIEW -->
+<div id="shortform-view">
+
+  <div class="sf-hero">
+    <p class="sf-hero-eyebrow">Quick reads · 3 min or less</p>
+    <h1 class="sf-hero-title">Short-form <em>Articles</em></h1>
+    <p class="sf-hero-sub">Sharp, focused writing that respects your time — and earns it.</p>
+  </div>
+
+  <!-- NICHE FILTER TABS -->
+  <div class="sf-niche-nav">
+    <div class="sf-niche-nav-inner">
+      <button class="sf-niche-btn active" onclick="filterSF('all', this)">All</button>
+      <button class="sf-niche-btn" onclick="filterSF('construction', this)">Construction</button>
+      <button class="sf-niche-btn" onclick="filterSF('law', this)">Law</button>
+      <button class="sf-niche-btn" onclick="filterSF('cleaning', this)">Cleaning</button>
+      <button class="sf-niche-btn" onclick="filterSF('roofing', this)">Roofing</button>
+    </div>
+  </div>
+
+  <div class="sf-grid-wrap">
+    <div class="sf-grid" id="sf-grid">
+
+      <!-- CONSTRUCTION 1 -->
+      <div class="sf-card" data-niche="construction" onclick="openArticle('sf-construction-1')">
+        <div class="sf-card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&auto=format&fit=crop&q=75" alt="Construction site" loading="lazy">
+        </div>
+        <div class="sf-card-body">
+          <div class="sf-card-niche">Construction</div>
+          <h3 class="sf-card-title">Why Most Construction Projects Go Over Budget — and How to Stop It</h3>
+          <p class="sf-card-excerpt">Cost overruns are not bad luck. They are predictable, and with the right habits in place, largely preventable.</p>
+          <p class="sf-card-meta">May 15, 2026 <span>·</span> 3 min read</p>
+        </div>
+      </div>
+
+      <!-- CONSTRUCTION 2 -->
+      <div class="sf-card" data-niche="construction" onclick="openArticle('sf-construction-2')">
+        <div class="sf-card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1590486803833-1c5dc8ddd4c8?w=800&auto=format&fit=crop&q=75" alt="Construction materials" loading="lazy">
+        </div>
+        <div class="sf-card-body">
+          <div class="sf-card-niche">Construction</div>
+          <h3 class="sf-card-title">The Five Questions You Must Ask Before Hiring a Contractor</h3>
+          <p class="sf-card-excerpt">Most hiring mistakes happen before the first nail is driven. The right questions asked early save months of trouble later.</p>
+          <p class="sf-card-meta">May 12, 2026 <span>·</span> 3 min read</p>
+        </div>
+      </div>
+
+      <!-- LAW 1 -->
+      <div class="sf-card" data-niche="law" onclick="openArticle('sf-law-1')">
+        <div class="sf-card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&auto=format&fit=crop&q=75" alt="Law and justice" loading="lazy">
+        </div>
+        <div class="sf-card-body">
+          <div class="sf-card-niche">Law</div>
+          <h3 class="sf-card-title">What Your Contract Actually Says — and What It Doesn't</h3>
+          <p class="sf-card-excerpt">Most people sign contracts without understanding them. Here is what to look for before you put your name on anything.</p>
+          <p class="sf-card-meta">May 14, 2026 <span>·</span> 3 min read</p>
+        </div>
+      </div>
+
+      <!-- LAW 2 -->
+      <div class="sf-card" data-niche="law" onclick="openArticle('sf-law-2')">
+        <div class="sf-card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=800&auto=format&fit=crop&q=75" alt="Legal books and scales" loading="lazy">
+        </div>
+        <div class="sf-card-body">
+          <div class="sf-card-niche">Law</div>
+          <h3 class="sf-card-title">Know Your Rights: Three Legal Protections Most People Don't Use</h3>
+          <p class="sf-card-excerpt">The law offers more protection than most people claim. The problem is not availability — it is awareness.</p>
+          <p class="sf-card-meta">May 10, 2026 <span>·</span> 3 min read</p>
+        </div>
+      </div>
+
+      <!-- CLEANING 1 -->
+      <div class="sf-card" data-niche="cleaning" onclick="openArticle('sf-cleaning-1')">
+        <div class="sf-card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=800&auto=format&fit=crop&q=75" alt="Clean home interior" loading="lazy">
+        </div>
+        <div class="sf-card-body">
+          <div class="sf-card-niche">Cleaning</div>
+          <h3 class="sf-card-title">The Room-by-Room Deep Clean Checklist Professionals Actually Use</h3>
+          <p class="sf-card-excerpt">Professional cleaners do not work harder than you. They work in a smarter sequence — and that sequence is learnable.</p>
+          <p class="sf-card-meta">May 13, 2026 <span>·</span> 3 min read</p>
+        </div>
+      </div>
+
+      <!-- CLEANING 2 -->
+      <div class="sf-card" data-niche="cleaning" onclick="openArticle('sf-cleaning-2')">
+        <div class="sf-card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1563453392212-326f5e854473?w=800&auto=format&fit=crop&q=75" alt="Cleaning products" loading="lazy">
+        </div>
+        <div class="sf-card-body">
+          <div class="sf-card-niche">Cleaning</div>
+          <h3 class="sf-card-title">The Cleaning Products You Think You Need — and the Three That Actually Work</h3>
+          <p class="sf-card-excerpt">The cleaning aisle exists to sell you complexity. Most of it is unnecessary. Here is what actually does the job.</p>
+          <p class="sf-card-meta">May 8, 2026 <span>·</span> 3 min read</p>
+        </div>
+      </div>
+
+      <!-- ROOFING 1 -->
+      <div class="sf-card" data-niche="roofing" onclick="openArticle('sf-roofing-1')">
+        <div class="sf-card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1632889986587-b0b09f4e9d9b?w=800&auto=format&fit=crop&q=75" alt="Roof inspection and repair" loading="lazy">
+        </div>
+        <div class="sf-card-body">
+          <div class="sf-card-niche">Roofing</div>
+          <h3 class="sf-card-title">Five Signs Your Roof Is Failing Before the Leak Shows Up Inside</h3>
+          <p class="sf-card-excerpt">By the time water appears on your ceiling, the damage is already weeks old. Catch it earlier — much earlier.</p>
+          <p class="sf-card-meta">May 16, 2026 <span>·</span> 3 min read</p>
+        </div>
+      </div>
+
+      <!-- ROOFING 2 -->
+      <div class="sf-card" data-niche="roofing" onclick="openArticle('sf-roofing-2')">
+        <div class="sf-card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&auto=format&fit=crop&q=75" alt="Roofing replacement" loading="lazy">
+        </div>
+        <div class="sf-card-body">
+          <div class="sf-card-niche">Roofing</div>
+          <h3 class="sf-card-title">Repair or Replace? How to Make the Right Roofing Decision</h3>
+          <p class="sf-card-excerpt">The wrong answer costs you significantly more money, in one direction or the other. Here is how to think it through.</p>
+          <p class="sf-card-meta">May 11, 2026 <span>·</span> 3 min read</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div><!-- end shortform-view -->
+
+<!-- ARTICLE VIEW -->
+<div id="article-view">
+  <div class="page-wrap">
+    <div style="padding-top: 2.5rem;">
+      <button class="back-btn" onclick="closeArticle()">Back to all articles</button>
+    </div>
+    <div id="article-content"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <p>© 2026 <strong>Dien Marvelous Bloq</strong> &nbsp;·&nbsp; All rights reserved</p>
+  <div class="footer-links">
+    <a href="#">About</a>
+    <a href="#">Archive</a>
+    <a href="#">Newsletter</a>
+    <a href="#">Contact</a>
+  </div>
+</footer>
+
+<script>
+/* ── ARTICLES DATA ── */
+const articles = {
+
+  'ai-thinking': {
+    category: 'Technology & AI',
+    title: 'What We Lose When Machines Do Our Thinking',
+    date: 'May 12, 2026',
+    readTime: '7 min read',
+    body: `
+      <p>There is a particular kind of satisfaction in solving a problem slowly. Not the triumphant click of an answer, but the long, ungainly process of working toward it: the false starts, the reconsidered assumptions, the sudden lateral leap that changes everything. This is what thinking actually feels like. And it is precisely this experience that we are, quietly and eagerly, giving away.</p>
+      <p>Artificial intelligence has arrived not as a replacement for human intelligence but as a supplement — or so we tell ourselves. In practice, the line is less clear. When a navigation app tells you which turn to take, you stop consulting your internal map. When a writing assistant finishes your sentences, you stop searching for your own words. The capability atrophies not because the tool is bad but because the tool is too good.</p>
+      <h2>The Friction We Need</h2>
+      <p>Cognitive scientists have long understood that difficulty is not the enemy of learning — it is its engine. "Desirable difficulties," a term coined by Robert Bjork, describes the counterintuitive truth that struggling to recall something makes it stick better than being told the answer. We learn by being slightly lost. We grow sharp through resistance.</p>
+      <p>The tools that make life easier are not neutral. Every time we delegate a cognitive task, we reduce our exposure to exactly the kind of productive friction that builds mental resilience. This is not technophobia. It is neuroscience.</p>
+      <blockquote>"The danger is not that machines will think like humans. The danger is that humans will stop thinking like humans."</blockquote>
+      <h2>A New Kind of Illiteracy</h2>
+      <p>We are approaching what some researchers are calling "cognitive outsourcing dependency" — a state in which people can no longer perform certain mental tasks without technological assistance. The irony is that we are doing this while feeling more capable than ever. AI tools produce fluent writing, logical arguments, and detailed analysis. We look at the output and feel competent. But the output is not ours.</p>
+      <h2>What to Do With This Knowledge</h2>
+      <p>The answer may lie in deliberate inefficiency. Choose, sometimes, to work without the assistant. Write the first draft before asking for help with the second. Solve the problem before checking the solution. Thinking is not just a means to an end. It is the practice through which we become who we are.</p>
+    `
+  },
+
+  'long-letter': {
+    category: 'Society',
+    title: 'The Return of the Long Letter',
+    date: 'March 30, 2026',
+    readTime: '4 min read',
+    body: `
+      <p>A friend of mine, a doctor in her early thirties, started writing letters in 2024. Not emails. Letters — handwritten on good paper, folded into envelopes, addressed with care, sent to seven people who were important to her. She received, over the following months, six replies. Three of those correspondences are still ongoing. She calls it the best decision she has made in years.</p>
+      <p>There is a revival happening that the metrics of the digital world cannot easily capture. Fountain pen sales have quietly grown for a decade. Stationery shops that should have closed have not.</p>
+      <h2>What the Letter Does That the Message Cannot</h2>
+      <p>A text message exists in a permanent state of availability. A letter is different. It arrives, and its arrival is an event. Someone held this paper. Someone thought about what to say, and then said it by hand, in a form that cannot be copied and pasted or forwarded without effort.</p>
+      <blockquote>"A letter is proof that someone sat still long enough to think about you. In our current moment, this is not a small thing."</blockquote>
+      <h2>What It Signals</h2>
+      <p>In choosing the slower, more effortful form of communication, the letter-writer sends a signal that the recipient cannot misread: you are worth this. The letter is not coming back as a dominant form of communication. It doesn't need to. What it is doing is finding its proper place: as a practice for the relationships that matter enough to deserve it.</p>
+    `
+  },
+
+  'old-cities': {
+    category: 'Culture',
+    title: 'Why Old Cities Still Teach Us How to Live',
+    date: 'March 22, 2026',
+    readTime: '5 min read',
+    body: `
+      <p>The modern city is optimised for movement. Wide roads for cars, efficient grids, everything designed to get you from one destination to another with minimum friction and maximum speed. It is enormously effective at what it attempts. And it produces, with remarkable reliability, environments where people feel lonely even in dense proximity to each other.</p>
+      <p>Ancient cities were optimised for something different. The winding medinas of Fez and Marrakech, the compressed neighbourhoods of Siena, the intimate alleyways of old Kyoto — these were designed, consciously or not, for human encounter.</p>
+      <h2>The Urbanist Rediscovery</h2>
+      <p>Contemporary urban planners are spending considerable intellectual effort rediscovering what pre-industrial city builders knew by instinct. Jane Jacobs, whose 1961 book remains the field's most important text, argued that mixed-use, pedestrian-scaled urban environments produce social cohesion in ways that large-scale modernist planning fundamentally cannot.</p>
+      <blockquote>"The old city was not beautiful by accident. It was the accumulated result of generations of people learning, through trial and error, what kinds of spaces make human beings thrive."</blockquote>
+      <h2>What We Can Still Learn</h2>
+      <p>You do not need to live in Siena to take the lesson. The principle — that human beings flourish in places designed for encounter rather than transit — applies everywhere. The old cities do not offer blueprints. But they offer principles, hard-won over centuries, about what it means to build a place where people actually want to live.</p>
+    `
+  },
+
+  /* ── LISTICLES ── */
+  'list-ai-tools': {
+    category: 'Technology & AI · Listicle',
+    title: '8 AI Tools That Are Quietly Changing How We Work',
+    date: 'May 11, 2026', readTime: '5 min read', isListicle: true,
+    intro: `The noise around artificial intelligence is enormous. Beneath it, a smaller and more practical conversation is happening among professionals who have actually integrated these tools into their daily work. This is not a ranking of the most powerful models. It is a list of tools that are earning their place — not through spectacle, but through genuine, repeatable utility.`,
+    items: [
+      { title: 'Claude (Anthropic)', body: 'For long-form reasoning, nuanced writing, and research synthesis, Claude has emerged as the tool of choice for writers, researchers, and strategists who need more than a quick answer. Its ability to hold extended context and reason across it makes it especially valuable for complex, multi-part work.' },
+      { title: 'Perplexity AI', body: 'A search engine rebuilt for the AI era. Where traditional search returns links, Perplexity returns synthesised answers with citations. For research tasks that used to require scanning ten tabs simultaneously, it has meaningfully reduced the friction.' },
+      { title: 'Cursor', body: 'A code editor built around AI assistance. Unlike bolt-on AI plugins, Cursor was designed from the ground up for AI-assisted development. Developers who have switched describe a qualitative shift in how quickly they can move from idea to working code.' },
+      { title: 'Otter.ai', body: 'Transcription and meeting notes, done invisibly. Otter joins your calls, transcribes them in real time, generates summaries, and lets you search across your entire meeting history. The hours recovered from manual note-taking add up faster than most people expect.' },
+      { title: 'Runway ML', body: 'Video editing and generation for people who are not video editors. Runway has made capabilities that previously required specialist skills — background removal, motion tracking, AI-generated footage — accessible to anyone with a browser and a creative brief.' },
+      { title: 'Notion AI', body: 'For teams already living in Notion, the AI layer adds genuine value: drafting, summarising, translating, and generating structured documents from rough notes. Its power comes from being embedded in the workspace rather than sitting outside it.' },
+      { title: 'ElevenLabs', body: 'Voice synthesis that has crossed the threshold from interesting to useful. Podcasters, content creators, and accessibility-focused developers are using ElevenLabs to produce natural-sounding voiceovers at a fraction of the traditional cost and timeline.' },
+      { title: 'Gamma', body: 'Presentations, rebuilt. Gamma generates well-structured, visually coherent slide decks from a prompt or outline. For people who spend hours fighting with slide software to produce something merely adequate, it removes the most painful part of the process.' }
+    ]
+  },
+
+  'list-wellness-habits': {
+    category: 'Health & Wellness · Listicle',
+    title: '7 Small Habits That Science Says Will Extend Your Life',
+    date: 'May 7, 2026', readTime: '4 min read', isListicle: true,
+    intro: `Longevity research has, in recent years, moved from the fringes of geroscience into the mainstream. What it consistently finds is both reassuring and slightly inconvenient: the things that add years to life are neither expensive nor exotic. They are small, repeatable behaviours that compound over decades.`,
+    items: [
+      { title: 'Walk at least 7,000 steps a day', body: 'A landmark study published in JAMA Network Open found that walking 7,000 or more steps daily was associated with a 50–70% lower risk of mortality compared to fewer steps. The finding holds across age groups and does not require the steps to be consecutive.' },
+      { title: 'Sleep seven to nine hours consistently', body: 'Chronic sleep deprivation is associated with elevated risk of cardiovascular disease, type 2 diabetes, obesity, and cognitive decline. Consistency matters as much as duration: irregular sleep schedules disrupt circadian rhythms independently of total hours.' },
+      { title: 'Eat mostly plants, most of the time', body: 'The dietary pattern most consistently linked to longevity is not any specific diet but a general orientation: high in vegetables, legumes, whole grains, and fruit; low in ultra-processed foods and red meat.' },
+      { title: 'Maintain strong social connections', body: 'Loneliness is now classified by major health organisations as a risk factor equivalent to smoking 15 cigarettes a day. Social connection — not quantity of contacts but depth of relationship — is one of the most powerful predictors of longevity.' },
+      { title: 'Do resistance training at least twice a week', body: 'Muscle mass declines naturally with age, but this decline is substantially modifiable through strength training. Maintaining muscle mass into later decades is associated with lower rates of fall-related injury and better metabolic health.' },
+      { title: 'Manage stress with a daily practice', body: 'Chronic psychological stress accelerates cellular ageing through a measurable mechanism: the shortening of telomeres. Practices that demonstrably reduce cortisol — including meditation, deep breathing, and time in nature — appear to slow this process.' },
+      { title: "Don't smoke, and drink alcohol minimally", body: 'The research here is unambiguous. Smoking remains the single most modifiable cause of premature death globally. Alcohol, long assumed to carry cardiovascular benefits in moderation, is increasingly recognised as harmful at any level.' }
+    ]
+  },
+
+  'list-money-rules': {
+    category: 'Finance · Listicle',
+    title: '10 Money Rules the Wealthy Follow That Nobody Talks About',
+    date: 'May 2, 2026', readTime: '6 min read', isListicle: true,
+    intro: `Financial advice is everywhere, and most of it is generic. The principles below are less often articulated, but they appear with remarkable consistency among people who have built lasting wealth across different industries, geographies, and starting points.`,
+    items: [
+      { title: 'They pay themselves first, automatically', body: 'Before any spending decision is made, a fixed percentage of income moves to savings or investment automatically. This is not discipline — it is architecture. By removing the decision entirely, they eliminate the most common point of failure in personal finance.' },
+      { title: 'They know the difference between assets and expenses', body: 'A car, a luxury watch, and a second home may all feel like investments. They are not. An asset generates income or appreciates reliably. An expense costs money to maintain. The wealthy are ruthless about this distinction.' },
+      { title: 'They let compound interest work across decades, not years', body: 'Wealth built through investment compounds exponentially — but the exponential curve is backloaded. The first decade looks discouraging. The third decade looks miraculous. Most people abandon the process before reaching the part where it accelerates.' },
+      { title: 'They spend lavishly on a few things and frugally on everything else', body: 'Research on high-net-worth individuals consistently finds they identify two or three categories that matter deeply to them and spend freely there, while being surprisingly frugal in areas they do not care about. This is intentional allocation, not accidental.' },
+      { title: 'They treat their network as infrastructure', body: 'The quality of relationships around a person — professionally, intellectually, and personally — is a better predictor of financial trajectory than almost any technical skill. Most significant opportunities arrive through people, not applications.' },
+      { title: 'They are comfortable with calculated risk', body: 'Wealth rarely accumulates through entirely safe choices. The wealthy are skilled at evaluating asymmetric bets: situations where the downside is bounded but the upside is not. They also diversify not to eliminate risk but to ensure no single bet can end them.' },
+      { title: 'They read their contracts', body: 'This sounds mundane. It is enormously consequential. The wealth transfer that happens through poorly understood financial agreements — mortgages, insurance policies, investment terms — is staggering. Understanding what you are signing is a form of self-protection that compounds over a lifetime.' },
+      { title: 'They have multiple income streams', body: 'A single income source, however large, is a fragile financial structure. The wealthy systematically build additional streams: investments, side projects, royalties, rental income. The goal is to ensure no single point of failure can dramatically alter their financial position.' },
+      { title: 'They hire for their weaknesses early', body: 'Accountants, lawyers, and financial advisors cost money. They cost far less than the errors their absence allows. Wealthy individuals tend to engage professional advisors much earlier than others believe is necessary.' },
+      { title: 'They redefine what "enough" means on their own terms', body: 'The accumulation of wealth without a definition of sufficiency produces a particular kind of anxiety — the feeling of never quite arriving. The people who seem most genuinely comfortable with their financial lives have made a deliberate decision about what enough looks like.' }
+    ]
+  },
+
+  'list-african-destinations': {
+    category: 'Travel · Listicle',
+    title: "9 African Destinations That Should Be on Every Serious Traveller's List",
+    date: 'April 25, 2026', readTime: '5 min read', isListicle: true,
+    intro: `Africa is the most geographically diverse continent on earth — 54 countries, every climate zone, ecosystems ranging from the Sahara to the Congo Basin to the Drakensberg highlands. What follows is a selection of places that reward the traveller who pays attention.`,
+    items: [
+      { title: 'Marrakech, Morocco', body: 'The medina of Marrakech is a masterclass in sensory complexity — a medieval city that has absorbed centuries of trade routes, dynasties, and cultures without losing its essential character. The Djemaa el-Fna square at dusk is one of the great urban experiences on the planet.' },
+      { title: 'Kigali, Rwanda', body: 'The cleanest, most orderly capital city in Africa — and one of the safest. Kigali is also a city that has rebuilt itself from catastrophe with a determination visible in its infrastructure, its institutions, and the striking self-possession of its people.' },
+      { title: 'The Omo Valley, Ethiopia', body: 'One of the last places on earth where radically different ways of life exist in close proximity — pastoralist communities whose practices, languages, and aesthetics remain largely intact. This is not a place for casual tourism; it requires preparation and a serious commitment to respectful engagement.' },
+      { title: 'Zanzibar, Tanzania', body: 'Stone Town is a UNESCO World Heritage site for reasons that become immediately obvious upon walking its alleys — the layered architectural evidence of Arab, Persian, Indian, and Swahili influences creates something that exists nowhere else.' },
+      { title: 'Dakar, Senegal', body: "The cultural capital of West Africa in a very real sense: its art scene, music scene, restaurant scene, and intellectual life punch far above the city's size. The IFAN museum houses one of the finest collections of traditional African art on the continent." },
+      { title: 'The Okavango Delta, Botswana', body: 'A river that flows inland and vanishes into the Kalahari Desert, creating a vast inland delta that supports extraordinary biodiversity. Unlike the heavily trafficked game reserves of East Africa, the Okavango rewards patience and immersion over performance.' },
+      { title: 'Cape Town, South Africa', body: 'Possibly the most visually spectacular city in the world, set between Table Mountain and two oceans. Its complexity — the beauty and the inequality, the extraordinary food and wine culture alongside the legacy of apartheid — makes it a place that asks more of you than most cities do.' },
+      { title: 'Lamu, Kenya', body: 'A small island off the Kenyan coast where no cars are permitted and daily life still moves at a pre-industrial pace. The old town is one of the best-preserved Swahili settlements in East Africa. Lamu rewards the traveller willing to go slowly.' },
+      { title: 'Lagos, Nigeria', body: 'Not for the faint of heart, and worth every moment. Lagos is the most energetic city in Africa — a megacity of extraordinary contradictions, terrible infrastructure, brilliant art, astonishing food, and a creative class that is among the most vital in the world. You will not forget it.' }
+    ]
+  },
+
+  'list-books-decade': {
+    category: 'Culture · Listicle',
+    title: '12 Books That Defined the Last Decade of Ideas',
+    date: 'April 15, 2026', readTime: '5 min read', isListicle: true,
+    intro: `Ideas do not arrive fully formed. They accumulate, contradict each other, get stress-tested by events, and eventually settle into the background assumptions of an era. The books below shaped — or captured — some of the most significant shifts in how educated, engaged people understand the world they are living in.`,
+    items: [
+      { title: 'Thinking, Fast and Slow — Daniel Kahneman', body: "The definitive account of how the human mind actually works — imperfectly, heuristically, systematically biased. Kahneman's framework of System 1 and System 2 thinking became the common language of behavioural economics and public policy." },
+      { title: 'Capital in the Twenty-First Century — Thomas Piketty', body: 'A French economist produced the unlikely bestseller of the decade, arguing from historical data that wealth inequality is not an aberration but the default condition of capitalism when growth slows.' },
+      { title: 'Between the World and Me — Ta-Nehisi Coates', body: 'Written as a letter from a father to his teenage son, this slim book redefined how Americans could speak about race, body, history, and fear. It introduced a generation of readers to an analytical framework for understanding structural racism.' },
+      { title: 'Sapiens — Yuval Noah Harari', body: 'A grand, sweeping history of humankind that asked a simple question — how did Homo sapiens come to dominate the earth? — and answered it with unusual range and readability. It restored the appetite for big-picture historical thinking.' },
+      { title: 'The Uninhabitable Earth — David Wallace-Wells', body: "The most clarifying account of the climate crisis written for a general reader. Wallace-Wells did not soften the findings; he presented the worst-case scenarios in full, and the result changed how many readers thought about the stakes of the next several decades." },
+      { title: 'Becoming — Michelle Obama', body: 'The best-selling memoir in American history. Beyond its political context, it is a beautifully written account of self-construction — how a person builds an identity across class, race, ambition, and circumstance.' },
+      { title: 'Educated — Tara Westover', body: 'A memoir about growing up in a survivalist family in rural Idaho with no formal education, and the particular kind of courage required to pursue knowledge when knowledge itself threatens the world that made you.' },
+      { title: 'The Coddling of the American Mind — Jonathan Haidt & Greg Lukianoff', body: 'A diagnosis of what the authors called "safetyism" in higher education and its downstream effects on a generation\'s psychological resilience. It set the terms for a debate about fragility, freedom of thought, and the purpose of universities.' },
+      { title: 'Winners Take All — Anand Giridharadas', body: 'A sharp critique of the elite philanthropic class — the argument that the very people who benefit most from systemic inequality have captured the language and institutions of change in ways that entrench their own position.' },
+      { title: 'Good Economics for Hard Times — Abhijit Banerjee & Esther Duflo', body: 'Written by Nobel laureates, this book translated the findings of rigorous development economics into clear, accessible prose — and repeatedly demonstrated how intuitive economic assumptions are contradicted by careful evidence.' },
+      { title: 'Caste — Isabel Wilkerson', body: 'An argument that the United States is best understood not through the lens of race but through the lens of caste — an inherited, invisible hierarchy that structures every social interaction. Simultaneously scholarly and devastating.' },
+      { title: 'The Dawn of Everything — David Graeber & David Wengrow', body: 'Perhaps the most intellectually ambitious book of the decade: a re-reading of the entire archaeological and anthropological record of human prehistory. It arrived shortly after Graeber\'s death and stands as a monument to his restless, beautiful thinking.' }
+    ]
+  },
+
+  'list-productivity-myths': {
+    category: 'Society · Listicle',
+    title: "6 Productivity Myths It's Time to Stop Believing",
+    date: 'April 5, 2026', readTime: '4 min read', isListicle: true,
+    intro: `Productivity culture is one of the stranger features of contemporary life — a body of advice that grows more elaborate with each passing year while the people following it report feeling busier and less effective than ever. Much of the advice is not simply unhelpful; it is actively counterproductive.`,
+    items: [
+      { title: 'Myth: Waking up at 5am makes you more successful', body: 'The "miracle morning" genre rests on a correlation that runs backwards. Highly disciplined people are more likely to choose early rising — but early rising does not produce the discipline. Research shows roughly 40% of the population are genetically predisposed to be evening types, for whom forced early rising impairs cognitive performance.' },
+      { title: 'Myth: Multitasking makes you more efficient', body: 'The human brain does not multitask. It task-switches, incurring a switching cost each time attention moves between tasks. People who believe they are good multitaskers are typically worse at it — they are less able to filter irrelevant information and take longer to return to a primary task after interruption.' },
+      { title: 'Myth: You need to work more hours to get more done', body: 'Research on knowledge workers consistently finds that productive output plateaus around six focused hours per day. Beyond this point, error rates rise and genuine creative work declines. People who appear to work sixteen-hour days are often performing busyness rather than producing in proportion to their hours.' },
+      { title: 'Myth: A full inbox means you\'re falling behind', body: 'The pressure to maintain inbox zero and be perpetually available creates a mode of continuous partial attention deeply hostile to focused work. Research by Gloria Mark at UC Irvine found it takes an average of 23 minutes to fully regain focus after an email interruption.' },
+      { title: 'Myth: Hustle culture separates the successful from the rest', body: 'The glorification of overwork produces high rates of burnout, which is itself a significant cause of sustained underperformance. The most thorough longitudinal studies of high achievers find sustainable output is more associated with adequate rest, clear priorities, and healthy relationships than with the willingness to sacrifice everything else.' },
+      { title: 'Myth: The right system will finally fix your productivity', body: 'Research on habit formation suggests that the most effective productivity behaviour is not finding the optimal system but building a small number of reliable routines and executing them consistently. Simplicity maintained beats complexity abandoned.' }
+    ]
+  },
+
+  'list-safety': {
+    category: 'Safety · Listicle',
+    title: '8 Safety Principles That Could Save Your Life One Day',
+    date: 'May 10, 2026', readTime: '5 min read', isListicle: true,
+    intro: `Safety is one of those subjects that attracts enormous attention after incidents and almost none in the long stretches of ordinary time when the habits that would have prevented them could actually be built. The following principles are drawn from accident investigation reports, emergency medicine research, and disaster preparedness literature.`,
+    items: [
+      { title: 'Know your emergency exits everywhere you go', body: 'Emergency responders consistently find that casualties in fires and building collapses cluster near the entrance — the way people came in. Making a habit of noting exits in hotels, cinemas, offices, and public spaces takes thirty seconds and can make an extraordinary difference in an emergency.' },
+      { title: 'Never drive fatigued', body: 'Drowsy driving impairs reaction time, lane discipline, and decision-making to a degree comparable to drunk driving. Studies found that drivers who had slept less than five hours in the previous 24 hours were 4.3 times more likely to be involved in a crash.' },
+      { title: 'Have a household emergency plan and rehearse it', body: 'Most households have no agreed plan for fire, flooding, or power outage. The cost of having one is an hour of conversation and a piece of paper. Plans should include meeting points, contact numbers stored offline, and basic supplies.' },
+      { title: 'Learn basic first aid and CPR', body: 'Cardiac arrest survival rates outside hospitals are typically below 10% without immediate bystander intervention — and rise to 30-40% with immediate CPR. The window of effective intervention is minutes. Learning CPR takes a few hours and the knowledge is retained for years.' },
+      { title: 'Secure your home against the most likely intrusion', body: 'Most domestic burglaries are opportunistic. Research consistently finds that even minimal security measures (deadbolts, motion-sensor lighting, visible cameras) divert most opportunistic burglars to easier targets.' },
+      { title: 'Understand the risks in your specific geography', body: 'Safety threats are not uniform. Understanding the specific hazards of your location — flooding patterns, road accident hotspots, prevalent crimes — allows targeted preparation rather than generic worry.' },
+      { title: 'Trust your instincts in unfamiliar situations', body: 'The psychologist Gavin de Becker documented what he called the "gift of fear" — the way the human nervous system processes threat signals faster than conscious thought can articulate them. The feeling of unease in a situation, before you can explain why, deserves more respect than most people give it.' },
+      { title: 'Stay visible and identifiable when using roads on foot or bicycle', body: 'Pedestrian and cyclist fatalities disproportionately occur at night and in poor visibility conditions. High-visibility clothing, reflective elements, and lights are not aesthetic choices — they are survival choices.' }
+    ]
+  },
+
+  'list-environment': {
+    category: 'Environment · Listicle',
+    title: '10 Environmental Facts That Should Change How You Live',
+    date: 'May 6, 2026', readTime: '5 min read', isListicle: true,
+    intro: `Environmental communication has a persistent problem: it alternates between alarm and guilt without providing clarity about what actually matters. The facts below are chosen to orient — to give a clear-eyed picture of where the most significant pressures lie, and where individual and collective action can make a meaningful difference.`,
+    items: [
+      { title: 'Food systems account for roughly one-third of global greenhouse gas emissions', body: "This figure surprises most people, who think primarily about transport or energy when they consider climate impact. Of food categories, beef and lamb are substantially more emissions-intensive than any plant-based food — a single kilogram of beef produces roughly 60kg of CO₂ equivalent, compared to 2-3kg for pulses." },
+      { title: 'Approximately 8 million tonnes of plastic enter the ocean every year', body: 'Unlike organic waste, plastic does not biodegrade — it photodegrades into microplastics, which have now been found in human blood, breast milk, and placentas. The primary sources are inadequate waste management systems, particularly in rapidly urbanising regions.' },
+      { title: 'Over 70% of global freshwater use goes to agriculture', body: 'Water scarcity is already a reality for four billion people for at least one month per year, and agricultural demand is the primary driver. The shift toward more water-efficient crops, drip irrigation systems, and reduced food waste are among the highest-leverage interventions available.' },
+      { title: 'Deforestation contributes approximately 10% of annual carbon emissions', body: 'Their destruction is driven primarily by agricultural expansion — particularly cattle ranching and palm oil. The Amazon, Congo Basin, and Southeast Asian forests are the most significant, and their protection is among the most cost-effective climate interventions known.' },
+      { title: 'The fashion industry produces 10% of global carbon emissions and 20% of global wastewater', body: 'The average consumer buys 60% more clothing than 15 years ago but keeps items for half as long. Synthetic fibres shed microplastics in every wash cycle. The most effective individual response is buying less, buying better, and extending the life of garments.' },
+      { title: 'Buildings account for 40% of global energy consumption', body: 'Residential and commercial buildings are the single largest category of energy use globally. Insulation, efficient heating and cooling systems, LED lighting, and smart energy management can reduce a building\'s energy consumption by 50-70%.' },
+      { title: 'One-third of all food produced globally is wasted', body: 'In high-income countries, most waste occurs at the consumer level: food bought and not eaten. Meal planning, proper storage, and using whole ingredients are among the highest-impact individual food behaviours.' },
+      { title: 'Air pollution kills approximately 7 million people annually', body: 'The World Health Organisation estimates that 99% of the global population breathes air that exceeds its guidelines for particulate matter. Indoor air pollution from cooking fires alone kills approximately 3.8 million people per year.' },
+      { title: 'Soil degradation threatens long-term food security for billions', body: 'Intensive agricultural practices are depleting topsoil at rates that significantly exceed natural regeneration. Regenerative agriculture practices, including crop rotation, cover cropping, and reduced tillage, are demonstrably effective alternatives.' },
+      { title: 'Individual action matters most when it drives systemic change', body: 'The debate between individual and systemic responsibility is largely false. Individual choices matter — particularly high-impact decisions around diet, transport, and household energy — but they matter most when aggregated into market signals, political mandates, and cultural norms.' }
+    ]
+  },
+
+  'list-security': {
+    category: 'Security · Listicle',
+    title: '9 Digital Security Habits Everyone Should Have by Now',
+    date: 'April 29, 2026', readTime: '5 min read', isListicle: true,
+    intro: `Digital security has an awareness problem — not a lack of it, but a surfeit. People know they should be more careful online. And then they use the same password across twelve accounts. The habits below are the foundational layer that the overwhelming majority of people have still not implemented.`,
+    items: [
+      { title: 'Use a password manager and unique passwords for every account', body: 'Password reuse is the single most exploited vulnerability in consumer digital security. When one service is breached, attackers automatically test those credentials across banking, email, and social media platforms. A password manager generates and stores unique, complex passwords for every site.' },
+      { title: 'Enable two-factor authentication on every important account', body: 'Two-factor authentication requires a second verification step beyond your password. Even if an attacker has your password, they cannot access your account without the second factor. Authenticator apps are more secure than SMS codes, which can be intercepted via SIM-swapping attacks.' },
+      { title: 'Be deeply sceptical of unsolicited messages requesting action', body: 'Phishing — fraudulent messages designed to trick you into revealing credentials or clicking malicious links — is responsible for the majority of successful cyberattacks. The tells are consistent: urgency, threat, unexpected sender, requests for credentials or payment.' },
+      { title: 'Keep your software and operating system updated', body: 'Software updates frequently patch security vulnerabilities that attackers actively exploit. The WannaCry ransomware attack targeted a Windows vulnerability for which a patch had been available for two months. Enabling automatic updates is the simplest and most effective protection against known exploits.' },
+      { title: 'Use a VPN on public Wi-Fi networks', body: 'Public Wi-Fi networks are fundamentally insecure — traffic can be intercepted by anyone on the same network. A VPN encrypts your internet traffic, making interception effectively impossible for a would-be attacker.' },
+      { title: 'Audit and limit what personal data you share with apps and services', body: 'Periodically reviewing app permissions, limiting location access to "while using," and deleting apps you no longer use significantly reduces your data exposure surface.' },
+      { title: 'Back up your data regularly and store backups securely', body: 'Ransomware attacks encrypt victims\' data and demand payment for the decryption key. The only reliable defence is an up-to-date backup stored separately from the main system — ideally following the 3-2-1 rule: three copies, on two different media, with one stored offsite.' },
+      { title: 'Protect your SIM card with a PIN and be aware of SIM-swapping', body: 'SIM-swapping — where an attacker convinces your mobile carrier to transfer your phone number to a SIM they control — is an increasingly common attack vector. Setting a SIM PIN and a carrier account PIN adds a layer of protection against this specific threat.' },
+      { title: 'Know how to recognise and respond to a breach', body: 'Services like HaveIBeenPwned allow you to check whether your email address has appeared in known data breaches. If it has, change the affected password immediately and any reused passwords.' }
+    ]
+  },
+
+  'list-waste': {
+    category: 'Waste Management · Listicle',
+    title: '7 Waste Reduction Habits That Actually Make a Difference',
+    date: 'April 20, 2026', readTime: '4 min read', isListicle: true,
+    intro: `Waste management suffers from a particularly acute version of the individual-versus-system tension that runs through most environmental questions. The recycling symbol has been so thoroughly marketed as a solution that most people have significantly overestimated its effectiveness. The habits below are about a more honest engagement with the problem, starting with reduction rather than disposal.`,
+    items: [
+      { title: 'Refuse before you recycle: reduce consumption first', body: 'The waste hierarchy places refuse at the top and recycle near the bottom for good reason. Recycling is energy-intensive, often economically marginal, and — for many materials — not genuinely cyclic. The most effective waste intervention is not buying the item in the first place.' },
+      { title: 'Compost organic waste at home', body: 'Organic matter in landfill decomposes anaerobically, producing methane — a greenhouse gas roughly 80 times more potent than CO₂ over a 20-year period. Home composting converts food scraps and garden waste into a genuinely valuable soil amendment.' },
+      { title: 'Understand what your local recycling system actually accepts', body: 'Wishful recycling — putting items in the recycling bin in the hope they will be processed — is a significant problem. Contaminated recycling loads are often sent to landfill. Knowing precisely what your local council accepts is more effective than maximising the volume.' },
+      { title: 'Repair and extend the life of electronics', body: 'Electronic waste is the fastest-growing waste stream globally, and among the most toxic. Extending the life of a smartphone by two years roughly halves its environmental footprint. Using repair services and buying refurbished are among the highest-impact individual technology decisions.' },
+      { title: 'Buy food in quantities you will actually use', body: 'In most high-income households, food is the largest single category of waste by weight and value. Shopping more frequently in smaller quantities, and using a list tied to a specific meal plan, consistently reduces food waste more than any disposal behaviour.' },
+      { title: 'Dispose of hazardous household waste properly', body: 'Batteries, paint, cleaning chemicals, pharmaceuticals, and used oil cause significant environmental damage when disposed of in general waste or poured down drains. Most municipalities provide designated collection points for these materials.' },
+      { title: 'Advocate for better infrastructure, not just better habits', body: 'Individual waste habits operate within infrastructure systems that determine what is actually possible. Supporting policies that strengthen waste infrastructure is, in aggregate, more effective than any personal behaviour change.' }
+    ]
+  },
+
+  /* ── LONG-FORM ARTICLES ── */
+  'lf-global-order': {
+    category: 'Hard News & Politics · National & World News',
+    title: 'The New World Order Nobody Voted For',
+    date: 'May 13, 2026', readTime: '8 min read',
+    body: `
+      <p>The post-Cold War settlement — the loose consensus around liberal democracy, multilateral institutions, and American-led security architecture — has been unravelling for longer than most commentators care to admit. What is new in 2026 is the speed. Alliances that took decades to build are being abandoned in months. Institutions that survived world wars are being bypassed by bilateral deals struck in hotel rooms.</p>
+      <h2>The Fracture Lines</h2>
+      <p>The South China Sea remains the most kinetic of the world's flashpoints. China's incremental but relentless expansion of its maritime presence has created a situation where a miscalculation by any party could escalate faster than diplomatic channels can contain it. In West Africa, the Sahel's collapse continues at a pace that international observers have consistently underestimated.</p>
+      <h2>The Institutional Deficit</h2>
+      <p>The United Nations Security Council has not passed a substantive resolution on any active conflict in eighteen months. Regional organisations — the African Union, ASEAN, the Arab League — lack either the resources or the political coherence to fill the gap.</p>
+      <blockquote>"We are not in a multipolar world. We are in a world of competing unilateralisms, each claiming to represent the international community while systematically undermining it."</blockquote>
+      <p>What emerges from this disorder will not be designed. It will be negotiated, imposed, and stumbled into — shaped by the decisions of leaders operating under domestic political pressures that have little to do with the architecture of global order.</p>
+    `
+  },
+
+  'lf-policy-drift': {
+    category: 'Hard News & Politics · Elections & Policy',
+    title: 'Why Voters Keep Choosing Disruption Over Stability',
+    date: 'May 8, 2026', readTime: '7 min read',
+    body: `
+      <p>In the past three years, incumbent governments have been voted out of office in France, the United Kingdom, South Korea, Argentina, India, and a dozen smaller democracies. The pattern is not ideological: right-wing governments have fallen to left-wing challengers, and left-wing governments have fallen to right-wing ones. What connects the losses is a generalised sentiment — the sense that those in power are managing the system for their own benefit rather than for the people who elected them.</p>
+      <h2>The Trust Collapse</h2>
+      <p>The Edelman Trust Barometer recorded its sharpest single-year decline in 2024 and has not recovered. The gap between what governments promise and what they deliver — on housing, healthcare, the cost of living, and climate — has widened to a point where it is visible in everyday life.</p>
+      <blockquote>"The demand for disruption is rational. What voters want — accountability, responsiveness, a government that actually works for them — is entirely legitimate. The question is whether disruption delivers it."</blockquote>
+      <h2>What Disruption Actually Delivers</h2>
+      <p>The evidence on disruptor governments is fairly extensive. They tend to be effective at symbolism, redistribution toward their core constituency, and the destruction of institutions they identify as hostile. They tend to be poor at the boring work of improving public services and managing complex trade-offs over time. But by the time that becomes apparent, the next disruptor is already on the ballot.</p>
+    `
+  },
+
+  'lf-inflation-survival': {
+    category: 'Finance & Business · Personal Finance',
+    title: 'How to Build a Financial Life in a Permanently Inflationary World',
+    date: 'May 10, 2026', readTime: '7 min read',
+    body: `
+      <p>The financial advice that most people received was calibrated for a world of low, stable inflation. Keep cash savings. Buy bonds for safety. Assume your purchasing power roughly holds. That world is not coming back. The structural drivers of the inflationary period we have entered — deglobalisation, ageing demographics, the energy transition, chronic underinvestment in housing supply — are not cyclical. They are generational.</p>
+      <h2>The Cash Problem</h2>
+      <p>The most immediate implication for ordinary savers is the real return on cash. When inflation runs at 4-6% and savings accounts pay 2-3%, every year you hold cash you lose purchasing power. Financial advisers are now routinely recommending that clients hold no more than three to six months of expenses in cash.</p>
+      <blockquote>"The financial plan that worked for your parents will not work for you. Not because they were wrong, but because the world has changed."</blockquote>
+      <h2>Practical Adjustments</h2>
+      <p>The advisers who have been most helpful to clients emphasise three shifts: move from nominal to real thinking, prioritise assets with pricing power, and reduce debt with fixed rates where possible while rates are elevated. None of this is comfortable advice. But discomfort is the price of accuracy, and accuracy is the beginning of resilience.</p>
+    `
+  },
+
+  'lf-markets-ai': {
+    category: 'Finance & Business · Market Updates',
+    title: 'The AI Trade Is Splitting the Market in Two',
+    date: 'May 6, 2026', readTime: '6 min read',
+    body: `
+      <p>The S&P 500 is up 14% year-to-date. Strip out the seven largest AI-exposed companies, and the index is up 2%. This bifurcation — the most extreme in modern market history by some measures — raises questions that analysts are finding genuinely difficult to answer: Is the concentration rational, or is it a bubble?</p>
+      <h2>The Bull Case</h2>
+      <p>The argument for current valuations runs as follows. The companies benefiting from AI infrastructure spending have real revenue, real earnings growth, and exposure to a technology cycle that historical analogies suggest could last a decade or more. The sceptics who called the internet a bubble in 1997 were right about the froth but wrong about the underlying direction.</p>
+      <blockquote>"The market is pricing in a future that may arrive — but perhaps not at the speed, scale, or margin that current multiples require."</blockquote>
+      <h2>What Investors Should Do</h2>
+      <p>The honest answer is that nobody knows. What is clear is that portfolios concentrated in a narrow band of AI-exposed equities carry risks that diversification across sectors and geographies would reduce. The question is whether current prices already reflect that transformation, leaving little upside and significant downside.</p>
+    `
+  },
+
+  'lf-housing-crisis': {
+    category: 'Finance & Business · Real Estate & Economy',
+    title: 'Who Actually Owns the Housing Market Now?',
+    date: 'April 30, 2026', readTime: '8 min read',
+    body: `
+      <p>In 2010, institutional investors owned approximately 2% of single-family homes in the United States. By 2025, that figure had risen to roughly 5% nationally, and in certain markets the share was substantially higher. The shift represents a fundamental change in who the housing market is designed to serve.</p>
+      <h2>How It Happened</h2>
+      <p>The story begins with the 2008 financial crisis. As millions of homeowners defaulted, institutional investors bought distressed properties at scale. What was initially presented as a mechanism for stabilising the housing market became a template for a new asset class: single-family rental housing, managed at scale, priced algorithmically.</p>
+      <blockquote>"The housing crisis is not a market failure in the technical sense. The market is working exactly as designed. The question is whether we designed it for the right outcome."</blockquote>
+      <h2>The Policy Response</h2>
+      <p>Governments are now reaching for a range of tools: taxes on non-owner-occupied properties, restrictions on institutional ownership, caps on short-term rental density, and public investment in social housing at scales not seen since the post-war period. The current trajectory — rising rents, declining homeownership rates — is not sustainable politically or socially.</p>
+    `
+  },
+
+  'lf-celebrity-economy': {
+    category: 'Entertainment & Culture · Celebrity & Pop Culture',
+    title: 'The Celebrity Industrial Complex Is Eating Itself',
+    date: 'May 4, 2026', readTime: '6 min read',
+    body: `
+      <p>The mathematics of contemporary celebrity have become almost impossible to sustain. A major Hollywood actor needs to maintain a social media presence across five platforms, post at minimum three times a week, attend brand events, manage a parasocial relationship with tens of millions of followers, and still find time to make the films and television that theoretically justified the fame in the first place.</p>
+      <h2>The Monetisation Trap</h2>
+      <p>Every layer of celebrity is now monetised. The red carpet appearance is a brand deal. The social media post is a sponsored placement. The documentary about the celebrity's personal struggle is a streaming deal. The system requires the celebrity to be simultaneously authentic and commercial, vulnerable and aspirational, accessible and exclusive. The contradictions are irresolvable.</p>
+      <blockquote>"Fame has always been a bargain with the public. What has changed is the terms — the public now expects full access, and will accept nothing less."</blockquote>
+      <h2>What Comes Next</h2>
+      <p>There is a cohort of younger performers who appear to have learned from the wreckage of their predecessors. They maintain more deliberate distance from social media, refuse brand deals that feel misaligned, and speak openly about the psychological cost of public life. Whether this represents a sustainable alternative or merely a more sophisticated version of the same performance remains to be seen.</p>
+    `
+  },
+
+  'lf-streaming-fatigue': {
+    category: 'Entertainment & Culture · Movie & Music Reviews',
+    title: 'Streaming Fatigue Is Real — and the Studios Are Finally Listening',
+    date: 'April 27, 2026', readTime: '6 min read',
+    body: `
+      <p>At peak streaming — roughly 2021-2023 — the major platforms were collectively releasing more than 1,000 original titles per year. The strategy was rooted in a Silicon Valley product logic: more content means more time on platform means more subscribers means more revenue. What it actually produced was a library so vast that navigation became a barrier to engagement.</p>
+      <h2>The Recalibration</h2>
+      <p>The reckoning came first in the financial results. Subscriber growth slowed across all major platforms. Netflix announced a strategic reduction in output and a renewed focus on "event television." The lessons of HBO's prestige era, which the streaming revolution seemed briefly to have made irrelevant, turn out to have been correct all along.</p>
+      <blockquote>"The streaming era taught us that content is not king. Attention is king. And attention, in a world of infinite content, goes to the things that feel genuinely worth it."</blockquote>
+      <h2>What Audiences Actually Want</h2>
+      <p>Consumer research is remarkably consistent. People do not want more content. They want better content — the specific feeling of discovering something extraordinary, of being gripped by a story that earns its runtime. The curation that broadcast television provided served a social function that pure abundance cannot replicate.</p>
+    `
+  },
+
+  'lf-gut-health': {
+    category: 'Lifestyle & Consumer · Health & Wellness',
+    title: 'The Gut-Brain Axis: What the Latest Research Is Telling Us About Food and Mental Health',
+    date: 'May 1, 2026', readTime: '7 min read',
+    body: `
+      <p>The human gut contains approximately 100 trillion microorganisms — bacteria, fungi, viruses, and archaea — collectively known as the microbiome. For most of medical history, this ecosystem was considered peripheral: relevant to digestion and immune function, but not much else. The research of the past decade has systematically dismantled this view.</p>
+      <h2>The Microbiome-Brain Connection</h2>
+      <p>The gut and brain are in constant bidirectional communication via what researchers call the gut-brain axis. The gut produces approximately 90% of the body's serotonin — the neurotransmitter most associated with mood regulation — and significant quantities of dopamine, GABA, and other neuroactive compounds.</p>
+      <blockquote>"We have been thinking about food and mental health as two separate conversations. The gut-brain research suggests they were always the same conversation."</blockquote>
+      <h2>What You Can Actually Do</h2>
+      <p>Dietary diversity — specifically, the variety of plant species consumed per week — is the strongest predictor of microbiome diversity. Fermented foods increase the abundance of beneficial bacteria. Ultra-processed foods are consistently associated with lower microbiome diversity. Eating more varied plants, more fermented foods, and fewer ultra-processed foods is the best available translation of the microbiome research into daily life.</p>
+    `
+  },
+
+  'lf-travel-rebound': {
+    category: 'Lifestyle & Consumer · Travel & Food',
+    title: 'Overtourism Is Back — and Worse Than Before',
+    date: 'April 24, 2026', readTime: '7 min read',
+    body: `
+      <p>The pandemic years produced, briefly, a hope that the global tourism industry might use the forced pause to restructure itself. That hope has not been fulfilled. Tourist arrivals in the world's most popular destinations have not merely recovered to 2019 levels; in many cases they have exceeded them, compressed into shorter peak seasons by the recovery patterns of international aviation.</p>
+      <h2>The Human Cost</h2>
+      <p>In Barcelona, residents have taken to water-pistol protests against tourists. In Santorini, the mayor has formally requested cruise ship operators to cap daily arrivals. In Dubrovnik, the resident population inside the walls has declined from 5,000 to under 1,000 in two decades, as housing has been converted to short-term rentals and daily life made functionally impossible.</p>
+      <blockquote>"The question is not whether travel is good or bad. The question is what kind of traveller you want to be — and what kind of place you want the world's most beautiful destinations to remain."</blockquote>
+      <h2>What Responsible Travel Actually Means</h2>
+      <p>The more difficult conversation is about the demand itself. Going to a place when it is not at peak season. Going to less-visited places rather than the globally famous ones. Staying longer and doing less. None of these are radical ideas. They are simply the habits of travel that existed before tourism became an industry.</p>
+    `
+  },
+
+  'lf-ev-reality': {
+    category: 'Lifestyle & Consumer · Automotive',
+    title: 'The EV Revolution Is Stalling — Here Is What Went Wrong',
+    date: 'April 20, 2026', readTime: '8 min read',
+    body: `
+      <p>In 2022, virtually every major automaker published net-zero transition plans that included an end to internal combustion engine sales by 2030 or 2035. By 2025, most of those same companies had quietly revised their timelines, reduced their EV production targets, or both. Ford announced a $1.9 billion reduction in EV investment. Even Tesla saw sales growth slow significantly in its key markets.</p>
+      <h2>The Adoption Gap</h2>
+      <p>The early adopter market has been substantially served. The next wave of buyers has different priorities. They worry about range, charging infrastructure, upfront cost, and depreciation — which has been severe as second-hand EV values have collapsed. These concerns are not irrational. They reflect a real gap between the EV experience for someone with a home charger and the experience for someone who parks on the street and drives long distances regularly.</p>
+      <blockquote>"The transition will happen. The mistake was assuming it would happen on a schedule set by what we wanted rather than what consumers and infrastructure could actually deliver."</blockquote>
+      <h2>What Comes Next</h2>
+      <p>The stall is not permanent. Battery costs continue to decline, charging networks are expanding, and the software gap is closing rapidly. But the timeline for mass adoption has shifted by five to ten years in most honest assessments, and the policy frameworks built around the original projections are now misaligned with market reality.</p>
+    `
+  },
+
+  'lf-smartphone-plateau': {
+    category: 'Technology & Science · Consumer Tech',
+    title: 'The Smartphone Has Peaked — Now What?',
+    date: 'May 7, 2026', readTime: '6 min read',
+    body: `
+      <p>The smartphone has been the defining consumer technology platform for fifteen years. No product in history has been adopted as quickly, used as extensively, or modified daily life as completely. And it is, by every available metric, plateauing. Global smartphone shipments have been essentially flat since 2018. Replacement cycles have extended from two years to three and a half.</p>
+      <h2>The Innovation Deficit</h2>
+      <p>The hardware story is essentially told. Cameras, processors, screen technology, and battery life have all reached a level of maturity where the improvement from generation to generation is incremental rather than transformative. There is no feature that will drive mass replacement the way the App Store, face recognition, or 4G connectivity once did.</p>
+      <blockquote>"Every transformative platform in history looked, at the right moment, like a solution in search of a problem. The smartphone was a camera and a phone and a computer — three problems at once. AR needs its own problem."</blockquote>
+      <h2>The Next Platform</h2>
+      <p>Every technology company is searching for the next dominant platform. Augmented reality glasses are the most frequently cited candidate, and the investments being made by Meta, Apple, and Google in this space are enormous. But the consumer proposition remains unclear, the form factor uncomfortable, and the killer application has not yet emerged.</p>
+    `
+  },
+
+  'lf-big-tech-reckoning': {
+    category: 'Technology & Science · Tech Industry',
+    title: 'The Antitrust Era Has Finally Arrived for Big Tech',
+    date: 'April 18, 2026', readTime: '8 min read',
+    body: `
+      <p>For most of the 2010s, technology industry observers predicted that the regulatory reckoning for the major platforms was imminent. They were right about the direction and wrong about the timing. The cases took years to build, the legal theories took years to develop, and the political will to pursue them against deeply embedded companies was intermittent at best. In 2025 and 2026, the dam broke simultaneously on three continents.</p>
+      <h2>The Cases That Changed Everything</h2>
+      <p>The US Department of Justice's antitrust case against Google's search distribution agreements produced a ruling that the practice was an illegal monopoly maintenance strategy. The European Commission found Apple in violation of the Digital Markets Act for its App Store practices and imposed daily fines running into billions. The UK's Competition and Markets Authority completed its investigation of Amazon's marketplace practices and found systematic self-preferencing.</p>
+      <blockquote>"The platforms built their moats assuming regulators would never learn to swim. The regulators have learned."</blockquote>
+      <h2>What the Industry Got Wrong</h2>
+      <p>The technology industry's regulatory strategy rested on two assumptions: that governments did not understand the technology well enough to regulate it effectively, and that the economic and geopolitical value the platforms provided would insulate them from serious consequences. Both assumptions proved insufficient. The era of effectively unregulated platform accumulation is over.</p>
+    `
+  },
+
+  'lf-sports-money': {
+    category: 'Sports · Major Leagues & Tournaments',
+    title: 'The Money That Is Rewriting the Rules of Sport',
+    date: 'May 9, 2026', readTime: '7 min read',
+    body: `
+      <p>Professional sport has always been a business. What has changed in the past decade is the scale, the source, and the transparency of the money — and the degree to which financial logic has come to override sporting logic in the decisions that shape what fans actually see.</p>
+      <h2>Sovereign Wealth and the New Owners</h2>
+      <p>The acquisition of English Premier League clubs, French football teams, golf tournaments, and Formula One franchises by sovereign wealth funds from the Gulf states has been the most visible manifestation of a broader trend. Sport has become, for a certain class of investor, simultaneously an asset class and a geopolitical tool.</p>
+      <blockquote>"The clubs belong to the communities they represent. Except, increasingly, they don't."</blockquote>
+      <h2>What Fans Are Losing</h2>
+      <p>The most concrete consequence for ordinary supporters is cost. Ticket prices for major sporting events have increased at rates significantly above inflation across every major league. The sport that built its identity on working-class communities is pricing those communities out of the stadium. The long-term consequences of this disconnection — between clubs and the communities that sustained them for generations — are uncertain but probably significant.</p>
+    `
+  },
+
+  'lf-road-safety': {
+    category: 'Safety · Public & Personal Safety',
+    title: 'Road Deaths Are Rising Again — and Distraction Is Only Part of the Story',
+    date: 'April 22, 2026', readTime: '7 min read',
+    body: `
+      <p>Road traffic fatalities declined steadily in most developed countries from the 1970s through to roughly 2016. The decline was the product of compounding improvements: better vehicle safety engineering, seatbelt and helmet mandates, drunk-driving enforcement, speed limit reductions, and infrastructure design improvements. Then the trend reversed. In the United States, road deaths rose 18% between 2019 and 2023.</p>
+      <h2>The Distraction Factor</h2>
+      <p>Smartphone distraction while driving is real, measurable, and deadly. Studies using dashboard camera footage and phone telemetry data have established beyond reasonable doubt that hands-on-phone use increases crash risk by a factor of three to four. But distraction is not the complete explanation. The rise of SUVs and pickup trucks has changed the physics of collisions in ways that are particularly deadly for pedestrians and cyclists.</p>
+      <blockquote>"Road deaths are not accidents. They are the predictable outcome of decisions we make about how to design roads, what vehicles to allow, and how rigorously to enforce the rules we set."</blockquote>
+      <h2>The Policy Gap</h2>
+      <p>Vision Zero — the Swedish policy framework that treats every road death as preventable — has been adopted rhetorically by dozens of cities while being implemented substantively by very few. The interventions that actually reduce road deaths — lower speed limits rigorously enforced, infrastructure redesigned for pedestrian priority, vehicle design standards that protect vulnerable road users — are politically expensive. They create friction for drivers, who vote.</p>
+    `
+  },
+
+  'lf-climate-adaptation': {
+    category: 'Environment · Climate & Ecology',
+    title: 'Adaptation, Not Just Mitigation: How Cities Are Learning to Live With Climate Change',
+    date: 'April 15, 2026', readTime: '9 min read',
+    body: `
+      <p>The global climate conversation has been organised, for most of the past three decades, around the concept of mitigation — reducing the greenhouse gas emissions that drive warming. This is the right priority. But it is increasingly insufficient as a complete response. The warming that has already occurred means that climate impacts are not a future problem. They are a present one.</p>
+      <h2>What Adaptation Looks Like</h2>
+      <p>Rotterdam has spent 25 years converting itself from a city threatened by rising seas to a city designed around water. Water plazas — public spaces that double as flood reservoirs during heavy rainfall — green roofs, and a sophisticated system of pumps, dikes, and surge barriers have made the city a global reference point for climate-resilient urban design. The investment has been substantial. But Rotterdam's planners make a pointed argument: the cost of adaptation is a fraction of the cost of damage from unadapted climate impacts.</p>
+      <h2>The Justice Dimension</h2>
+      <p>The countries and communities least responsible for climate change are disproportionately exposed to its consequences and least equipped financially to adapt to them. This is the central injustice of the climate crisis.</p>
+      <blockquote>"Adaptation without justice is a plan for the rich to build walls around themselves while the rest of the world drowns."</blockquote>
+      <p>The cities that will navigate climate change best are those that treat adaptation as infrastructure — as essential and as publicly financed as roads and water systems — rather than as a luxury or an afterthought.</p>
+    `
+  },
+
+  'lf-plastic-treaty': {
+    category: 'Waste Management · Systems & Solutions',
+    title: 'The Global Plastics Treaty: Why It Matters and Why It Is So Difficult',
+    date: 'April 10, 2026', readTime: '8 min read',
+    body: `
+      <p>In March 2022, the United Nations Environment Assembly passed a resolution to develop a legally binding global agreement on plastic pollution by the end of 2024. Three years later, negotiations are continuing, the deadline has been missed, and the fundamental disagreements that make the treaty so difficult to conclude have become clearer.</p>
+      <h2>What the Treaty Is Trying to Do</h2>
+      <p>Plastic pollution is unambiguously a global problem. Plastic produced in China ends up in Pacific Ocean gyres. Microplastics shed from synthetic clothing in European washing machines have been found in the deepest ocean trenches and in Arctic ice. No country can solve this problem unilaterally, which is why a binding international agreement is, in principle, the right instrument.</p>
+      <blockquote>"The plastics treaty negotiation is a window into every international environmental negotiation of the past 50 years. The problem is global, the solutions are known, and the obstacle is the concentrated economic interest of those who profit from the status quo."</blockquote>
+      <h2>The Coalition Against Action</h2>
+      <p>A bloc of oil-producing nations has consistently opposed treaty language that would cap plastic production. The petrochemical industry has been present throughout the negotiations in ways that have drawn comparison to tobacco industry involvement in health policy. A treaty that achieves meaningful reductions would represent genuine progress. The treaty currently likely to emerge will be something considerably more modest, and whether it will be adequate to the scale of the problem is a question the next decade will answer.</p>
+    `
+  },
+
+  /* ── SHORT-FORM ARTICLES ── */
+
+  'sf-construction-1': {
+    category: 'Construction · Short-form',
+    title: 'Why Most Construction Projects Go Over Budget — and How to Stop It',
+    date: 'May 15, 2026',
+    readTime: '3 min read',
+    body: `
+      <p>Ask anyone who has managed a building project — large or small — and they will tell you the same thing: the final bill was not the quoted bill. The gap between estimate and reality is so common in construction that many clients simply accept it as an industry norm. It is not. It is a planning problem, and it is solvable.</p>
+
+      <h2>Where the Money Actually Goes</h2>
+      <p>The three most consistent sources of cost overrun in construction projects are scope creep, poor site conditions that were not assessed before work began, and delays that cascade into labour cost increases. Of these, scope creep is the most controllable. It describes the gradual expansion of a project's requirements after work has started — the extra window added here, the upgraded finish there, the structural change that felt minor at the time. Each decision is defensible on its own terms. Together, they can add 20–40% to a project's cost.</p>
+      <p>The antidote is not rigidity but clarity. A well-scoped project, with detailed drawings and a bill of quantities prepared before contractor selection, leaves far less room for the ambiguity that drives scope creep. Changes happen — but with a clear baseline, their cost is transparent and agreed before the work proceeds.</p>
+
+      <h2>The Contingency Question</h2>
+      <p>Every serious estimator builds a contingency into a construction budget. The standard advice is 10% for new builds and 15–20% for renovations, where unknowns multiply. Most clients treat the contingency as money they expect to save. The experienced ones treat it as money they expect to spend — and plan around what happens if they do.</p>
+
+      <blockquote>"A budget without a contingency is not a budget. It is a wish."</blockquote>
+
+      <p>The simplest protection against budget overrun is also the least glamorous: spend more time and money on planning before the first site visit, and treat every change request as a formal decision with a documented cost. The projects that finish on budget are almost always the projects that were most thoroughly prepared before they began.</p>
+    `
+  },
+
+  'sf-construction-2': {
+    category: 'Construction · Short-form',
+    title: 'The Five Questions You Must Ask Before Hiring a Contractor',
+    date: 'May 12, 2026',
+    readTime: '3 min read',
+    body: `
+      <p>The most important decisions in any construction project are made before the work starts — and the most important of those is who you hire to do it. A skilled, trustworthy contractor with whom you communicate well will navigate problems. A poor one will create them, deny them, and eventually walk away from them. Asking the right questions before signing anything is not due diligence. It is self-preservation.</p>
+
+      <h2>The Questions That Separate Good Contractors from the Rest</h2>
+      <p>First: can I see three completed projects of similar scope, and speak to those clients directly? References should be verifiable, recent, and specific to the type of work you are commissioning. A residential renovator's glowing references mean little if you are building a commercial extension.</p>
+      <p>Second: who will actually be on site, and what is your supervision model? Many contractors win work on the strength of their own experience, then delegate the majority of the actual construction to subcontractors they supervise loosely. Understanding exactly who will be doing the work — and how often the principal contractor will be present — is essential.</p>
+      <p>Third: how do you handle variations, and what is your process for documenting them? This question reveals a great deal about a contractor's professionalism. The answer you want involves a written variation order signed by both parties before any additional work proceeds.</p>
+      <p>Fourth: what does your payment schedule look like, and is it tied to milestones? Front-loaded payment schedules favour the contractor at the client's expense. A payment structure tied to verified progress protects you if the work stalls or quality is disputed.</p>
+
+      <blockquote>"The contractor who is most uncomfortable with your questions is the one most worth being uncomfortable with."</blockquote>
+
+      <p>Fifth, and perhaps most important: what went wrong on your last project, and how did you handle it? Every experienced contractor has a story of a project that went sideways. What matters is not the problem but the response — honesty, accountability, and resolution. A contractor with no answer to this question has either no experience or no candour, and neither is a quality you want on your site.</p>
+    `
+  },
+
+  'sf-law-1': {
+    category: 'Law · Short-form',
+    title: 'What Your Contract Actually Says — and What It Doesn\'t',
+    date: 'May 14, 2026',
+    readTime: '3 min read',
+    body: `
+      <p>Most people approach a contract the way they approach terms and conditions: a formality to be completed before moving on to the thing they actually care about. This is a costly habit. Contracts are not administrative paperwork. They are the document that will govern what happens if anything goes wrong — and the people writing them know this far better than the people signing them.</p>
+
+      <h2>The Clauses That Do the Most Damage</h2>
+      <p>Limitation of liability clauses are among the most consequential and least read provisions in commercial contracts. They cap the amount one party can recover from the other in the event of a breach — sometimes at a figure so low that bringing a claim would cost more than the recovery. These clauses are common, they are enforceable in most jurisdictions, and they are negotiable before signing and almost impossible to challenge after.</p>
+      <p>Automatic renewal clauses — provisions that extend a contract for another term unless notice is given within a specific window — have trapped businesses in unwanted agreements for years. The window for termination is typically buried and typically short. Identifying it before signing, and diarising the deadline, takes two minutes and can save months of obligation.</p>
+      <p>Jurisdiction clauses specify which country's law governs the contract and where disputes must be resolved. Signing a contract governed by a foreign jurisdiction means that any dispute must be litigated there, at your expense and at a disadvantage.</p>
+
+      <blockquote>"A contract is a set of promises. Read what you are promising before you promise it."</blockquote>
+
+      <h2>What to Do</h2>
+      <p>You do not need a lawyer to review every contract you sign. You do need to read them. For anything involving significant money, property, or long-term obligation, a single hour of legal advice before signing will almost always cost less than the problems it prevents. The lawyer who reviews your contract is not a cost. The lawyer who helps you after you have signed the wrong one almost certainly is.</p>
+    `
+  },
+
+  'sf-law-2': {
+    category: 'Law · Short-form',
+    title: 'Know Your Rights: Three Legal Protections Most People Don\'t Use',
+    date: 'May 10, 2026',
+    readTime: '3 min read',
+    body: `
+      <p>Legal protection is not the exclusive property of those who can afford lawyers. Many of the most practically useful protections available to ordinary people cost nothing to exercise — they require only the knowledge that they exist. Here are three that most people leave entirely unused.</p>
+
+      <h2>The Right to a Written Itemised Bill</h2>
+      <p>In most jurisdictions, consumers have the right to request an itemised bill from any service provider — a mechanic, a hospital, a legal firm, a tradesperson — and to receive a clear breakdown of what they are being charged for, and why. Providers are not always forthcoming with this information unprompted. Asking for it is entirely within your rights, and the act of asking frequently produces a revised, lower figure. Service providers who know their billing will be scrutinised item by item are notably more careful about what they include.</p>
+
+      <h2>The Right to a Cooling-Off Period</h2>
+      <p>Consumer protection law in many countries provides a cooling-off period — typically 7 to 14 days — during which you can cancel certain contracts without penalty and receive a full refund. This applies most commonly to contracts signed away from a trader's permanent business premises: door-to-door sales, contracts signed at events, and many online purchases. The right exists whether or not the seller informs you of it.</p>
+
+      <blockquote>"Rights unexercised are rights unused. The law cannot help people who do not know what it offers."</blockquote>
+
+      <h2>The Right to Challenge Unfair Contract Terms</h2>
+      <p>Consumer contract law in most developed jurisdictions renders unfair standard terms unenforceable, regardless of whether you signed a document containing them. A term is typically considered unfair if it creates a significant imbalance between the parties' rights and obligations to the detriment of the consumer. This does not require a court ruling to assert — many disputes involving clearly unfair terms are resolved by a letter citing the relevant legislation and requesting amendment. The existence of this right alone is worth knowing before you accept any standard form agreement as final.</p>
+    `
+  },
+
+  'sf-cleaning-1': {
+    category: 'Cleaning · Short-form',
+    title: 'The Room-by-Room Deep Clean Checklist Professionals Actually Use',
+    date: 'May 13, 2026',
+    readTime: '3 min read',
+    body: `
+      <p>The difference between a surface clean and a deep clean is not effort — it is sequence and completeness. Professional cleaners move through a space in a specific order that ensures nothing is contaminated after it has been cleaned, nothing is missed, and time is not wasted backtracking. The sequence is learnable, and once learned, it makes cleaning meaningfully faster and more thorough.</p>
+
+      <h2>The Universal Rule: Top to Bottom, Dry Before Wet</h2>
+      <p>Every professional cleaner works from ceiling to floor, because dust and debris fall downward. Cleaning surfaces at eye level before the floor, then the floor last, means you never have to clean a surface twice. Within each surface, dry cleaning (dusting, vacuuming) always precedes wet cleaning (wiping, mopping) — otherwise you are moving wet dust rather than removing it.</p>
+
+      <h2>Room by Room</h2>
+      <p>In a kitchen, the deep clean sequence is: ventilation hood and filters first (the greasiest, most neglected surface), then appliance exteriors, then worktops and splashbacks, then cabinet fronts, then sink and taps, then floor. The refrigerator interior — emptied, shelves removed and washed — is a separate task that most people avoid and most professional cleaners include as standard.</p>
+      <p>In a bathroom, the sequence is: toilet (the contamination source) last, not first. Begin with the shower and bath, then the sink, then the toilet — exterior first, then seat, then bowl. Flush with the lid closed. Clean the floor working backwards toward the door.</p>
+      <p>In a bedroom, prioritise what most people ignore: mattress vacuuming, the undersides and backs of furniture, skirting boards, and light fixtures. These are the surfaces that accumulate months of dust between regular cleans.</p>
+
+      <blockquote>"A clean room is the result of the right order, not the right effort."</blockquote>
+
+      <p>The checklist is not about doing more. It is about doing things once, correctly, in the right sequence — so that the hour you spend cleaning produces a result that lasts, rather than a result that needs repeating in three days.</p>
+    `
+  },
+
+  'sf-cleaning-2': {
+    category: 'Cleaning · Short-form',
+    title: 'The Cleaning Products You Think You Need — and the Three That Actually Work',
+    date: 'May 8, 2026',
+    readTime: '3 min read',
+    body: `
+      <p>Walk into any supermarket cleaning aisle and you will find products for every conceivable surface, stain, and room in the house — specialist bathroom sprays, kitchen degreasers, glass cleaners, floor polishes, furniture wipes, and a rotating cast of "new formula" additions. The average household cleaning cupboard contains between fifteen and twenty products. Most professional cleaners carry three. This is not because professionals know less. It is because they understand what cleaning chemistry actually does.</p>
+
+      <h2>The Three That Cover Everything</h2>
+      <p>A quality all-purpose cleaner — either a concentrated commercial product diluted correctly or a simple solution of washing-up liquid and warm water — handles the vast majority of everyday surface cleaning tasks. Most of what the specialist products do is offer a different fragrance and a higher price point. The active cleaning mechanism is almost always the same: surfactant chemistry that breaks the bond between grease or dirt and the surface beneath it.</p>
+      <p>A mild abrasive cleaner — a cream or powder — handles the tasks that require physical as well as chemical action: limescale around taps, soap scum in showers, baked-on residue inside ovens. The combination of a mild acid (citric acid in commercial products, or plain white vinegar in a home formulation) and a gentle abrasive polishes without scratching most surfaces.</p>
+      <p>A disinfectant — one product, used only where pathogen control actually matters: toilets, raw meat preparation surfaces, sick rooms. Using antibacterial products across every surface in a home is not hygienic practice. It is marketing.</p>
+
+      <blockquote>"Most of what the cleaning industry sells you is the idea that your home requires more chemistry than it does."</blockquote>
+
+      <p>The simplest cleaning system is often the most effective: fewer products, used correctly, in the right context. The cupboard full of specialist products is not evidence of a cleaner home. It is usually evidence of a well-marketed one.</p>
+    `
+  },
+
+  'sf-roofing-1': {
+    category: 'Roofing · Short-form',
+    title: 'Five Signs Your Roof Is Failing Before the Leak Shows Up Inside',
+    date: 'May 16, 2026',
+    readTime: '3 min read',
+    body: `
+      <p>A leak that appears on your ceiling is not the beginning of a roofing problem. It is the visible end of a process that has typically been underway for weeks or months. The damage that produces interior water ingress usually starts on the roof's surface or in the roof structure itself — and it is detectable long before it reaches the inside of the building. Knowing what to look for turns a reactive repair into a planned one, which is almost always cheaper and less disruptive.</p>
+
+      <h2>What to Look for From the Ground</h2>
+      <p>Missing, cracked, or curling shingles are the most visible sign of surface deterioration. Shingles that are lifting at their edges or showing dark patches of exposed substrate have lost their weather resistance. In a strong wind or heavy rain, they are no longer doing their job. Granule loss — visible as a sandy deposit in gutters or on the ground below downpipes — indicates that asphalt shingles are reaching the end of their protective life. The granules are not cosmetic; they are the UV and weather barrier.</p>
+      <p>Sagging roof lines, visible from the street, indicate structural issues beneath the surface — typically rot in the decking or rafters caused by moisture that has been infiltrating for some time. This is a more serious finding than surface wear, and it requires a structural inspection rather than a surface repair.</p>
+      <p>Blocked or damaged gutters create pooling water that backs up under roofing materials at the eaves — one of the most common causes of internal water damage in otherwise intact roofs.</p>
+
+      <blockquote>"The most expensive roof repair is always the one that waited."</blockquote>
+
+      <h2>Inside the Roof Space</h2>
+      <p>An inspection of the roof space — the loft or attic — on a dry day reveals staining and discolouration that indicates where water has previously entered. Daylight visible through the roof structure indicates gaps that, even if not currently leaking, will do so under sufficient rainfall. Both findings are worth addressing before winter, not after.</p>
+    `
+  },
+
+  'sf-roofing-2': {
+    category: 'Roofing · Short-form',
+    title: 'Repair or Replace? How to Make the Right Roofing Decision',
+    date: 'May 11, 2026',
+    readTime: '3 min read',
+    body: `
+      <p>The most expensive roofing mistake is not replacing a roof that needed replacing. It is repairing a roof that needed replacing — repeatedly, at increasing cost, until the cumulative repair bills exceed what a replacement would have cost. The second most expensive mistake is replacing a roof that needed only a targeted repair. Getting this decision right requires understanding what the options actually cost, and what they actually deliver.</p>
+
+      <h2>When Repair Makes Sense</h2>
+      <p>A roof that is less than fifteen years old, has no structural issues, and has localised damage — a section of missing tiles, a failed flashing around a chimney or skylight, a patch of lifted shingles — is almost always a repair candidate. Localised problems on a fundamentally sound roof are addressable at a fraction of replacement cost, and the repair will last years if it is done properly.</p>
+      <p>The critical word is localised. If a roofing contractor identifies damage in multiple separate locations on a roof, the honest interpretation is usually not "several small problems" but "a roof that is deteriorating across its surface." Multiple areas of failure indicate that the material has reached or is approaching the end of its serviceable life.</p>
+
+      <h2>When Replacement Is the Right Call</h2>
+      <p>A roof over twenty years old with recurring leaks, widespread shingle failure, any evidence of structural deterioration, or a history of repairs that have not held is a replacement candidate. The age threshold matters because roofing materials have defined lifespans — asphalt shingles typically last 20–25 years — and beyond those thresholds, repairs address symptoms without addressing the underlying material fatigue.</p>
+
+      <blockquote>"A repaired old roof is still an old roof."</blockquote>
+
+      <p>Get two or three independent assessments before making the decision. A contractor who only offers repair or only offers replacement is not giving you the full picture. The right answer should be based on the roof's age, condition, and the cost-benefit calculation over the next ten years — not on which service the contractor happens to specialise in.</p>
+    `
+  }
+};
+
+/* ── ARTICLE HERO IMAGES ── */
+const articleImages = {
+  'ai-thinking':            { src: 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&auto=format&fit=crop&q=80', caption: 'The age of machine cognition — and what we risk surrendering.' },
+  'long-letter':            { src: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&auto=format&fit=crop&q=80', caption: 'A handwritten letter is, in the most literal sense, a gift of time.' },
+  'old-cities':             { src: 'https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=1200&auto=format&fit=crop&q=80', caption: 'The old city was not beautiful by accident.' },
+  'list-ai-tools':          { src: 'https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=1200&auto=format&fit=crop&q=80', caption: 'The tools that are earning their place — not through spectacle, but utility.' },
+  'list-wellness-habits':   { src: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1200&auto=format&fit=crop&q=80', caption: 'Longevity research keeps returning to the same simple answers.' },
+  'list-money-rules':       { src: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=1200&auto=format&fit=crop&q=80', caption: 'The principles of lasting wealth are neither secret nor complicated.' },
+  'list-african-destinations': { src: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=1200&auto=format&fit=crop&q=80', caption: 'Africa rewards the traveller who pays attention.' },
+  'list-books-decade':      { src: 'https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=1200&auto=format&fit=crop&q=80', caption: 'Twelve books that shaped how we understand the world we live in.' },
+  'list-productivity-myths':{ src: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1200&auto=format&fit=crop&q=80', caption: 'The most popular productivity advice is often the most counterproductive.' },
+  'list-safety':            { src: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&auto=format&fit=crop&q=80', caption: 'Safety habits built in ordinary time prevent catastrophe in extraordinary moments.' },
+  'list-environment':       { src: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&auto=format&fit=crop&q=80', caption: 'Understanding the problem accurately is the first requirement for addressing it well.' },
+  'list-security':          { src: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&auto=format&fit=crop&q=80', caption: 'The foundational habits that most people still have not implemented.' },
+  'list-waste':             { src: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=1200&auto=format&fit=crop&q=80', caption: 'Cutting through recycling myths to what the evidence actually says.' },
+  'sf-construction-1':     { src: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&auto=format&fit=crop&q=80', caption: 'Cost overruns are a planning problem — and a preventable one.' },
+  'sf-construction-2':     { src: 'https://images.unsplash.com/photo-1590486803833-1c5dc8ddd4c8?w=1200&auto=format&fit=crop&q=80', caption: 'The right questions asked early save months of trouble later.' },
+  'sf-law-1':               { src: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&auto=format&fit=crop&q=80', caption: 'Read what you are promising before you promise it.' },
+  'sf-law-2':               { src: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1200&auto=format&fit=crop&q=80', caption: 'Rights unexercised are rights unused.' },
+  'sf-cleaning-1':          { src: 'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=1200&auto=format&fit=crop&q=80', caption: 'A clean room is the result of the right order, not the right effort.' },
+  'sf-cleaning-2':          { src: 'https://images.unsplash.com/photo-1563453392212-326f5e854473?w=1200&auto=format&fit=crop&q=80', caption: 'Most of what the cleaning industry sells you is complexity you do not need.' },
+  'sf-roofing-1':           { src: 'https://images.unsplash.com/photo-1632889986587-b0b09f4e9d9b?w=1200&auto=format&fit=crop&q=80', caption: 'The most expensive roof repair is always the one that waited.' },
+  'sf-roofing-2':           { src: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&auto=format&fit=crop&q=80', caption: 'A repaired old roof is still an old roof.' },
+};
+
+/* ── PAGE NAVIGATION ── */
+function showPage(page, btn) {
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  const homeView = document.getElementById('home-view');
+  const longformView = document.getElementById('longform-view');
+  const shortformView = document.getElementById('shortform-view');
+  const articleView = document.getElementById('article-view');
+
+  articleView.style.display = 'none';
+  articleView.classList.remove('visible');
+  homeView.style.display = 'none';
+  longformView.style.display = 'none';
+  longformView.classList.remove('visible');
+  shortformView.style.display = 'none';
+  shortformView.classList.remove('visible');
+
+  if (page === 'home') {
+    homeView.style.display = 'block';
+    // restore recent articles if they were hidden
+    const sectionHeader = homeView.querySelector('.section-header');
+    const articlesGrid = document.getElementById('articles-grid');
+    if (sectionHeader) sectionHeader.style.display = '';
+    if (articlesGrid) articlesGrid.style.display = '';
+  } else if (page === 'longform') {
+    longformView.style.display = 'block';
+    longformView.classList.add('visible');
+  } else if (page === 'shortform') {
+    shortformView.style.display = 'block';
+    shortformView.classList.add('visible');
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function filterListicles(btn) {
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  const homeView = document.getElementById('home-view');
+  const longformView = document.getElementById('longform-view');
+  const shortformView = document.getElementById('shortform-view');
+  const articleView = document.getElementById('article-view');
+
+  articleView.style.display = 'none';
+  articleView.classList.remove('visible');
+  longformView.style.display = 'none';
+  longformView.classList.remove('visible');
+  shortformView.style.display = 'none';
+  shortformView.classList.remove('visible');
+  homeView.style.display = 'block';
+
+  const sectionHeader = homeView.querySelector('.section-header');
+  const articlesGrid = document.getElementById('articles-grid');
+  if (sectionHeader) sectionHeader.style.display = 'none';
+  if (articlesGrid) articlesGrid.style.display = 'none';
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ── SHORT-FORM NICHE FILTER ── */
+function filterSF(niche, btn) {
+  document.querySelectorAll('.sf-niche-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const cards = document.querySelectorAll('.sf-card');
+  cards.forEach(card => {
+    card.style.display = (niche === 'all' || card.dataset.niche === niche) ? '' : 'none';
+  });
+}
+
+/* ── LONG-FORM SECTION NAVIGATION ── */
+function showLFSection(section, btn) {
+  document.querySelectorAll('.lf-sec-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  document.querySelectorAll('.lf-section-panel').forEach(p => p.classList.remove('visible'));
+  const panel = document.getElementById('lf-' + section);
+  if (panel) panel.classList.add('visible');
+}
+
+function showLFSub(section, sub, btn) {
+  const panel = document.getElementById('lf-' + section);
+  if (!panel) return;
+  panel.querySelectorAll('.lf-sub-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  panel.querySelectorAll('.lf-sub-panel').forEach(p => p.classList.remove('visible'));
+  const subPanel = document.getElementById('lf-' + section + '-' + sub);
+  if (subPanel) subPanel.classList.add('visible');
+}
+
+/* ── OPEN ARTICLE ── */
+function openArticle(slug) {
+  const art = articles[slug];
+  if (!art) return;
+
+  const imgData = articleImages[slug];
+  const heroHTML = imgData
+    ? `<div class="article-hero-wrap"><img src="${imgData.src}" alt="${art.title}" loading="lazy"></div>
+       <p class="article-hero-caption">${imgData.caption}</p>`
+    : '';
+
+  let bodyHTML = '';
+  if (art.isListicle) {
+    const itemsHTML = art.items.map((item, i) => `
+      <div class="list-item">
+        <div class="list-num">${i + 1}</div>
+        <div class="list-item-body">
+          <h3>${item.title}</h3>
+          <p>${item.body}</p>
+        </div>
+      </div>
+    `).join('');
+    bodyHTML = `<p style="font-size:19px;line-height:1.8;color:var(--ink-mid);margin-bottom:2.5rem">${art.intro}</p>${itemsHTML}`;
+  } else {
+    bodyHTML = art.body;
+  }
+
+  const content = document.getElementById('article-content');
+  content.innerHTML = `
+    <div class="article-full visible">
+      <div class="article-full-header">
+        <div class="cat-tag">${art.category}</div>
+        <h1 class="article-full-title">${art.title}</h1>
+        <p class="article-full-meta">
+          By <strong>Dien Marvelous</strong> &nbsp;·&nbsp; ${art.date} &nbsp;·&nbsp; ${art.readTime}
+        </p>
+      </div>
+      ${heroHTML}
+      <div class="article-body">${bodyHTML}</div>
+    </div>
+  `;
+
+  document.getElementById('home-view').style.display = 'none';
+  document.getElementById('longform-view').style.display = 'none';
+  document.getElementById('longform-view').classList.remove('visible');
+  document.getElementById('shortform-view').style.display = 'none';
+  document.getElementById('shortform-view').classList.remove('visible');
+
+  const av = document.getElementById('article-view');
+  av.style.display = 'block';
+  av.classList.add('visible');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ── CLOSE ARTICLE ── */
+function closeArticle() {
+  const activeNav = document.querySelector('.nav-btn.active');
+  const navText = activeNav ? activeNav.textContent.trim() : '';
+
+  document.getElementById('article-view').style.display = 'none';
+  document.getElementById('article-view').classList.remove('visible');
+
+  if (navText.includes('Long-form')) {
+    document.getElementById('longform-view').style.display = 'block';
+    document.getElementById('longform-view').classList.add('visible');
+  } else if (navText.includes('Short-form')) {
+    document.getElementById('shortform-view').style.display = 'block';
+    document.getElementById('shortform-view').classList.add('visible');
+  } else {
+    document.getElementById('home-view').style.display = 'block';
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
