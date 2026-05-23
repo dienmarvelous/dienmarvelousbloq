@@ -863,6 +863,188 @@
   @media (max-width: 640px) {
     .sf-grid { grid-template-columns: 1fr; }
   }
+
+  /* ── NEXT ARTICLE BAR ── */
+  .next-article-bar {
+    margin-top: 3.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+  .next-article-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .next-article-label::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: var(--border);
+  }
+  .next-article-card {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background: #fff;
+    border: 1px solid var(--border);
+    padding: 1.25rem;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .next-article-card:hover {
+    border-color: var(--gold);
+    box-shadow: 0 2px 12px rgba(181,150,58,0.08);
+  }
+  .next-article-img {
+    width: 120px;
+    height: 72px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: #ddd;
+    display: block;
+  }
+  .next-article-info { flex: 1; min-width: 0; }
+  .next-article-cat {
+    font-family: var(--sans);
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 0.3rem;
+  }
+  .next-article-title {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 0.25rem;
+    transition: color 0.2s;
+  }
+  .next-article-card:hover .next-article-title { color: var(--gold-dark); }
+  .next-article-meta {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: var(--ink-faint);
+  }
+  .next-article-arrow {
+    font-size: 22px;
+    color: var(--gold);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+  .next-article-card:hover .next-article-arrow { transform: translateX(4px); }
+  @media (max-width: 520px) {
+    .next-article-img { width: 80px; height: 52px; }
+    .next-article-title { font-size: 15px; }
+  }
+
+  /* ── LEGAL / STATIC PAGES ── */
+  #about-view, #privacy-view, #terms-view, #contact-view { display: none; }
+  #about-view.visible, #privacy-view.visible, #terms-view.visible, #contact-view.visible { display: block; }
+
+  .static-hero {
+    background: var(--ink);
+    padding: 3rem 1.5rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .static-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 39px,
+      rgba(181,150,58,0.06) 39px, rgba(181,150,58,0.06) 40px);
+    pointer-events: none;
+  }
+  .static-hero-eyebrow {
+    font-family: var(--sans); font-size: 10px; letter-spacing: 0.28em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem;
+  }
+  .static-hero-title {
+    font-family: var(--serif); font-size: clamp(28px,5vw,44px);
+    font-weight: 400; color: #fff; line-height: 1.15;
+  }
+  .static-hero-title em { font-style: italic; color: var(--gold-light); }
+  .static-body {
+    max-width: 720px; margin: 0 auto; padding: 3rem 1.5rem 5rem;
+  }
+  .static-body h2 {
+    font-family: var(--serif); font-size: 22px; font-weight: 400;
+    color: var(--ink); margin: 2.5rem 0 0.75rem; line-height: 1.3;
+  }
+  .static-body h2:first-child { margin-top: 0; }
+  .static-body p {
+    font-family: var(--body); font-size: 17px; line-height: 1.8;
+    color: var(--ink-mid); margin-bottom: 1.25em;
+  }
+  .static-body ul {
+    font-family: var(--body); font-size: 17px; line-height: 1.8;
+    color: var(--ink-mid); padding-left: 1.5rem; margin-bottom: 1.25em;
+  }
+  .static-body ul li { margin-bottom: 0.4em; }
+  .static-body a { color: var(--gold-dark); text-decoration: underline; }
+  .static-rule {
+    border: none; border-top: 0.5px solid var(--border);
+    margin: 2.5rem 0;
+  }
+  .static-updated {
+    font-family: var(--sans); font-size: 11px; letter-spacing: 0.08em;
+    color: var(--ink-faint); margin-bottom: 2rem;
+  }
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  .contact-card {
+    background: #fff; border: 1px solid var(--border);
+    padding: 1.5rem; border-radius: 2px;
+  }
+  .contact-card-label {
+    font-family: var(--sans); font-size: 10px; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .contact-card p { margin-bottom: 0; font-size: 16px; }
+  @media (max-width: 600px) { .contact-grid { grid-template-columns: 1fr; } }
+
+  /* ── SOURCE CITATIONS ── */
+  .article-source {
+    font-family: var(--sans); font-size: 11px; letter-spacing: 0.05em;
+    color: var(--ink-faint); margin-top: 3rem; padding-top: 1.5rem;
+    border-top: 0.5px solid var(--border-soft);
+  }
+  .article-source strong {
+    display: block; font-size: 10px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.6rem;
+  }
+  .article-source ol { padding-left: 1.25rem; }
+  .article-source ol li { margin-bottom: 0.3em; line-height: 1.6; }
+
+  /* ── OPINION LABEL ── */
+  .opinion-badge {
+    display: inline-block;
+    font-family: var(--sans); font-size: 9px; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold-dark); border: 1px solid var(--gold);
+    padding: 2px 8px; margin-bottom: 0.6rem; vertical-align: middle;
+  }
+
+  /* ── IMAGE CREDIT ── */
+  .img-credit {
+    font-family: var(--sans); font-size: 10px; color: var(--ink-faint);
+    letter-spacing: 0.04em; text-align: right; margin-top: 0.25rem;
+    margin-bottom: 1.5rem; font-style: italic;
+  }
 </style>
 </head>
 <body>
@@ -1530,13 +1712,158 @@
 </div>
 
 <!-- FOOTER -->
+
+<!-- ABOUT VIEW -->
+<div id="about-view">
+  <div class="static-hero">
+    <p class="static-hero-eyebrow">Who We Are</p>
+    <h1 class="static-hero-title">About <em>Dien Marvelous Bloq</em></h1>
+  </div>
+  <div class="static-body">
+    <p class="static-updated">Last updated: May 2026</p>
+    <h2>Our Mission</h2>
+    <p>Dien Marvelous Bloq exists for one reason: to publish writing that earns your time. In a media landscape saturated with noise, clickbait, and content produced purely to fill a feed, we take a different approach — careful, substantive, and honest writing on the topics that shape daily life.</p>
+    <p>We cover technology, finance, health, travel, culture, law, construction, environmental issues, and more. Whether it is a quick listicle or a long-form investigation, every piece we publish is held to the same standard: it must be accurate, well-structured, and genuinely useful to the reader.</p>
+    <hr class="static-rule">
+    <h2>About the Author</h2>
+    <p><strong>Dien Marvelous</strong> is a Lagos-based writer and content strategist with a focus on ideas that matter across technology, finance, society, and everyday life. He founded this blog in 2024 as a space for writing that does not compromise depth for speed — or accuracy for engagement.</p>
+    <p>His work spans listicles, short-form analysis, and long-form reporting. He has written across niches including personal finance, digital security, environmental policy, construction, law, and consumer lifestyle topics. His style is clear, factually grounded, and designed for readers who want to understand the world more accurately than the average news feed allows.</p>
+    <hr class="static-rule">
+    <h2>Editorial Standards</h2>
+    <p>Every article published on this blog is:</p>
+    <ul>
+      <li>Written by a named author — no anonymous or AI-only content</li>
+      <li>Fact-checked against named, verifiable sources</li>
+      <li>Free from undisclosed promotional content</li>
+      <li>Clearly labelled where content represents opinion or commentary rather than reported fact</li>
+    </ul>
+    <p>We do not accept guest posts, paid placements, or sponsored articles. All content on this site reflects the independent editorial judgment of Dien Marvelous.</p>
+    <hr class="static-rule">
+    <h2>Disclosure</h2>
+    <p>This blog does not currently receive external funding, advertising revenue, or sponsorships of any kind. The author does not receive a commission through any links in this content unless explicitly stated otherwise on a specific article page. There are no current conflicts of interest to disclose.</p>
+    <p>If this changes at any point, disclosures will be added prominently to the relevant content and to this page.</p>
+    <hr class="static-rule">
+    <h2>Contact</h2>
+    <p>For editorial enquiries, corrections, or collaboration proposals, please reach out via the <a href="javascript:void(0)" onclick="return showStaticPage('contact', event)">Contact page</a>.</p>
+  </div>
+</div>
+
+<!-- PRIVACY POLICY VIEW -->
+<div id="privacy-view">
+  <div class="static-hero">
+    <p class="static-hero-eyebrow">Your Data, Our Responsibility</p>
+    <h1 class="static-hero-title"><em>Privacy</em> Policy</h1>
+  </div>
+  <div class="static-body">
+    <p class="static-updated">Last updated: May 2026 &nbsp;·&nbsp; Effective date: January 2024</p>
+    <p>Dien Marvelous Bloq ("we", "us", or "our") is committed to protecting your privacy. This Privacy Policy explains what information we collect, how we use it, and what rights you have in relation to it. By using this website, you agree to the collection and use of information in accordance with this policy.</p>
+    <hr class="static-rule">
+    <h2>1. Information We Collect</h2>
+    <p><strong>Information you provide voluntarily:</strong> If you subscribe to our newsletter, we collect your email address. We do not collect names, phone numbers, or payment information through this site.</p>
+    <p><strong>Information collected automatically:</strong> Like most websites, we may collect standard log data including your IP address, browser type, pages visited, and time spent on the site. This data is used solely for analytics purposes to understand how our content is performing.</p>
+    <h2>2. How We Use Your Information</h2>
+    <ul>
+      <li>To deliver newsletter content you have subscribed to</li>
+      <li>To understand how our articles are read and improve our editorial output</li>
+      <li>To ensure the technical performance and security of the site</li>
+    </ul>
+    <p>We do not sell, trade, or transfer your personal information to any third party. We do not use your data for advertising profiling or behavioural targeting.</p>
+    <h2>3. Cookies</h2>
+    <p>This website may use basic session cookies to ensure proper functionality. We do not use tracking cookies, advertising cookies, or third-party analytics cookies beyond basic, anonymised site performance monitoring.</p>
+    <h2>4. Third-Party Services</h2>
+    <p>Images on this site are served from Unsplash, a free-licence image platform. Google Fonts are used for typography. These services may collect basic technical data in accordance with their own privacy policies. We have no control over, and assume no responsibility for, the content or practices of those third-party services.</p>
+    <h2>5. Data Retention</h2>
+    <p>Newsletter subscriber data is retained for as long as you remain subscribed. You may unsubscribe at any time via the link included in every newsletter email, and your data will be deleted promptly upon request.</p>
+    <h2>6. Your Rights</h2>
+    <p>Depending on your location, you may have the right to:</p>
+    <ul>
+      <li>Access the personal data we hold about you</li>
+      <li>Request correction of inaccurate data</li>
+      <li>Request deletion of your data</li>
+      <li>Object to or restrict our processing of your data</li>
+    </ul>
+    <p>To exercise any of these rights, contact us at <a href="mailto:wealthymarvelous@gmail.com" style="color:var(--gold-dark);font-weight:600;text-decoration:underline;">wealthymarvelous@gmail.com</a>.</p>
+    <h2>7. Children's Privacy</h2>
+    <p>This website is not directed at children under the age of 13. We do not knowingly collect personal information from children. If you believe a child has provided us with personal information, please contact us and we will delete it promptly.</p>
+    <h2>8. Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated effective date. We encourage you to review this policy periodically.</p>
+    <h2>9. Contact</h2>
+    <p>For any privacy-related enquiries, please contact: <a href="mailto:wealthymarvelous@gmail.com" style="color:var(--gold-dark);font-weight:600;text-decoration:underline;">wealthymarvelous@gmail.com</a></p>
+  </div>
+</div>
+
+<!-- TERMS OF USE VIEW -->
+<div id="terms-view">
+  <div class="static-hero">
+    <p class="static-hero-eyebrow">Please Read Carefully</p>
+    <h1 class="static-hero-title">Terms <em>of Use</em></h1>
+  </div>
+  <div class="static-body">
+    <p class="static-updated">Last updated: May 2026 &nbsp;·&nbsp; Effective date: January 2024</p>
+    <p>Welcome to Dien Marvelous Bloq. By accessing or using this website, you agree to be bound by the following Terms of Use. If you do not agree with any of these terms, please do not use this site.</p>
+    <hr class="static-rule">
+    <h2>1. Acceptance of Terms</h2>
+    <p>These Terms of Use govern your access to and use of dienmarvelous.github.io/dienmarvelousbloq and all content published on it. We reserve the right to update these terms at any time. Continued use of the site following any changes constitutes your acceptance of the revised terms.</p>
+    <h2>2. Intellectual Property</h2>
+    <p>All original content on this site — including articles, listicles, headlines, and editorial copy — is the intellectual property of Dien Marvelous unless otherwise stated. You may share or quote brief excerpts for non-commercial purposes provided you give clear attribution and link back to the original article. Full reproduction of any article without written permission is prohibited.</p>
+    <h2>3. Accuracy of Information</h2>
+    <p>We make every reasonable effort to ensure that information published on this site is accurate and up to date. However, we do not warrant the completeness or accuracy of any content. Articles represent the editorial judgment of the author at the time of publication and should not be relied upon as professional legal, financial, medical, or technical advice. Always consult a qualified professional for advice specific to your situation.</p>
+    <h2>4. No Professional Advice</h2>
+    <p>Content on this site is published for informational and educational purposes only. Nothing published here constitutes legal advice, financial advice, medical advice, or any other form of regulated professional advice. Readers should seek independent professional guidance before acting on any information found on this site.</p>
+    <h2>5. External Links</h2>
+    <p>This site may contain links to third-party websites for reference purposes. We are not responsible for the content, accuracy, or practices of any external site. The inclusion of a link does not constitute endorsement of that site or its content.</p>
+    <h2>6. Limitation of Liability</h2>
+    <p>To the fullest extent permitted by law, Dien Marvelous Bloq and its author accept no liability for any loss or damage arising from your use of this website or reliance on any content published here.</p>
+    <h2>7. Newsletter</h2>
+    <p>By subscribing to our newsletter, you consent to receiving periodic email communications containing editorial content. You may unsubscribe at any time. We will not use your email address for any purpose other than delivering the newsletter.</p>
+    <h2>8. Governing Law</h2>
+    <p>These Terms of Use shall be governed by and construed in accordance with the laws of the Federal Republic of Nigeria. Any disputes arising from your use of this site shall be subject to the exclusive jurisdiction of the courts of Lagos State, Nigeria.</p>
+    <h2>9. Contact</h2>
+    <p>If you have any questions about these Terms of Use, please contact: <a href="mailto:wealthymarvelous@gmail.com" style="color:var(--gold-dark);font-weight:600;text-decoration:underline;">wealthymarvelous@gmail.com</a></p>
+  </div>
+</div>
+
+<!-- CONTACT VIEW -->
+<div id="contact-view">
+  <div class="static-hero">
+    <p class="static-hero-eyebrow">Get In Touch</p>
+    <h1 class="static-hero-title"><em>Contact</em> Us</h1>
+  </div>
+  <div class="static-body">
+    <p>Whether you have a correction to flag, a collaboration proposal, a story tip, or simply want to say hello — we would like to hear from you. Please use the relevant contact below.</p>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-card-label">Editorial & Corrections</div>
+        <p>For factual corrections, editorial feedback, or story suggestions:</p>
+        <p><a href="mailto:wealthymarvelous@gmail.com" style="color:var(--gold-dark);font-weight:600;text-decoration:underline;">wealthymarvelous@gmail.com</a></p>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-label">Collaborations</div>
+        <p>For writing commissions, content partnerships, or media enquiries:</p>
+        <p><a href="mailto:wealthymarvelous@gmail.com" style="color:var(--gold-dark);font-weight:600;text-decoration:underline;">wealthymarvelous@gmail.com</a></p>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-label">Publisher</div>
+        <p>Dien Marvelous<br>Lagos, Nigeria</p>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-label">Response Time</div>
+        <p>We aim to respond to all enquiries within 2 business days.</p>
+      </div>
+    </div>
+    <hr class="static-rule">
+    <h2>Corrections Policy</h2>
+    <p>We take accuracy seriously. If you spot a factual error in any article, please email us with the article title, the specific error, and your suggested correction. Verified corrections will be made promptly and noted at the bottom of the relevant article.</p>
+  </div>
+</div>
+
 <footer class="site-footer">
   <p>© 2026 <strong>Dien Marvelous Bloq</strong> &nbsp;·&nbsp; All rights reserved</p>
   <div class="footer-links">
-    <a href="#">About</a>
-    <a href="#">Archive</a>
-    <a href="#">Newsletter</a>
-    <a href="#">Contact</a>
+    <a href="javascript:void(0)" onclick="return showStaticPage('about', event)">About</a>
+    <a href="javascript:void(0)" onclick="return showStaticPage('privacy', event)">Privacy Policy</a>
+    <a href="javascript:void(0)" onclick="return showStaticPage('terms', event)">Terms of Use</a>
+    <a href="javascript:void(0)" onclick="return showStaticPage('contact', event)">Contact</a>
   </div>
 </footer>
 
@@ -1549,6 +1876,11 @@ const articles = {
     title: 'What We Lose When Machines Do Our Thinking',
     date: 'May 12, 2026',
     readTime: '7 min read',
+    sources: [
+      'Bjork, R.A. (1994). Memory and Metamemory Considerations in the Training of Human Beings. <em>Metacognition: Knowing about Knowing</em>, MIT Press.',
+      'Sparrow, B., Liu, J., & Wegner, D.M. (2011). Google Effects on Memory. <em>Science</em>, 333(6043), 776–778.',
+      'Ward, A.F. et al. (2017). Brain Drain: The Mere Presence of One\'s Own Smartphone Reduces Available Cognitive Capacity. <em>Journal of the Association for Consumer Research</em>, 2(2).'
+    ],
     body: `
       <p>There is a particular kind of satisfaction in solving a problem slowly. Not the triumphant click of an answer, but the long, ungainly process of working toward it: the false starts, the reconsidered assumptions, the sudden lateral leap that changes everything. This is what thinking actually feels like. And it is precisely this experience that we are, quietly and eagerly, giving away.</p>
       <p>Artificial intelligence has arrived not as a replacement for human intelligence but as a supplement — or so we tell ourselves. In practice, the line is less clear. When a navigation app tells you which turn to take, you stop consulting your internal map. When a writing assistant finishes your sentences, you stop searching for your own words. The capability atrophies not because the tool is bad but because the tool is too good.</p>
@@ -1568,6 +1900,11 @@ const articles = {
     title: 'The Return of the Long Letter',
     date: 'March 30, 2026',
     readTime: '4 min read',
+    isOpinion: true,
+    sources: [
+      'Montag, C. et al. (2019). Addictive Features of Social Media/Messenger Platforms and Freud\'s Pleasure Principle. <em>International Journal of Environmental Research and Public Health</em>, 16(14).',
+      'Schrift, R.Y., & Parker, J.R. (2014). Staying the Course: The Option of Doing Nothing and Its Impact on Post-choice Values. <em>Psychological Science</em>.'
+    ],
     body: `
       <p>A friend of mine, a doctor in her early thirties, started writing letters in 2024. Not emails. Letters — handwritten on good paper, folded into envelopes, addressed with care, sent to seven people who were important to her. She received, over the following months, six replies. Three of those correspondences are still ongoing. She calls it the best decision she has made in years.</p>
       <p>There is a revival happening that the metrics of the digital world cannot easily capture. Fountain pen sales have quietly grown for a decade. Stationery shops that should have closed have not.</p>
@@ -1584,6 +1921,11 @@ const articles = {
     title: 'Why Old Cities Still Teach Us How to Live',
     date: 'March 22, 2026',
     readTime: '5 min read',
+    sources: [
+      'Jacobs, J. (1961). <em>The Death and Life of Great American Cities</em>. Random House.',
+      'Leyden, K.M. (2003). Social Capital and the Built Environment: The Importance of Walkable Neighborhoods. <em>American Journal of Public Health</em>, 93(9), 1546–1551.',
+      'Gehl, J. (2010). <em>Cities for People</em>. Island Press.'
+    ],
     body: `
       <p>The modern city is optimised for movement. Wide roads for cars, efficient grids, everything designed to get you from one destination to another with minimum friction and maximum speed. It is enormously effective at what it attempts. And it produces, with remarkable reliability, environments where people feel lonely even in dense proximity to each other.</p>
       <p>Ancient cities were optimised for something different. The winding medinas of Fez and Marrakech, the compressed neighbourhoods of Siena, the intimate alleyways of old Kyoto — these were designed, consciously or not, for human encounter.</p>
@@ -1600,6 +1942,12 @@ const articles = {
     category: 'Technology & AI · Listicle',
     title: '8 AI Tools That Are Quietly Changing How We Work',
     date: 'May 11, 2026', readTime: '5 min read', isListicle: true,
+    sources: [
+      'Anthropic (2024). Claude Product Overview. anthropic.com',
+      'Perplexity AI (2024). About Perplexity. perplexity.ai',
+      'Runway ML (2024). Runway Research. runwayml.com',
+      'ElevenLabs (2024). ElevenLabs Voice AI. elevenlabs.io'
+    ],
     intro: `The noise around artificial intelligence is enormous. Beneath it, a smaller and more practical conversation is happening among professionals who have actually integrated these tools into their daily work. This is not a ranking of the most powerful models. It is a list of tools that are earning their place — not through spectacle, but through genuine, repeatable utility.`,
     items: [
       { title: 'Claude (Anthropic)', body: 'For long-form reasoning, nuanced writing, and research synthesis, Claude has emerged as the tool of choice for writers, researchers, and strategists who need more than a quick answer. Its ability to hold extended context and reason across it makes it especially valuable for complex, multi-part work.' },
@@ -1617,6 +1965,12 @@ const articles = {
     category: 'Health & Wellness · Listicle',
     title: '7 Small Habits That Science Says Will Extend Your Life',
     date: 'May 7, 2026', readTime: '4 min read', isListicle: true,
+    sources: [
+      'Saint-Maurice, P.F. et al. (2020). Association of Daily Step Count and Step Intensity With Mortality Among US Adults. <em>JAMA</em>, 323(12), 1151–1160.',
+      'Walker, M. (2017). <em>Why We Sleep</em>. Scribner.',
+      'Holt-Lunstad, J. et al. (2015). Loneliness and Social Isolation as Risk Factors for Mortality. <em>Perspectives on Psychological Science</em>, 10(2), 227–237.',
+      'Sapolsky, R. (2004). <em>Why Zebras Don\'t Get Ulcers</em>. Henry Holt and Company.'
+    ],
     intro: `Longevity research has, in recent years, moved from the fringes of geroscience into the mainstream. What it consistently finds is both reassuring and slightly inconvenient: the things that add years to life are neither expensive nor exotic. They are small, repeatable behaviours that compound over decades.`,
     items: [
       { title: 'Walk at least 7,000 steps a day', body: 'A landmark study published in JAMA Network Open found that walking 7,000 or more steps daily was associated with a 50–70% lower risk of mortality compared to fewer steps. The finding holds across age groups and does not require the steps to be consecutive.' },
@@ -1633,6 +1987,11 @@ const articles = {
     category: 'Finance · Listicle',
     title: '10 Money Rules the Wealthy Follow That Nobody Talks About',
     date: 'May 2, 2026', readTime: '6 min read', isListicle: true,
+    sources: [
+      'Stanley, T.J., & Danko, W.D. (1996). <em>The Millionaire Next Door</em>. Taylor Trade Publishing.',
+      'Clements, J. (2016). <em>How to Think About Money</em>. Createspace.',
+      'Housel, M. (2020). <em>The Psychology of Money</em>. Harriman House.'
+    ],
     intro: `Financial advice is everywhere, and most of it is generic. The principles below are less often articulated, but they appear with remarkable consistency among people who have built lasting wealth across different industries, geographies, and starting points.`,
     items: [
       { title: 'They pay themselves first, automatically', body: 'Before any spending decision is made, a fixed percentage of income moves to savings or investment automatically. This is not discipline — it is architecture. By removing the decision entirely, they eliminate the most common point of failure in personal finance.' },
@@ -1652,6 +2011,11 @@ const articles = {
     category: 'Travel · Listicle',
     title: "9 African Destinations That Should Be on Every Serious Traveller's List",
     date: 'April 25, 2026', readTime: '5 min read', isListicle: true,
+    sources: [
+      'UNESCO World Heritage Centre. Stone Town of Zanzibar. whc.unesco.org',
+      'World Bank (2024). Rwanda Country Overview. worldbank.org',
+      'Lonely Planet (2024). Africa Travel Guide. lonelyplanet.com'
+    ],
     intro: `Africa is the most geographically diverse continent on earth — 54 countries, every climate zone, ecosystems ranging from the Sahara to the Congo Basin to the Drakensberg highlands. What follows is a selection of places that reward the traveller who pays attention.`,
     items: [
       { title: 'Marrakech, Morocco', body: 'The medina of Marrakech is a masterclass in sensory complexity — a medieval city that has absorbed centuries of trade routes, dynasties, and cultures without losing its essential character. The Djemaa el-Fna square at dusk is one of the great urban experiences on the planet.' },
@@ -1670,6 +2034,11 @@ const articles = {
     category: 'Culture · Listicle',
     title: '12 Books That Defined the Last Decade of Ideas',
     date: 'April 15, 2026', readTime: '5 min read', isListicle: true,
+    sources: [
+      'All titles cited are published works verifiable through major booksellers and library catalogues.',
+      'New York Times Bestseller Lists (2013–2021). nytimes.com/books',
+      'National Book Award records. nationalbook.org'
+    ],
     intro: `Ideas do not arrive fully formed. They accumulate, contradict each other, get stress-tested by events, and eventually settle into the background assumptions of an era. The books below shaped — or captured — some of the most significant shifts in how educated, engaged people understand the world they are living in.`,
     items: [
       { title: 'Thinking, Fast and Slow — Daniel Kahneman', body: "The definitive account of how the human mind actually works — imperfectly, heuristically, systematically biased. Kahneman's framework of System 1 and System 2 thinking became the common language of behavioural economics and public policy." },
@@ -1691,6 +2060,12 @@ const articles = {
     category: 'Society · Listicle',
     title: "6 Productivity Myths It's Time to Stop Believing",
     date: 'April 5, 2026', readTime: '4 min read', isListicle: true,
+    sources: [
+      'Czeisler, C.A. (2006). Sleep Deficit: The Performance Killer. <em>Harvard Business Review</em>.',
+      'Mark, G., Gudith, D., & Klocke, U. (2008). The Cost of Interrupted Work: More Speed and Stress. <em>ACM CHI Conference Proceedings</em>.',
+      'Pencavel, J. (2014). The Productivity of Working Hours. <em>IZA Discussion Paper No. 8129</em>.',
+      'Roenneberg, T. (2012). <em>Internal Time: Chronotypes, Social Jet Lag, and Why You\'re So Tired</em>. Harvard University Press.'
+    ],
     intro: `Productivity culture is one of the stranger features of contemporary life — a body of advice that grows more elaborate with each passing year while the people following it report feeling busier and less effective than ever. Much of the advice is not simply unhelpful; it is actively counterproductive.`,
     items: [
       { title: 'Myth: Waking up at 5am makes you more successful', body: 'The "miracle morning" genre rests on a correlation that runs backwards. Highly disciplined people are more likely to choose early rising — but early rising does not produce the discipline. Research shows roughly 40% of the population are genetically predisposed to be evening types, for whom forced early rising impairs cognitive performance.' },
@@ -1706,6 +2081,12 @@ const articles = {
     category: 'Safety · Listicle',
     title: '8 Safety Principles That Could Save Your Life One Day',
     date: 'May 10, 2026', readTime: '5 min read', isListicle: true,
+    sources: [
+      'AAA Foundation for Traffic Safety (2016). Prevalence of Motor Vehicle Crashes Involving Drowsy Drivers. aaafoundation.org',
+      'American Heart Association (2023). CPR Facts and Stats. heart.org',
+      'de Becker, G. (1997). <em>The Gift of Fear</em>. Little, Brown and Company.',
+      'National Fire Protection Association (2023). Fire Loss in the United States. nfpa.org'
+    ],
     intro: `Safety is one of those subjects that attracts enormous attention after incidents and almost none in the long stretches of ordinary time when the habits that would have prevented them could actually be built. The following principles are drawn from accident investigation reports, emergency medicine research, and disaster preparedness literature.`,
     items: [
       { title: 'Know your emergency exits everywhere you go', body: 'Emergency responders consistently find that casualties in fires and building collapses cluster near the entrance — the way people came in. Making a habit of noting exits in hotels, cinemas, offices, and public spaces takes thirty seconds and can make an extraordinary difference in an emergency.' },
@@ -1723,6 +2104,12 @@ const articles = {
     category: 'Environment · Listicle',
     title: '10 Environmental Facts That Should Change How You Live',
     date: 'May 6, 2026', readTime: '5 min read', isListicle: true,
+    sources: [
+      'IPCC (2022). Climate Change 2022: Mitigation of Climate Change. ipcc.ch',
+      'FAO (2021). The State of Food and Agriculture. fao.org',
+      'World Health Organisation (2023). Air Pollution. who.int',
+      'Poore, J., & Nemecek, T. (2018). Reducing Food\'s Environmental Impacts Through Producers and Consumers. <em>Science</em>, 360(6392), 987–992.'
+    ],
     intro: `Environmental communication has a persistent problem: it alternates between alarm and guilt without providing clarity about what actually matters. The facts below are chosen to orient — to give a clear-eyed picture of where the most significant pressures lie, and where individual and collective action can make a meaningful difference.`,
     items: [
       { title: 'Food systems account for roughly one-third of global greenhouse gas emissions', body: "This figure surprises most people, who think primarily about transport or energy when they consider climate impact. Of food categories, beef and lamb are substantially more emissions-intensive than any plant-based food — a single kilogram of beef produces roughly 60kg of CO₂ equivalent, compared to 2-3kg for pulses." },
@@ -1742,6 +2129,12 @@ const articles = {
     category: 'Security · Listicle',
     title: '9 Digital Security Habits Everyone Should Have by Now',
     date: 'April 29, 2026', readTime: '5 min read', isListicle: true,
+    sources: [
+      'Verizon (2024). Data Breach Investigations Report. verizon.com/business/resources/reports/dbir',
+      'Have I Been Pwned. haveibeenpwned.com',
+      'National Cyber Security Centre UK (2023). Password Guidance. ncsc.gov.uk',
+      'Krebs, B. (2018). <em>Spam Nation</em>. Sourcebooks.'
+    ],
     intro: `Digital security has an awareness problem — not a lack of it, but a surfeit. People know they should be more careful online. And then they use the same password across twelve accounts. The habits below are the foundational layer that the overwhelming majority of people have still not implemented.`,
     items: [
       { title: 'Use a password manager and unique passwords for every account', body: 'Password reuse is the single most exploited vulnerability in consumer digital security. When one service is breached, attackers automatically test those credentials across banking, email, and social media platforms. A password manager generates and stores unique, complex passwords for every site.' },
@@ -1760,6 +2153,11 @@ const articles = {
     category: 'Waste Management · Listicle',
     title: '7 Waste Reduction Habits That Actually Make a Difference',
     date: 'April 20, 2026', readTime: '4 min read', isListicle: true,
+    sources: [
+      'UNEP (2021). Food Waste Index Report. unep.org',
+      'Ellen MacArthur Foundation (2022). The New Plastics Economy. ellenmacarthurfoundation.org',
+      'EPA (2023). Advancing Sustainable Materials Management. epa.gov'
+    ],
     intro: `Waste management suffers from a particularly acute version of the individual-versus-system tension that runs through most environmental questions. The recycling symbol has been so thoroughly marketed as a solution that most people have significantly overestimated its effectiveness. The habits below are about a more honest engagement with the problem, starting with reduction rather than disposal.`,
     items: [
       { title: 'Refuse before you recycle: reduce consumption first', body: 'The waste hierarchy places refuse at the top and recycle near the bottom for good reason. Recycling is energy-intensive, often economically marginal, and — for many materials — not genuinely cyclic. The most effective waste intervention is not buying the item in the first place.' },
@@ -1777,6 +2175,11 @@ const articles = {
     category: 'Hard News & Politics · National & World News',
     title: 'The New World Order Nobody Voted For',
     date: 'May 13, 2026', readTime: '8 min read',
+    sources: [
+      'Council on Foreign Relations (2024). Global Conflict Tracker. cfr.org',
+      'UN Security Council (2024). Meeting Records. un.org/securitycouncil',
+      'UNHCR (2024). Global Trends: Forced Displacement. unhcr.org'
+    ],
     body: `
       <p>The post-Cold War settlement — the loose consensus around liberal democracy, multilateral institutions, and American-led security architecture — has been unravelling for longer than most commentators care to admit. What is new in 2026 is the speed. Alliances that took decades to build are being abandoned in months. Institutions that survived world wars are being bypassed by bilateral deals struck in hotel rooms.</p>
       <h2>The Fracture Lines</h2>
@@ -1792,6 +2195,12 @@ const articles = {
     category: 'Hard News & Politics · Elections & Policy',
     title: 'Why Voters Keep Choosing Disruption Over Stability',
     date: 'May 8, 2026', readTime: '7 min read',
+    isOpinion: true,
+    sources: [
+      'Edelman (2024). Edelman Trust Barometer. edelman.com/trust',
+      'Inglehart, R., & Norris, P. (2019). <em>Cultural Backlash: Trump, Brexit, and Authoritarian Populism</em>. Cambridge University Press.',
+      'Mounk, Y. (2018). <em>The People vs. Democracy</em>. Harvard University Press.'
+    ],
     body: `
       <p>In the past three years, incumbent governments have been voted out of office in France, the United Kingdom, South Korea, Argentina, India, and a dozen smaller democracies. The pattern is not ideological: right-wing governments have fallen to left-wing challengers, and left-wing governments have fallen to right-wing ones. What connects the losses is a generalised sentiment — the sense that those in power are managing the system for their own benefit rather than for the people who elected them.</p>
       <h2>The Trust Collapse</h2>
@@ -1806,6 +2215,11 @@ const articles = {
     category: 'Finance & Business · Personal Finance',
     title: 'How to Build a Financial Life in a Permanently Inflationary World',
     date: 'May 10, 2026', readTime: '7 min read',
+    sources: [
+      'Bank for International Settlements (2024). Annual Economic Report. bis.org',
+      'IMF (2024). World Economic Outlook. imf.org/en/Publications/WEO',
+      'Bernstein, W. (2010). <em>The Investor\'s Manifesto</em>. Wiley.'
+    ],
     body: `
       <p>The financial advice that most people received was calibrated for a world of low, stable inflation. Keep cash savings. Buy bonds for safety. Assume your purchasing power roughly holds. That world is not coming back. The structural drivers of the inflationary period we have entered — deglobalisation, ageing demographics, the energy transition, chronic underinvestment in housing supply — are not cyclical. They are generational.</p>
       <h2>The Cash Problem</h2>
@@ -1820,6 +2234,11 @@ const articles = {
     category: 'Finance & Business · Market Updates',
     title: 'The AI Trade Is Splitting the Market in Two',
     date: 'May 6, 2026', readTime: '6 min read',
+    sources: [
+      'S&P Global Market Intelligence (2024). S&P 500 Sector Performance Data.',
+      'Goldman Sachs (2024). Global Investment Research: AI Investment Outlook.',
+      'Sequoia Capital (2023). AI\'s $600B Question. sequoiacap.com'
+    ],
     body: `
       <p>The S&P 500 is up 14% year-to-date. Strip out the seven largest AI-exposed companies, and the index is up 2%. This bifurcation — the most extreme in modern market history by some measures — raises questions that analysts are finding genuinely difficult to answer: Is the concentration rational, or is it a bubble?</p>
       <h2>The Bull Case</h2>
@@ -1834,6 +2253,11 @@ const articles = {
     category: 'Finance & Business · Real Estate & Economy',
     title: 'Who Actually Owns the Housing Market Now?',
     date: 'April 30, 2026', readTime: '8 min read',
+    sources: [
+      'Urban Institute (2024). Institutional Investor Homebuying Report. urban.org',
+      'National Association of Realtors (2024). Housing Affordability Index. nar.realtor',
+      'Federal Reserve Bank of Atlanta (2024). Home Ownership Affordability Monitor. atlantafed.org'
+    ],
     body: `
       <p>In 2010, institutional investors owned approximately 2% of single-family homes in the United States. By 2025, that figure had risen to roughly 5% nationally, and in certain markets the share was substantially higher. The shift represents a fundamental change in who the housing market is designed to serve.</p>
       <h2>How It Happened</h2>
@@ -1848,6 +2272,11 @@ const articles = {
     category: 'Entertainment & Culture · Celebrity & Pop Culture',
     title: 'The Celebrity Industrial Complex Is Eating Itself',
     date: 'May 4, 2026', readTime: '6 min read',
+    isOpinion: true,
+    sources: [
+      'Marwick, A., & Boyd, D. (2011). I Tweet Honestly, I Tweet Passionately: Twitter Users, Context Collapse, and the Imagined Audience. <em>New Media & Society</em>, 13(1).',
+      'Turner, G. (2010). <em>Ordinary People and the Media: The Demotic Turn</em>. SAGE Publications.'
+    ],
     body: `
       <p>The mathematics of contemporary celebrity have become almost impossible to sustain. A major Hollywood actor needs to maintain a social media presence across five platforms, post at minimum three times a week, attend brand events, manage a parasocial relationship with tens of millions of followers, and still find time to make the films and television that theoretically justified the fame in the first place.</p>
       <h2>The Monetisation Trap</h2>
@@ -1862,6 +2291,11 @@ const articles = {
     category: 'Entertainment & Culture · Movie & Music Reviews',
     title: 'Streaming Fatigue Is Real — and the Studios Are Finally Listening',
     date: 'April 27, 2026', readTime: '6 min read',
+    sources: [
+      'MoffettNathanson (2024). Streaming Industry Analysis Reports.',
+      'Variety Intelligence Platform (2024). Global SVOD Subscriber Data.',
+      'Netflix Q4 2023 Earnings Report. ir.netflix.net'
+    ],
     body: `
       <p>At peak streaming — roughly 2021-2023 — the major platforms were collectively releasing more than 1,000 original titles per year. The strategy was rooted in a Silicon Valley product logic: more content means more time on platform means more subscribers means more revenue. What it actually produced was a library so vast that navigation became a barrier to engagement.</p>
       <h2>The Recalibration</h2>
@@ -1876,6 +2310,11 @@ const articles = {
     category: 'Lifestyle & Consumer · Health & Wellness',
     title: 'The Gut-Brain Axis: What the Latest Research Is Telling Us About Food and Mental Health',
     date: 'May 1, 2026', readTime: '7 min read',
+    sources: [
+      'Cryan, J.F. et al. (2019). The Microbiota-Gut-Brain Axis. <em>Physiological Reviews</em>, 99(4), 1877–2013.',
+      'Sonnenburg, J., & Sonnenburg, E. (2019). Diet-induced Extinctions in the Gut Microbiota Compound over Generations. <em>Nature</em>, 529, 212–215.',
+      'Zmora, N. et al. (2019). You Are What You Eat: Diet, Health and the Gut Microbiota. <em>Nature Reviews Gastroenterology & Hepatology</em>, 16, 35–56.'
+    ],
     body: `
       <p>The human gut contains approximately 100 trillion microorganisms — bacteria, fungi, viruses, and archaea — collectively known as the microbiome. For most of medical history, this ecosystem was considered peripheral: relevant to digestion and immune function, but not much else. The research of the past decade has systematically dismantled this view.</p>
       <h2>The Microbiome-Brain Connection</h2>
@@ -1890,6 +2329,11 @@ const articles = {
     category: 'Lifestyle & Consumer · Travel & Food',
     title: 'Overtourism Is Back — and Worse Than Before',
     date: 'April 24, 2026', readTime: '7 min read',
+    sources: [
+      'UNWTO (2024). Tourism Barometer. unwto.org',
+      'Barcelona City Council (2024). Tourism Statistics Report. barcelona.cat',
+      'OECD (2023). Tourism Trends and Policies. oecd.org'
+    ],
     body: `
       <p>The pandemic years produced, briefly, a hope that the global tourism industry might use the forced pause to restructure itself. That hope has not been fulfilled. Tourist arrivals in the world's most popular destinations have not merely recovered to 2019 levels; in many cases they have exceeded them, compressed into shorter peak seasons by the recovery patterns of international aviation.</p>
       <h2>The Human Cost</h2>
@@ -1904,6 +2348,11 @@ const articles = {
     category: 'Lifestyle & Consumer · Automotive',
     title: 'The EV Revolution Is Stalling — Here Is What Went Wrong',
     date: 'April 20, 2026', readTime: '8 min read',
+    sources: [
+      'IEA (2024). Global EV Outlook. iea.org/reports/global-ev-outlook-2024',
+      'Ford Motor Company Q3 2023 Earnings Call Transcript.',
+      'BloombergNEF (2024). Electric Vehicle Outlook. about.bnef.com'
+    ],
     body: `
       <p>In 2022, virtually every major automaker published net-zero transition plans that included an end to internal combustion engine sales by 2030 or 2035. By 2025, most of those same companies had quietly revised their timelines, reduced their EV production targets, or both. Ford announced a $1.9 billion reduction in EV investment. Even Tesla saw sales growth slow significantly in its key markets.</p>
       <h2>The Adoption Gap</h2>
@@ -1918,6 +2367,11 @@ const articles = {
     category: 'Technology & Science · Consumer Tech',
     title: 'The Smartphone Has Peaked — Now What?',
     date: 'May 7, 2026', readTime: '6 min read',
+    sources: [
+      'IDC (2024). Worldwide Quarterly Mobile Phone Tracker. idc.com',
+      'Counterpoint Research (2024). Global Smartphone Market Report. counterpointresearch.com',
+      'CIRP (2024). Apple iPhone Replacement Cycle Study. cirpllc.com'
+    ],
     body: `
       <p>The smartphone has been the defining consumer technology platform for fifteen years. No product in history has been adopted as quickly, used as extensively, or modified daily life as completely. And it is, by every available metric, plateauing. Global smartphone shipments have been essentially flat since 2018. Replacement cycles have extended from two years to three and a half.</p>
       <h2>The Innovation Deficit</h2>
@@ -1932,6 +2386,11 @@ const articles = {
     category: 'Technology & Science · Tech Industry',
     title: 'The Antitrust Era Has Finally Arrived for Big Tech',
     date: 'April 18, 2026', readTime: '8 min read',
+    sources: [
+      'US Department of Justice v. Google LLC, Case No. 20-cv-3010 (D.D.C. 2024).',
+      'European Commission (2024). Digital Markets Act Enforcement Actions. ec.europa.eu',
+      'UK Competition and Markets Authority (2024). Amazon Marketplace Investigation Report. gov.uk/cma'
+    ],
     body: `
       <p>For most of the 2010s, technology industry observers predicted that the regulatory reckoning for the major platforms was imminent. They were right about the direction and wrong about the timing. The cases took years to build, the legal theories took years to develop, and the political will to pursue them against deeply embedded companies was intermittent at best. In 2025 and 2026, the dam broke simultaneously on three continents.</p>
       <h2>The Cases That Changed Everything</h2>
@@ -1946,6 +2405,11 @@ const articles = {
     category: 'Sports · Major Leagues & Tournaments',
     title: 'The Money That Is Rewriting the Rules of Sport',
     date: 'May 9, 2026', readTime: '7 min read',
+    sources: [
+      'Deloitte (2024). Annual Review of Football Finance. deloitte.com',
+      'Forbes (2024). The World\'s Most Valuable Sports Teams. forbes.com',
+      'PIF (Public Investment Fund of Saudi Arabia) Annual Report 2023. pif.gov.sa'
+    ],
     body: `
       <p>Professional sport has always been a business. What has changed in the past decade is the scale, the source, and the transparency of the money — and the degree to which financial logic has come to override sporting logic in the decisions that shape what fans actually see.</p>
       <h2>Sovereign Wealth and the New Owners</h2>
@@ -1960,6 +2424,11 @@ const articles = {
     category: 'Safety · Public & Personal Safety',
     title: 'Road Deaths Are Rising Again — and Distraction Is Only Part of the Story',
     date: 'April 22, 2026', readTime: '7 min read',
+    sources: [
+      'NHTSA (2023). Fatality Analysis Reporting System. nhtsa.gov',
+      'WHO (2023). Global Status Report on Road Safety. who.int',
+      'Insurance Institute for Highway Safety (2024). Pedestrian Safety Research. iihs.org'
+    ],
     body: `
       <p>Road traffic fatalities declined steadily in most developed countries from the 1970s through to roughly 2016. The decline was the product of compounding improvements: better vehicle safety engineering, seatbelt and helmet mandates, drunk-driving enforcement, speed limit reductions, and infrastructure design improvements. Then the trend reversed. In the United States, road deaths rose 18% between 2019 and 2023.</p>
       <h2>The Distraction Factor</h2>
@@ -1974,6 +2443,12 @@ const articles = {
     category: 'Environment · Climate & Ecology',
     title: 'Adaptation, Not Just Mitigation: How Cities Are Learning to Live With Climate Change',
     date: 'April 15, 2026', readTime: '9 min read',
+    sources: [
+      'IPCC (2022). Climate Change 2022: Impacts, Adaptation and Vulnerability. ipcc.ch',
+      'C40 Cities (2024). Cities Climate Action. c40.org',
+      'Rotterdam Climate Initiative (2023). Rotterdam Climate Adaptation Report. rotterdam.nl',
+      'UNEP (2023). Adaptation Gap Report. unep.org'
+    ],
     body: `
       <p>The global climate conversation has been organised, for most of the past three decades, around the concept of mitigation — reducing the greenhouse gas emissions that drive warming. This is the right priority. But it is increasingly insufficient as a complete response. The warming that has already occurred means that climate impacts are not a future problem. They are a present one.</p>
       <h2>What Adaptation Looks Like</h2>
@@ -1989,6 +2464,11 @@ const articles = {
     category: 'Waste Management · Systems & Solutions',
     title: 'The Global Plastics Treaty: Why It Matters and Why It Is So Difficult',
     date: 'April 10, 2026', readTime: '8 min read',
+    sources: [
+      'UNEP (2022). Resolution UNEP/EA.5/Res.14 — End Plastic Pollution. unep.org',
+      'OECD (2022). Global Plastics Outlook. oecd.org',
+      'Center for International Environmental Law (2024). Plastics Treaty Negotiation Tracker. ciel.org'
+    ],
     body: `
       <p>In March 2022, the United Nations Environment Assembly passed a resolution to develop a legally binding global agreement on plastic pollution by the end of 2024. Three years later, negotiations are continuing, the deadline has been missed, and the fundamental disagreements that make the treaty so difficult to conclude have become clearer.</p>
       <h2>What the Treaty Is Trying to Do</h2>
@@ -2192,6 +2672,26 @@ const articleImages = {
 };
 
 /* ── PAGE NAVIGATION ── */
+
+/* ── STATIC PAGES (About, Privacy, Terms, Contact) ── */
+const allViews = ['home-view','longform-view','shortform-view','article-view','about-view','privacy-view','terms-view','contact-view'];
+
+function showStaticPage(page, e) {
+  if (e) { e.preventDefault(); e.stopPropagation(); }
+  allViews.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.style.display = 'none'; el.classList.remove('visible'); }
+  });
+  const target = document.getElementById(page + '-view');
+  if (target) {
+    target.style.display = 'block';
+    target.classList.add('visible');
+  }
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  return false;
+}
+
 function showPage(page, btn) {
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
@@ -2208,6 +2708,10 @@ function showPage(page, btn) {
   longformView.classList.remove('visible');
   shortformView.style.display = 'none';
   shortformView.classList.remove('visible');
+  ['about-view','privacy-view','terms-view','contact-view'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.style.display = 'none'; el.classList.remove('visible'); }
+  });
 
   if (page === 'home') {
     homeView.style.display = 'block';
@@ -2282,6 +2786,69 @@ function showLFSub(section, sub, btn) {
 }
 
 /* ── OPEN ARTICLE ── */
+
+/* ── ARTICLE SEQUENCES ── */
+const articleSequences = {
+  listicle: [
+    'list-ai-tools','list-wellness-habits','list-money-rules',
+    'list-african-destinations','list-books-decade','list-productivity-myths',
+    'list-safety','list-environment','list-security','list-waste'
+  ],
+  shortform: [
+    'sf-construction-1','sf-construction-2',
+    'sf-law-1','sf-law-2',
+    'sf-cleaning-1','sf-cleaning-2',
+    'sf-roofing-1','sf-roofing-2'
+  ],
+  longform: [
+    'lf-global-order','lf-policy-drift',
+    'lf-inflation-survival','lf-markets-ai','lf-housing-crisis',
+    'lf-celebrity-economy','lf-streaming-fatigue',
+    'lf-gut-health','lf-travel-rebound','lf-ev-reality',
+    'lf-smartphone-plateau','lf-big-tech-reckoning',
+    'lf-sports-money','lf-road-safety','lf-climate-adaptation','lf-plastic-treaty'
+  ],
+  general: [
+    'ai-thinking','long-letter','old-cities'
+  ]
+};
+
+function getNextArticle(slug) {
+  for (const [, list] of Object.entries(articleSequences)) {
+    const idx = list.indexOf(slug);
+    if (idx !== -1) {
+      const nextSlug = list[(idx + 1) % list.length];
+      return nextSlug;
+    }
+  }
+  return null;
+}
+
+function buildNextArticleBar(currentSlug) {
+  const nextSlug = getNextArticle(currentSlug);
+  if (!nextSlug) return '';
+  const next = articles[nextSlug];
+  if (!next) return '';
+  const img = articleImages[nextSlug];
+  const imgTag = img
+    ? `<img class="next-article-img" src="${img.src}" alt="${next.title}" loading="lazy">`
+    : `<div class="next-article-img"></div>`;
+  return `
+    <div class="next-article-bar">
+      <div class="next-article-label">Up Next</div>
+      <div class="next-article-card" onclick="openArticle('${nextSlug}')">
+        ${imgTag}
+        <div class="next-article-info">
+          <div class="next-article-cat">${next.category}</div>
+          <div class="next-article-title">${next.title}</div>
+          <div class="next-article-meta">${next.date} &nbsp;·&nbsp; ${next.readTime}</div>
+        </div>
+        <div class="next-article-arrow">→</div>
+      </div>
+    </div>
+  `;
+}
+
 function openArticle(slug) {
   const art = articles[slug];
   if (!art) return;
@@ -2308,18 +2875,40 @@ function openArticle(slug) {
     bodyHTML = art.body;
   }
 
+  // Build opinion badge
+  const opinionBadge = art.isOpinion
+    ? '<span class="opinion-badge">Opinion &amp; Commentary</span>'
+    : '';
+
+  // Build image credit
+  const imgData2 = articleImages[slug];
+  const imgCredit = imgData2
+    ? '<p class="img-credit">Photo: Unsplash (free licence)</p>'
+    : '';
+
+  // Build sources block
+  let sourcesHTML = '';
+  if (art.sources && art.sources.length) {
+    const lis = art.sources.map(s => `<li>${s}</li>`).join('');
+    sourcesHTML = `<div class="article-source"><strong>Sources &amp; References</strong><ol>${lis}</ol></div>`;
+  }
+
   const content = document.getElementById('article-content');
   content.innerHTML = `
     <div class="article-full visible">
       <div class="article-full-header">
         <div class="cat-tag">${art.category}</div>
+        ${opinionBadge}
         <h1 class="article-full-title">${art.title}</h1>
         <p class="article-full-meta">
           By <strong>Dien Marvelous</strong> &nbsp;·&nbsp; ${art.date} &nbsp;·&nbsp; ${art.readTime}
         </p>
       </div>
       ${heroHTML}
+      ${imgCredit}
       <div class="article-body">${bodyHTML}</div>
+      ${sourcesHTML}
+      ${buildNextArticleBar(slug)}
     </div>
   `;
 
